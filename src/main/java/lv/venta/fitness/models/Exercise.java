@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Table(name = "excercise_table")
+@Table(name = "exercise_table")
 @MappedSuperclass
 @Getter
 @Setter
