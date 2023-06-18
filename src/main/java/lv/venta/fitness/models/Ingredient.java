@@ -51,7 +51,7 @@ public class Ingredient {
     @Min(1)
     @Max(100000)
     private int protein;
-    
+
 
     public Ingredient(String title, String description, int calories, int fat, int carbohydrates, int protein) {
         this.title = title;
