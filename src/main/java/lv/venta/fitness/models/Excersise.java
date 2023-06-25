@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
@@ -61,6 +63,10 @@ public class Excersise {
 	@Min(1)
 	@Max(1000)
 	private float addedWeight;
+	
+	@ManyToOne
+	@JoinColumn(name="idhe")
+	private HealthData healthData;
 
 	public Excersise(
 			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") String title,

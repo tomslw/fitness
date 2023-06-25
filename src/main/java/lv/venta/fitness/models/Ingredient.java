@@ -52,7 +52,10 @@ public class Ingredient {
     @Max(100000)
     private int protein;
 
-
+    @ManyToOne
+	@JoinColumn(name="idme")
+	private Meal meal;
+    
     public Ingredient(String title, String description, int calories, int fat, int carbohydrates, int protein) {
         this.title = title;
         this.description = description;

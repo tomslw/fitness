@@ -29,7 +29,12 @@ public class Meal {
     @NotNull
     @Size(min = 3, max = 30)
     private String description;
+    
+    @ManyToOne
+	@JoinColumn(name="idhe")
+	private HealthData healthData;
 
+    @OneToMany(mappedBy="Ingredient")
     @ToString.Exclude
     private Collection<Ingredient> ingredientCollection = new ArrayList<>();
 
