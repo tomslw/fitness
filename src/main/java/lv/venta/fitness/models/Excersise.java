@@ -19,13 +19,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Table(name = "excercise_table")
+@Table(name = "exercise_table")
 @MappedSuperclass
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-public class Exercise {
+public class Excersise {
 	
 	@Column(name = "Ide")
 	@Id
@@ -62,7 +62,7 @@ public class Exercise {
 	@Max(1000)
 	private float addedWeight;
 
-	public Exercise(
+	public Excersise(
 			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") String title,
 			@Size(min = 3, max = 100) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") String description,
 			@Min(0) @Max(10) float restInterval, @Min(1) @Max(100) int repetitions,
