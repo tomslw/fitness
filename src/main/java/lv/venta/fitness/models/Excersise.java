@@ -29,7 +29,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Excersise {
 	
-	@Column(name = "Ide")
+	@Column(name = "Idex")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Setter(value = AccessLevel.NONE)
