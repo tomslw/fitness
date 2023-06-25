@@ -1,5 +1,6 @@
 package lv.venta.fitness.models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -51,6 +52,10 @@ public class User {
 	private String username;
 	
 	private String password;
+	
+	@Column(name = "Birthday")
+	@NotNull
+	private LocalDateTime birthday;
 	
 	@OneToMany(mappedBy="HealthData")
 	@ToString.Exclude
