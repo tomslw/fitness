@@ -68,8 +68,8 @@ public class ExcersiseController {
                 return "redirect:/exercise/showAll";
             }
             catch (Exception e) {
-                e.printStackTrace();
-                return "error-page";
+//                e.printStackTrace();
+                return "redirect:/error";
             }
         } else {
             return "add-exercise-page";
