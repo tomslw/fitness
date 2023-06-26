@@ -5,6 +5,8 @@ import jakarta.validation.Valid;
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.services.IExcersiseService;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/exercise")
 public class ExcersiseController {
 
 	@Autowired
@@ -26,10 +31,9 @@ public class ExcersiseController {
         return "error-page";
     }
 
-    @GetMapping("/exercise/showAll")
-    public String getAllExercises(Model model){
-        model.addAttribute("exercises", excersiseService.selectAllExcersises());
-        return "all-exercises-page";
+    @GetMapping("/showAll")
+    Collection<Excersise> getAllExercises(Model model){
+        return excersiseService.selectAllExcersises();
     }
 
     @GetMapping("/exercise/showExerciseByMuscle/{muscle}")
