@@ -16,7 +16,6 @@ import lombok.ToString;
 
 @Table(name = "exercise_table")
 @Entity
-//@MappedSuperclass
 @Getter
 @Setter
 @ToString

@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -56,6 +58,11 @@ public class User {
 	@Column(name = "Birthday")
 	@NotNull
 	private LocalDateTime birthday;
+	
+	@Column(name = "weight_goal")
+	@Min(0)
+	@Max(200)
+	private float weight_goal;
 	
 	@OneToMany(mappedBy="user")
 	@ToString.Exclude
