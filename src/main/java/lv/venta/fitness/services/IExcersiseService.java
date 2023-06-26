@@ -7,7 +7,7 @@ import lv.venta.fitness.models.Excersise;
 
 public interface IExcersiseService {
 	ArrayList<Excersise> selectAllExcersises();
-	ArrayList<Excersise> selectExcersisesByMuscle(String muscle);
+	ArrayList<Excersise> selectExcersisesByMuscle(String muscle) throws Exception;
 	void insertNewExcersise(String title, String description, float restInterval, int repetitions, ArrayList<String> targetMuscles, float addedWeight);
-	void deleteExcersiseById(long idex);
+	void deleteExcersiseById(long idex) throws Exception;
 }
