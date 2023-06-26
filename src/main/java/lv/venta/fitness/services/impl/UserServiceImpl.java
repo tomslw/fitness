@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lv.venta.fitness.models.User;
 import lv.venta.fitness.repos.UserRepo;
 import lv.venta.fitness.services.IUserService;
 
+@Service
 public class UserServiceImpl implements IUserService{
 
 	@Autowired

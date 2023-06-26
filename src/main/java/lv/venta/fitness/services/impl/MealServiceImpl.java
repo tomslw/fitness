@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lv.venta.fitness.models.Ingredient;
 import lv.venta.fitness.models.Meal;
 import lv.venta.fitness.repos.MealRepo;
 import lv.venta.fitness.services.IMealService;
 
+@Service
 public class MealServiceImpl implements IMealService{
 	
 	@Autowired

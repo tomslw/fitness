@@ -3,12 +3,13 @@ package lv.venta.fitness.services.impl;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.repos.HealthDataRepo;
 import lv.venta.fitness.services.IHealthDataService;
 
-
+@Service
 public class HealthDataServiceImpl implements IHealthDataService{
 	
 	@Autowired

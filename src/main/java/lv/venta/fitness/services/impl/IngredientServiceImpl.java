@@ -3,11 +3,13 @@ package lv.venta.fitness.services.impl;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lv.venta.fitness.models.Ingredient;
 import lv.venta.fitness.repos.IngredientRepo;
 import lv.venta.fitness.services.IIngredientService;
 
+@Service
 public class IngredientServiceImpl implements IIngredientService{
 	
 	@Autowired
