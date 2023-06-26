@@ -57,7 +57,7 @@ public class User {
 	@NotNull
 	private LocalDateTime birthday;
 	
-	@OneToMany(mappedBy="HealthData")
+	@OneToMany(mappedBy="user")
 	@ToString.Exclude
 	@NotNull
 	private Collection<HealthData> allHealthData;

@@ -2,14 +2,7 @@ package lv.venta.fitness.models;
 
 import java.util.ArrayList;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -22,7 +15,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Table(name = "exercise_table")
-@MappedSuperclass
+@Entity
+//@MappedSuperclass
 @Getter
 @Setter
 @ToString

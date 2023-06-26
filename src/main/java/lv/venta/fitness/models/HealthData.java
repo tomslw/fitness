@@ -49,11 +49,12 @@ public class HealthData {
 	@NotNull
 	private Collection<String> fatiguedMuscles;
 	
-	@OneToMany(mappedBy="Meal")
+//	@OneToMany(mappedBy="Meal")
+	@OneToMany(mappedBy = "healthData")
 	@NotNull
 	private Collection<Meal> diet;
 	
-	@OneToMany(mappedBy="Excercise")
+	@OneToMany(mappedBy="healthData")
 	@ToString.Exclude
 	@NotNull
 	private Collection<Excersise> workout;

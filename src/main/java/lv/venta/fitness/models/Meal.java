@@ -34,7 +34,8 @@ public class Meal {
 	@JoinColumn(name="idhe")
 	private HealthData healthData;
 
-    @OneToMany(mappedBy="Ingredient")
+//    @OneToMany(mappedBy="Ingredient")
+    @OneToMany(mappedBy = "meal")
     @ToString.Exclude
     private Collection<Ingredient> ingredientCollection = new ArrayList<>();
 
