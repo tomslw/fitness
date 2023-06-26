@@ -15,8 +15,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Table(name = "exercise_table")
+<<<<<<< HEAD:src/main/java/lv/venta/fitness/models/Excersise.java
 @Entity
 //@MappedSuperclass
+=======
+@MappedSuperclass
+>>>>>>> c24289d63cf661d289a8b144978cc1e34988b26b:src/main/java/lv/venta/fitness/models/Exercise.java
 @Getter
 @Setter
 @ToString
