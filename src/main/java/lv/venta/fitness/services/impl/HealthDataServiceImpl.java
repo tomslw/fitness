@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.repos.HealthDataRepo;
-import lv.venta.fitness.repos.UserRepo;
 import lv.venta.fitness.services.IHealthDataService;
 
 

@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lv.venta.fitness.models.Excersise;
-import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.repos.ExcersiseRepo;
-import lv.venta.fitness.repos.HealthDataRepo;
 import lv.venta.fitness.services.IExcersiseService;
 
 public class ExcersiseServiceImpl implements IExcersiseService{

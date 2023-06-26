@@ -33,22 +33,22 @@ public class Ingredient {
     private String description;
 
     @Column(name = "calories")
-    @Min(1)
+    @Min(0)
     @Max(100000)
     private int calories;
 
     @Column(name = "fat")
-    @Min(1)
+    @Min(0)
     @Max(100000)
     private int fat;
 
     @Column(name = "carbohydrates")
-    @Min(1)
+    @Min(0)
     @Max(100000)
     private int carbohydrates;
 
     @Column(name = "protein")
-    @Min(1)
+    @Min(0)
     @Max(100000)
     private int protein;
 

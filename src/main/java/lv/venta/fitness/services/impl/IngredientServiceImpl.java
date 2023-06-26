@@ -20,17 +20,26 @@ public class IngredientServiceImpl implements IIngredientService{
 
 	@Override
 	public void insertNewIngredient(String title, String description, int calories, int fat, int carbohydrates,
-			int protein) {
+			int protein) throws Exception {
 		
-		Ingredient ingredient = new Ingredient(title, description, calories, fat, carbohydrates, protein);
-		
+		if(title != null && description != null && calories >= 0 && fat >= 0 && carbohydrates >= 0 && protein >= 0) {
+			Ingredient ingredient = new Ingredient(title, description, calories, fat, carbohydrates, protein);
+			ingredientRepo.save(ingredient);
+		}
+		else {
+			throw new Exception("Invalid arguments");
+		}
 		
 	}
 
 	@Override
-	public void deleteIngredientById(long idin) {
-		// TODO Auto-generated method stub
-		
+	public void deleteIngredientById(long idin) throws Exception {
+		if(idin > 0) {
+			ingredientRepo.deleteById(idin);
+		}
+		else {
+			throw new Exception("Invalid id");
+		}
 	}
 
 }
