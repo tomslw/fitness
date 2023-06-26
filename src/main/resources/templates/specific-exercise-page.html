@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <body>
-$END$
+<p th:text="${exercise.getTitle()}"></p>
+<p th:text="${exercise.getDescription()}"></p>
+<p th:text="${exercise.getRestInterval()}"></p>
+<p th:text="${exercise.getTargetMuscles()}"></p>
+<p th:text="${exercise.getAddedWeight()}"></p>
+<p th:text="${exercise.toString()}"></p>
 </body>
+
 </html>

@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <body>
-$END$
+<table>
+  <tr th:each="temp : ${exercises}">
+    <td th:text="${temp.getTitle()}"> </td>
+    <td th:text="${temp.getDescription()}"> </td>
+    <td th:text="${temp.getRestInterval}"> </td>
+    <td th:text="${temp.getRepetitions}"> </td>
+    <td th:text="${temp.getTargetMuscles}"> </td>
+    <td th:text="${temp.getAddedWeight}"> </td>
+  </tr>
+</table>
 </body>
 </html>
