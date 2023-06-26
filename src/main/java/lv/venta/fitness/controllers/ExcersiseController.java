@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -46,7 +47,7 @@ public class ExcersiseController {
     public String getDeleteExercise(@PathVariable(name = "id") long id, Model model){
         try{
             excersiseService.deleteExcersiseById(id);
-            model.addAttribute("room", excersiseService.selectAllExcersises());
+            model.addAttribute("exercises", excersiseService.selectAllExcersises());
             return "all-exercises-page";
         } catch (Exception e) {
             model.addAttribute("packetError", e.getMessage());
@@ -61,10 +62,10 @@ public class ExcersiseController {
     }
 
     @PostMapping("/exercise/insertNewExercise")
-    public String postAddExercise(@Valid Excersise excersise, BindingResult result) {
+    public String postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise, BindingResult result) {
         if(!result.hasErrors()) {
             try {
-                excersiseService.insertNewExcersise(excersise.getTitle(), excersise.getDescription(), excersise.getRestInterval(), excersise.getRepetitions(), excersise.getTargetMuscles(), excersise.getAddedWeight());
+                excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
                 return "redirect:/exercise/showAll";
             }
             catch (Exception e) {
@@ -72,7 +73,7 @@ public class ExcersiseController {
                 return "redirect:/error";
             }
         } else {
-            return "add-exercise-page";
+        	return "add-exercise-page";
         }
     }
 

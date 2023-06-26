@@ -28,7 +28,7 @@ public class Excersise {
 	@Setter(value = AccessLevel.NONE)
 	private long ide;
 	
-	@Column(name = "Title")
+	@Column(name = "title")
 	@Size(min = 3, max = 30)
 	@Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters")
 	private String title;
