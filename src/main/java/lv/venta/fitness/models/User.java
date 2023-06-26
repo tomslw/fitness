@@ -1,7 +1,6 @@
 package lv.venta.fitness.models;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import jakarta.persistence.Column;
@@ -62,10 +61,26 @@ public class User {
 	@Column(name = "weight_goal")
 	@Min(0)
 	@Max(200)
-	private float weight_goal;
+	private float weightGoal;
 	
 	@OneToMany(mappedBy="user")
 	@ToString.Exclude
 	@NotNull
 	private Collection<HealthData> allHealthData;
+
+	public User(
+			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") @NotNull String name,
+			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") @NotNull String surname,
+			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z,a-z,0-9,_\\ ]+", message = "Only latin letters") @NotNull String username,
+			String password, @NotNull LocalDateTime birthday, @Min(0) @Max(200) float weightGoal) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.username = username;
+		this.password = password;
+		this.birthday = birthday;
+		this.weightGoal = weightGoal;
+	}
+	
+	
 }

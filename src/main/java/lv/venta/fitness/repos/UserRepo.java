@@ -6,4 +6,6 @@ import lv.venta.fitness.models.User;
 
 public interface UserRepo extends CrudRepository<User, Long>{
 
+	User findByIdus(long idus);
+
 }
