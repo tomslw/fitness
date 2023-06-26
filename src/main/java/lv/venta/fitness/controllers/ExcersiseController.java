@@ -34,8 +34,8 @@ public class ExcersiseController {
     @GetMapping("/exercise/showExerciseByMuscle/{muscle}")
     public String getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model){
         try {
-            model.addAttribute("exercise", excersiseService.selectExcersisesByMuscle(muscle));
-            return "specific-exercise-page";
+            model.addAttribute("exercises", excersiseService.selectExcersisesByMuscle(muscle));
+            return "all-exercises-page";
         } catch (Exception e) {
             model.addAttribute("packetError", e.getMessage());
             return "error-page";
