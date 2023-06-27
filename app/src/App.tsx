@@ -1,11 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+export function App(): ReactElement {
 
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState<Excercise[]>([]);
   const [loading, setLoading] = useState(false);
+
+  // temporay
+
+interface Excercise {
+    idex: number;
+    title: String;
+    description: String;
+    restInterval: number;
+    repetitions: number;
+    addedWeight: number
+    // health data goes here, once that has been defined, for now not nessesary
+}
 
   useEffect(() => {
     setLoading(true);
@@ -29,7 +41,7 @@ function App() {
         <div className="App-intro">
           <h2>Excercise List</h2>
           {groups.map(group =>
-            <div key={group.Idex}>
+            <div key={group.idex}>
               {group.title}
             </div>
           )}
