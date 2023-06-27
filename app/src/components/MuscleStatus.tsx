@@ -43,19 +43,21 @@ export function MuscleStatus({intensityData} : Props): ReactElement {
 
 
     return (
-        <div className="muscle-container">
-            <img src={abdomen} alt="abdomen" className={"muscle " + translateIntensity(intensityData.abdomen)}/>
-            <img src={back} alt="back" className={"muscle " + translateIntensity(intensityData.back)}/>
-            <img src={biceps} alt="biceps" className={"muscle " + translateIntensity(intensityData.biceps)}/>
-            <img src={deltoid} alt="deltoid" className={"muscle " + translateIntensity(intensityData.deltoid)}/>
-            <img src={chest} alt="chest" className={"muscle " + translateIntensity(intensityData.chest)}/>
-            <img src={calves} alt="calves" className={"muscle " + translateIntensity(intensityData.calves)}/>
-            <img src={forearms} alt="forearms" className={"muscle " + translateIntensity(intensityData.forearms)}/>
-            <img src={gluteus} alt="gluteus" className={"muscle " + translateIntensity(intensityData.gluteus)}/>
-            <img src={hamstrings} alt="hamstrings" className={"muscle " + translateIntensity(intensityData.hamstrings)}/>
-            <img src={quadriceps} alt="quadriceps" className={"muscle " + translateIntensity(intensityData.quadriceps)}/>
-            <img src={trapezius} alt="trapezius" className={"muscle " + translateIntensity(intensityData.trapezius)}/>
-            <img src={triceps} alt="calves" className={"muscle " + translateIntensity(intensityData.triceps)}/>
+        <div className="body-window">
+            <div className="muscle-container">
+                <img src={abdomen} alt="abdomen" className={"muscle " + translateIntensity(intensityData.abdomen)}/>
+                <img src={back} alt="back" className={"muscle " + translateIntensity(intensityData.back)}/>
+                <img src={biceps} alt="biceps" className={"muscle " + translateIntensity(intensityData.biceps)}/>
+                <img src={deltoid} alt="deltoid" className={"muscle " + translateIntensity(intensityData.deltoid)}/>
+                <img src={chest} alt="chest" className={"muscle " + translateIntensity(intensityData.chest)}/>
+                <img src={calves} alt="calves" className={"muscle " + translateIntensity(intensityData.calves)}/>
+                <img src={forearms} alt="forearms" className={"muscle " + translateIntensity(intensityData.forearms)}/>
+                <img src={gluteus} alt="gluteus" className={"muscle " + translateIntensity(intensityData.gluteus)}/>
+                <img src={hamstrings} alt="hamstrings" className={"muscle " + translateIntensity(intensityData.hamstrings)}/>
+                <img src={quadriceps} alt="quadriceps" className={"muscle " + translateIntensity(intensityData.quadriceps)}/>
+                <img src={trapezius} alt="trapezius" className={"muscle " + translateIntensity(intensityData.trapezius)}/>
+                <img src={triceps} alt="calves" className={"muscle " + translateIntensity(intensityData.triceps)}/>
+            </div>
         </div>
     );
 }

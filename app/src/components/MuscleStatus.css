@@ -1,11 +1,18 @@
 
 
+.body-window {
+    background-color: #454d5c;
+    height: 28rem;
+    width: 50rem;
+}
+
 .muscle {
     position: absolute;
+    display: block;
     left: 0rem;
     top: 0rem;
     z-index: 1;
-    width: 30rem;
+    width: 100%;
 }
 /* mmm very nice, css magic */
 /* lifesaver: https://codepen.io/sosuke/pen/Pjoqqp */
