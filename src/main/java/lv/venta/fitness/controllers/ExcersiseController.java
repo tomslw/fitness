@@ -24,13 +24,7 @@ public class ExcersiseController {
 
 	@Autowired
     private IExcersiseService excersiseService;
-
-    @GetMapping("/error")
-    public String getError(Model model){
-        model.addAttribute("packetError", "Error");
-        return "error-page";
-    }
-
+	
     @GetMapping("/showAll")
     Collection<Excersise> getAllExercises(Model model){
         return excersiseService.selectAllExcersises();

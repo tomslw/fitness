@@ -26,7 +26,7 @@ public class Excersise {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Setter(value = AccessLevel.NONE)
-	private long ide;
+	private long idex;
 	
 	@Column(name = "title")
 	@Size(min = 3, max = 30)
