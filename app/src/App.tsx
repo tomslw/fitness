@@ -4,35 +4,50 @@ import './App.css';
 import { Exercise, HealthData, Intensity, Meal, MuscleGroups } from './utils/types';
 import { MuscleStatus } from './components/MuscleStatus';
 import { HealthSummary } from './components/HealthSummary';
+import { MealsList } from './components/MealsList';
 
 export function App(): ReactElement {
 
   const [exercise, setExercise] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const [intensity, setIntensity] = useState<MuscleGroups>({
-    chest: Intensity.high,
-    back: Intensity.low,
-    biceps: Intensity.low,
-    triceps: Intensity.low,
-    forearms: Intensity.low,
-    abdomen: Intensity.low,
-    gluteus: Intensity.medium,
-    hamstrings: Intensity.low,
-    quadriceps: Intensity.low,
-    calves: Intensity.low,
-    trapezius: Intensity.low,
-    deltoid: Intensity.low,
-  })
-
+  // selected HealthData entry
   const [health, setHealth] = useState<HealthData> ({
     weight: 60,
     height: 180,
-    morning_muscle_fatigue: intensity,
-    diet: new Array<Meal>(),
+    morningMuscleFatigue: {
+      chest: Intensity.high,
+      back: Intensity.low,
+      biceps: Intensity.low,
+      triceps: Intensity.low,
+      forearms: Intensity.low,
+      abdomen: Intensity.low,
+      gluteus: Intensity.medium,
+      hamstrings: Intensity.low,
+      quadriceps: Intensity.low,
+      calves: Intensity.low,
+      trapezius: Intensity.low,
+      deltoid: Intensity.low,
+    },
+    diet: new Array<Meal>({    
+      title: "pica",
+      description: "neveseligs ediens",
+      calories: 5000,
+      fat: 100,
+      carbohydrates: 101,
+      protein: 20,
+    },
+    {    
+      title: "Hamburgier",
+      description: "amerikano",
+      calories: 500,
+      fat: 80,
+      carbohydrates: 150,
+      protein: 15,
+    }),
     workout: new Array<Exercise>(),
-    calories_spent: 2000,
-    date_time: new Date(2023, 4, 8, 10, 13, 41, 12),
+    caloriesSpent: 2000,
+    dateTime: new Date(2023, 4, 8, 10, 13, 41, 12),
   })
 
   useEffect(() => {
@@ -57,11 +72,12 @@ export function App(): ReactElement {
     <div className="App">
       <header className="App-header">
         <div className="health-data-side">
-          <HealthSummary />
+          <HealthSummary healthData={health} setHealthData={setHealth}/>
+          <MealsList meals={health.diet} setMeals={(newList) => setHealth({ ...health, diet: newList })} />
         </div>
         <div className="muscle-side">
           <div className="title">Muscle soreness</div>
-          <MuscleStatus intensityData={intensity} setIntensityData={setIntensity}/>
+          <MuscleStatus intensityData={health.morningMuscleFatigue} setIntensityData={(data => setHealth({ ...health, morningMuscleFatigue: data }))}/>
         </div>
         
       </header>
