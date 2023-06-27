@@ -4,10 +4,10 @@ export interface Exercise {
     idex: number;
     title: String;
     description: String;
-    rest_interval: number;
+    restInterval: number;
     repetitions: number;
-    added_weight: number
-    target_muscles: MuscleGroups
+    addedWeight: number
+    targetMuscles: MuscleGroups
 }
 
 export interface Meal {
@@ -22,11 +22,11 @@ export interface Meal {
 export interface HealthData {
     weight: number;
     height: number;
-    morning_muscle_fatigue: MuscleGroups;
+    morningMuscleFatigue: MuscleGroups;
     diet: Array<Meal>;
     workout: Array<Exercise>;
-    calories_spent: number;
-    date_time: Date;
+    caloriesSpent: number;
+    dateTime: Date;
 }
 
 export enum Intensity {
