@@ -1,0 +1,33 @@
+
+
+.muscle {
+    position: absolute;
+    left: 0rem;
+    top: 0rem;
+    z-index: 1;
+    width: 30rem;
+}
+/* mmm very nice, css magic */
+/* lifesaver: https://codepen.io/sosuke/pen/Pjoqqp */
+.muscle-none {
+    filter: invert(49%) sepia(71%) saturate(7053%) hue-rotate(202deg) brightness(101%) contrast(106%);
+}
+.muscle-low {
+    filter: invert(50%) sepia(58%) saturate(2912%) hue-rotate(86deg) brightness(123%) contrast(121%);
+}
+.muscle-medium {
+    filter: invert(86%) sepia(48%) saturate(2178%) hue-rotate(359deg) brightness(103%) contrast(102%);
+}
+.muscle-high {
+    filter: invert(74%) sepia(67%) saturate(4800%) hue-rotate(359deg) brightness(100%) contrast(102%);
+}
+.muscle-injury {
+    filter: invert(21%) sepia(100%) saturate(6790%) hue-rotate(2deg) brightness(112%) contrast(124%);
+}
+
+.muscle-container {
+    position: relative;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
