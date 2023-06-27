@@ -1,0 +1,28 @@
+
+
+
+.title {
+
+}
+
+.base-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+}
+
+.selected-item-title {
+    font-size: 2rem;
+}
+
+.stats {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+}
+
+.stat-entry {
+    margin-right: auto;
+}
