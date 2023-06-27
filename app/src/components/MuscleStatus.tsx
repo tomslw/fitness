@@ -89,7 +89,7 @@ export function MuscleStatus({intensityData, setIntensityData} : Props): ReactEl
                 <img src={hamstrings} alt="hamstrings" className={"muscle " + translateIntensity(intensityData.hamstrings)}/>
                 <img src={quadriceps} alt="quadriceps" className={"muscle " + translateIntensity(intensityData.quadriceps)}/>
                 <img src={trapezius} alt="trapezius" className={"muscle " + translateIntensity(intensityData.trapezius)}/>
-                <img src={triceps} alt="calves" className={"muscle " + translateIntensity(intensityData.triceps)}/>
+                <img src={triceps} alt="triceps" className={"muscle " + translateIntensity(intensityData.triceps)}/>
             </div>
             <div className="middle-ui">
                 <ListItem 
@@ -147,9 +147,9 @@ export function MuscleStatus({intensityData, setIntensityData} : Props): ReactEl
                     defVal={intensityData.trapezius} 
                     intensityData={intensityData}
                 />
-                <ListItem title={"Calves"} 
-                    setData={(value) => setIntensityData({...intensityData, calves: value as Intensity})}
-                    defVal={intensityData.calves} 
+                <ListItem title={"Triceps"} 
+                    setData={(value) => setIntensityData({...intensityData, triceps: value as Intensity})}
+                    defVal={intensityData.triceps} 
                     intensityData={intensityData}
                 />
 
