@@ -74,5 +74,21 @@ public class HealthData {
 	@ManyToOne
 	@JoinColumn(name="idus")
 	private User user;
+
+	public HealthData(@Min(0) @Max(500) float weight, @Min(0) @Max(300) float height, MuscleGroups muscleGroups,
+			@NotNull Collection<Meal> diet, @NotNull Collection<Excersise> workout,
+			@Min(0) @Max(10000) int caloriesSpent, @NotNull LocalDateTime date, User user) {
+		super();
+		this.weight = weight;
+		this.height = height;
+		this.muscleGroups = muscleGroups;
+		this.diet = diet;
+		this.workout = workout;
+		this.caloriesSpent = caloriesSpent;
+		this.date = date;
+		this.user = user;
+	}
+	
+	
 	
 }

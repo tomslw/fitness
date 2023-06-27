@@ -51,9 +51,9 @@ public class MuscleGroups {
 	@NotNull
 	private Intensity triceps;
 	
-	@Column(name = "forarms")
+	@Column(name = "forearms")
 	@NotNull
-	private Intensity forarms;
+	private Intensity forearms;
 	
 	@Column(name = "abdomen")
 	@NotNull
@@ -71,19 +71,42 @@ public class MuscleGroups {
 	@NotNull
 	private Intensity quadriceps;
 	
-	@Column(name = "glutes")
+	@Column(name = "gluteus")
 	@NotNull
-	private Intensity glutes;
+	private Intensity gluteus;
 	
 	@Column(name = "trapezius")
 	@NotNull
 	private Intensity trapezius;
 	
-	@Column(name = "latissimus_dorsi")
+	@Column(name = "deltoid")
 	@NotNull
-	private Intensity latissimus_dorsi;
+	private Intensity deltoid;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "muscleGroups")
 	private HealthData healthData;
+
+	public MuscleGroups(@NotNull Intensity chest, @NotNull Intensity back, @NotNull Intensity biceps,
+			@NotNull Intensity triceps, @NotNull Intensity forearms, @NotNull Intensity abdomen,
+			@NotNull Intensity calves, @NotNull Intensity hamstrings, @NotNull Intensity quadriceps,
+			@NotNull Intensity gluteus, @NotNull Intensity trapezius, @NotNull Intensity deltoid,
+			HealthData healthData) {
+		super();
+		this.chest = chest;
+		this.back = back;
+		this.biceps = biceps;
+		this.triceps = triceps;
+		this.forearms = forearms;
+		this.abdomen = abdomen;
+		this.calves = calves;
+		this.hamstrings = hamstrings;
+		this.quadriceps = quadriceps;
+		this.gluteus = gluteus;
+		this.trapezius = trapezius;
+		this.deltoid = deltoid;
+		this.healthData = healthData;
+	}
+	
+	
 	
 }
