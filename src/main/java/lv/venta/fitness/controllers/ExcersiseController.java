@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("/exercise")
 public class ExcersiseController {
 
 	@Autowired
@@ -26,13 +24,13 @@ public class ExcersiseController {
         return "error-page";
     }
 
-    @GetMapping("/exercise/showAll")
+    @GetMapping("/showAll")
     public String getAllExercises(Model model){
         model.addAttribute("exercises", excersiseService.selectAllExcersises());
         return "all-exercises-page";
     }
 
-    @GetMapping("/exercise/showExerciseByMuscle/{muscle}")
+    @GetMapping("/showExerciseByMuscle/{muscle}")
     public String getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model){
         try {
             model.addAttribute("exercises", excersiseService.selectExcersisesByMuscle(muscle));
@@ -43,7 +41,7 @@ public class ExcersiseController {
         }
     }
 
-    @GetMapping("/exercise/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String getDeleteExercise(@PathVariable(name = "id") long id, Model model){
         try{
             excersiseService.deleteExcersiseById(id);
@@ -55,13 +53,13 @@ public class ExcersiseController {
         }
     }
 
-    @GetMapping("/exercise/insertNewExercise")
+    @GetMapping("/insertNewExercise")
     public String getAddExercise(Model model){
         model.addAttribute("exercise", new Excersise());
         return "add-exercise-page";
     }
 
-    @PostMapping("/exercise/insertNewExercise")
+    @PostMapping("/insertNewExercise")
     public String postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise, BindingResult result) {
         if(!result.hasErrors()) {
             try {
