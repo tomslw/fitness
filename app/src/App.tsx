@@ -1,12 +1,13 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Excercise, Intensity, MuscleGroups } from './utils/types';
+import { Exercise, HealthData, Intensity, Meal, MuscleGroups } from './utils/types';
 import { MuscleStatus } from './components/MuscleStatus';
+import { HealthSummary } from './components/HealthSummary';
 
 export function App(): ReactElement {
 
-  const [excercise, setExcercise] = useState<Excercise[]>([]);
+  const [exercise, setExercise] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(false);
 
   const [intensity, setIntensity] = useState<MuscleGroups>({
@@ -24,6 +25,16 @@ export function App(): ReactElement {
     deltoid: Intensity.low,
   })
 
+  const [health, setHealth] = useState<HealthData> ({
+    weight: 60,
+    height: 180,
+    morning_muscle_fatigue: intensity,
+    diet: new Array<Meal>(),
+    workout: new Array<Exercise>(),
+    calories_spent: 2000,
+    date_time: new Date(2023, 4, 8, 10, 13, 41, 12),
+  })
+
   useEffect(() => {
     setLoading(true);
     // having the response beeing handeled here is kind of meh, 
@@ -31,7 +42,7 @@ export function App(): ReactElement {
     fetch('exercise/showAll')
       .then(response => response.json())
       .then(data => {
-        setExcercise(data);
+        setExercise(data);
         setLoading(false);
       })
   }, []);
@@ -45,16 +56,14 @@ export function App(): ReactElement {
   return (
     <div className="App">
       <header className="App-header">
-        <MuscleStatus intensityData={intensity} setIntensityData={setIntensity}/>
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <div className="App-intro">
-          <h2>Excercise List</h2>
-          {excercise.map(group =>
-            <div key={group.idex}>
-              {group.title}
-            </div>
-          )}
+        <div className="health-data-side">
+          <HealthSummary />
         </div>
+        <div className="muscle-side">
+          <div className="title">Muscle soreness</div>
+          <MuscleStatus intensityData={intensity} setIntensityData={setIntensity}/>
+        </div>
+        
       </header>
     </div>
   );
