@@ -30,7 +30,7 @@ public class ExcersiseController {
         return excersiseService.selectAllExcersises();
     }
 
-    @GetMapping("/exercise/showExerciseByMuscle/{muscle}")
+    @GetMapping("/showExerciseByMuscle/{muscle}")
     public String getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model){
         try {
             model.addAttribute("exercises", excersiseService.selectExcersisesByMuscle(muscle));
@@ -41,7 +41,7 @@ public class ExcersiseController {
         }
     }
 
-    @GetMapping("/exercise/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String getDeleteExercise(@PathVariable(name = "id") long id, Model model){
         try{
             excersiseService.deleteExcersiseById(id);
@@ -53,13 +53,13 @@ public class ExcersiseController {
         }
     }
 
-    @GetMapping("/exercise/insertNewExercise")
+    @GetMapping("/insertNewExercise")
     public String getAddExercise(Model model){
         model.addAttribute("exercise", new Excersise());
         return "add-exercise-page";
     }
 
-    @PostMapping("/exercise/insertNewExercise")
+    @PostMapping("/insertNewExercise")
     public String postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise, BindingResult result) {
         if(!result.hasErrors()) {
             try {
