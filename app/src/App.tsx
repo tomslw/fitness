@@ -1,31 +1,21 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Excercise } from './utils/types';
 
 export function App(): ReactElement {
 
-  const [groups, setGroups] = useState<Excercise[]>([]);
+  const [excercise, setExcercise] = useState<Excercise[]>([]);
   const [loading, setLoading] = useState(false);
-
-  // temporay
-
-interface Excercise {
-    idex: number;
-    title: String;
-    description: String;
-    restInterval: number;
-    repetitions: number;
-    addedWeight: number
-    // health data goes here, once that has been defined, for now not nessesary
-}
 
   useEffect(() => {
     setLoading(true);
-
+    // having the response beeing handeled here is kind of meh, 
+    // should probably have a seperate Requester.ts with all the safety checks in the world
     fetch('exercise/showAll')
       .then(response => response.json())
       .then(data => {
-        setGroups(data);
+        setExcercise(data);
         setLoading(false);
       })
   }, []);
@@ -40,7 +30,7 @@ interface Excercise {
         <img src={logo} className="App-logo" alt="logo" />
         <div className="App-intro">
           <h2>Excercise List</h2>
-          {groups.map(group =>
+          {excercise.map(group =>
             <div key={group.idex}>
               {group.title}
             </div>
