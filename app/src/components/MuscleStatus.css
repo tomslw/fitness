@@ -2,8 +2,33 @@
 
 .body-window {
     background-color: #454d5c;
-    height: 28rem;
+    height: 35rem;
     width: 50rem;
+}
+
+.middle-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    background-color: azure;
+    width: 17%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+}
+
+.slider-item {
+    position: relative;
+    width: 100%;
+}
+
+.slider-title {
+    margin-bottom: -0.7rem;
+    color: black;
+    font-size: 1rem;
 }
 
 .muscle {
@@ -34,7 +59,5 @@
 
 .muscle-container {
     position: relative;
-    margin-left: 5rem;
-    margin-right: 5rem;
 }
 

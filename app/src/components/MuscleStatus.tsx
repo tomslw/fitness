@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { Intensity, MuscleGroups } from "../utils/types";
 import "./MuscleStatus.css"
+import Slider from "@mui/material/Slider"
 
 import abdomen from "../images/muscles/abdomen.png";
 import back from "../images/muscles/back.png";
@@ -15,11 +16,44 @@ import quadriceps from "../images/muscles/quadriceps.png";
 import trapezius from "../images/muscles/trapezius.png";
 import triceps from "../images/muscles/triceps.png";
 
-interface Props {
+interface ListProps {
+    title: String, 
+    setData: (newVal: Number) => void, 
+    defVal: Intensity, 
     intensityData: MuscleGroups
 }
 
-export function MuscleStatus({intensityData} : Props): ReactElement {
+function ListItem({title, setData, defVal, intensityData} : ListProps) : ReactElement {
+    return (
+        <div className="slider-item">
+            <div className="slider-title">{title}</div>
+            <Slider 
+                aria-label="back intensity"
+                defaultValue={defVal}
+                getAriaValueText={valuetext}
+                valueLabelFormat={valuetext}
+                valueLabelDisplay="auto"
+                step={1}
+                size="small"
+                marks
+                min={0}
+                max={4}
+                onChange={(event, value) => setData(Array.isArray(value) ? value[0] : value)}
+            />
+        </div>
+    );
+}
+
+interface Props {
+    intensityData: MuscleGroups,
+    setIntensityData: (intensityData: MuscleGroups) => void
+}
+
+function valuetext(value: number) {
+    return Intensity[value];
+}
+
+export function MuscleStatus({intensityData, setIntensityData} : Props): ReactElement {
 
     function translateIntensity (intensity: Intensity): String {
         switch (intensity) {
@@ -41,7 +75,6 @@ export function MuscleStatus({intensityData} : Props): ReactElement {
         }
     }
 
-
     return (
         <div className="body-window">
             <div className="muscle-container">
@@ -57,6 +90,71 @@ export function MuscleStatus({intensityData} : Props): ReactElement {
                 <img src={quadriceps} alt="quadriceps" className={"muscle " + translateIntensity(intensityData.quadriceps)}/>
                 <img src={trapezius} alt="trapezius" className={"muscle " + translateIntensity(intensityData.trapezius)}/>
                 <img src={triceps} alt="calves" className={"muscle " + translateIntensity(intensityData.triceps)}/>
+            </div>
+            <div className="middle-ui">
+                <ListItem 
+                    title={"Abdomen"} 
+                    setData={(value) => setIntensityData({...intensityData, abdomen: value as Intensity})} 
+                    defVal={intensityData.abdomen} intensityData={intensityData}
+                />
+                <ListItem title={"Back"} 
+                    setData={(value) => setIntensityData({...intensityData, back: value as Intensity})}
+                    defVal={intensityData.back} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Biceps"} 
+                    setData={(value) => setIntensityData({...intensityData, biceps: value as Intensity})}
+                    defVal={intensityData.biceps} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Deltoid"} 
+                    setData={(value) => setIntensityData({...intensityData, deltoid: value as Intensity})}
+                    defVal={intensityData.deltoid} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Chest"} 
+                    setData={(value) => setIntensityData({...intensityData, chest: value as Intensity})}
+                    defVal={intensityData.chest} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Calves"} 
+                    setData={(value) => setIntensityData({...intensityData, calves: value as Intensity})}
+                    defVal={intensityData.calves} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Forearms"} 
+                    setData={(value) => setIntensityData({...intensityData, forearms: value as Intensity})}
+                    defVal={intensityData.forearms} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Gluteus"} 
+                    setData={(value) => setIntensityData({...intensityData, gluteus: value as Intensity})}
+                    defVal={intensityData.gluteus} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Hamstrings"} 
+                    setData={(value) => setIntensityData({...intensityData, hamstrings: value as Intensity})}
+                    defVal={intensityData.hamstrings} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Quadriceps"} 
+                    setData={(value) => setIntensityData({...intensityData, quadriceps: value as Intensity})}
+                    defVal={intensityData.quadriceps} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Trapezius"} 
+                    setData={(value) => setIntensityData({...intensityData, trapezius: value as Intensity})}
+                    defVal={intensityData.trapezius} 
+                    intensityData={intensityData}
+                />
+                <ListItem title={"Calves"} 
+                    setData={(value) => setIntensityData({...intensityData, calves: value as Intensity})}
+                    defVal={intensityData.calves} 
+                    intensityData={intensityData}
+                />
+
+                
+
             </div>
         </div>
     );

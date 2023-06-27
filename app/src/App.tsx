@@ -45,7 +45,7 @@ export function App(): ReactElement {
   return (
     <div className="App">
       <header className="App-header">
-        <MuscleStatus intensityData={intensity}/>
+        <MuscleStatus intensityData={intensity} setIntensityData={setIntensity}/>
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <div className="App-intro">
           <h2>Excercise List</h2>
