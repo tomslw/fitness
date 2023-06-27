@@ -1,0 +1,63 @@
+
+
+.body-window {
+    background-color: #454d5c;
+    height: 35rem;
+    width: 50rem;
+}
+
+.middle-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    background-color: azure;
+    width: 17%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+}
+
+.slider-item {
+    position: relative;
+    width: 100%;
+}
+
+.slider-title {
+    margin-bottom: -0.7rem;
+    color: black;
+    font-size: 1rem;
+}
+
+.muscle {
+    position: absolute;
+    display: block;
+    left: 0rem;
+    top: 0rem;
+    z-index: 1;
+    width: 100%;
+}
+/* mmm very nice, css magic */
+/* lifesaver: https://codepen.io/sosuke/pen/Pjoqqp */
+.muscle-none {
+    filter: invert(49%) sepia(71%) saturate(7053%) hue-rotate(202deg) brightness(101%) contrast(106%);
+}
+.muscle-low {
+    filter: invert(50%) sepia(58%) saturate(2912%) hue-rotate(86deg) brightness(123%) contrast(121%);
+}
+.muscle-medium {
+    filter: invert(86%) sepia(48%) saturate(2178%) hue-rotate(359deg) brightness(103%) contrast(102%);
+}
+.muscle-high {
+    filter: invert(74%) sepia(67%) saturate(4800%) hue-rotate(359deg) brightness(100%) contrast(102%);
+}
+.muscle-injury {
+    filter: invert(21%) sepia(100%) saturate(6790%) hue-rotate(2deg) brightness(112%) contrast(124%);
+}
+
+.muscle-container {
+    position: relative;
+}
+
