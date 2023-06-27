@@ -11,12 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/exercise")
@@ -24,10 +19,17 @@ public class ExcersiseController {
 
 	@Autowired
     private IExcersiseService excersiseService;
-	
+
+    @GetMapping("/error")
+    public String getError(Model model){
+        model.addAttribute("packetError", "Error");
+        return "error-page";
+    }
+
     @GetMapping("/showAll")
-    Collection<Excersise> getAllExercises(Model model){
-        return excersiseService.selectAllExcersises();
+    public String getAllExercises(Model model){
+        model.addAttribute("exercises", excersiseService.selectAllExcersises());
+        return "all-exercises-page";
     }
 
     @GetMapping("/showExerciseByMuscle/{muscle}")
@@ -67,8 +69,8 @@ public class ExcersiseController {
                 return "redirect:/exercise/showAll";
             }
             catch (Exception e) {
-                e.printStackTrace();
-                return "error-page";
+//                e.printStackTrace();
+                return "redirect:/error";
             }
         } else {
         	return "add-exercise-page";

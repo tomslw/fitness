@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<table>
+<!--  te laikam jāņem ārā getDiet, getWorkout, ne? es nez-->
+  <tr th:each="temp : ${healthdata}">
+    <td th:text="${temp.getWeight()}"> </td>
+    <td th:text="${temp.getHeight()}"> </td>
+    <td th:text="${temp.getDiet}"> </td>
+    <td th:text="${temp.getWorkout}"> </td>
+    <td th:text="${temp.getCaloriesSpent}"> </td>
+    <td th:text="${temp.getDate}"> </td>
+    <td th:text="${temp.getUser}"> </td>
+  </tr>
+</table>
+</body>
+</html>
