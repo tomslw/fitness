@@ -1,12 +1,28 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Excercise } from './utils/types';
+import { Excercise, Intensity, MuscleGroups } from './utils/types';
+import { MuscleStatus } from './components/MuscleStatus';
 
 export function App(): ReactElement {
 
   const [excercise, setExcercise] = useState<Excercise[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const [intensity, setIntensity] = useState<MuscleGroups>({
+    chest: Intensity.high,
+    back: Intensity.low,
+    biceps: Intensity.low,
+    triceps: Intensity.low,
+    forearms: Intensity.low,
+    abdomen: Intensity.low,
+    gluteus: Intensity.medium,
+    hamstrings: Intensity.low,
+    quadriceps: Intensity.low,
+    calves: Intensity.low,
+    trapezius: Intensity.low,
+    deltoid: Intensity.low,
+  })
 
   useEffect(() => {
     setLoading(true);
@@ -24,10 +40,13 @@ export function App(): ReactElement {
     return <p>Loading...</p>;
   }
 
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <MuscleStatus intensityData={intensity} setIntensityData={setIntensity}/>
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <div className="App-intro">
           <h2>Excercise List</h2>
           {excercise.map(group =>
