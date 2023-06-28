@@ -3,6 +3,7 @@ package lv.venta.fitness.controllers;
 import jakarta.validation.Valid;
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.Meal;
+import lv.venta.fitness.services.IHealthDataService;
 import lv.venta.fitness.services.IMealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ public class MealController
 
     @Autowired
     private IMealService mealService;
+
+    @Autowired
+    private IHealthDataService healthDataService;
 
     @GetMapping("/showAll")
     Collection<Meal> getAllMeals(Model model) {
@@ -45,8 +49,9 @@ public class MealController
     }
 
     @PostMapping("/insertNewMeal")
-    void postAddMeal(@Valid @ModelAttribute("meal") Meal meal, BindingResult result) throws Exception {
+    void postAddMeal(@Valid @ModelAttribute("meal") Meal meal, long idhe) throws Exception {
         mealService.insertNewMeal(meal.getTitle(), meal.getDescription(), meal.getIngredients());
+        healthDataService.addMeal(idhe, meal);
     }
 
     @GetMapping("/delete/{idme}")

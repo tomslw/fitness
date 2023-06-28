@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import lv.venta.fitness.models.Meal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,6 +92,13 @@ public class HealthDataServiceImpl implements IHealthDataService{
 	public void addExercise(long idhe, Excersise excersise) {
 		HealthData healthData = getHealthServiceById(idhe);
 		healthData.addExercise(excersise);
+		healthRepo.save(healthData);
+	}
+
+	@Override
+	public void addMeal(long idhe, Meal meal) {
+		HealthData healthData = getHealthServiceById(idhe);
+		healthData.addMeal(meal);
 		healthRepo.save(healthData);
 	}
 

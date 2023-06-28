@@ -5,10 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import lv.venta.fitness.models.Excersise;
-import lv.venta.fitness.models.HealthData;
-import lv.venta.fitness.models.MuscleGroups;
-import lv.venta.fitness.models.User;
+import lv.venta.fitness.models.*;
 
 public interface IHealthDataService {
 	ArrayList<HealthData> selectAllHealthData();
@@ -18,6 +15,7 @@ public interface IHealthDataService {
 	void deleteHealthDataByUserId(long idus) throws Exception;
 	HealthData getHealthServiceById(long idhe);
 	void addExercise(long idhe, Excersise excersise);
+	void addMeal(long idhe, Meal meal);
 
 
 }
