@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useCallback } from "react";
 import { Intensity, MuscleGroups } from "../utils/types";
 import "./MuscleStatus.css"
 import Slider from "@mui/material/Slider"
@@ -46,16 +46,18 @@ function ListItem({title, setData, defVal, enableEdit} : ListProps) : ReactEleme
 }
 
 interface Props {
+    parentId: number,
     intensityData: MuscleGroups,
     setIntensityData: (intensityData: MuscleGroups) => void,
     enableEdit: boolean,
+    isWorkout: boolean,
 }
 
 function valuetext(value: number) {
     return Intensity[value];
 }
 
-export function MuscleStatus({intensityData, setIntensityData, enableEdit} : Props): ReactElement {
+export function MuscleStatus({parentId, intensityData, setIntensityData, enableEdit, isWorkout} : Props): ReactElement {
 
     function translateIntensity (intensity: Intensity): String {
         switch (intensity) {
@@ -77,6 +79,39 @@ export function MuscleStatus({intensityData, setIntensityData, enableEdit} : Pro
         }
     }
 
+    const handleSaveIntensityData = useCallback((newIntense: MuscleGroups) => {
+
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify({
+                chest: Intensity[newIntense.chest],
+                back: Intensity[newIntense.back],
+                biceps: Intensity[newIntense.biceps],
+                triceps: Intensity[newIntense.triceps],
+                forearms: Intensity[newIntense.forearms],
+                abdomen: Intensity[newIntense.abdomen],
+                gluteus: Intensity[newIntense.gluteus],
+                hamstrings: Intensity[newIntense.hamstrings],
+                quadriceps: Intensity[newIntense.quadriceps],
+                calves: Intensity[newIntense.calves],
+                trapezius: Intensity[newIntense.trapezius],
+                deltoid: Intensity[newIntense.deltoid],
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+        };
+
+        fetch((isWorkout ? 'muscle/updateByExercise/' : 'muscle/updateByHealthData/') + parentId, requestOptions);
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(data);
+            //     // check if success i guess
+            // });
+        
+    }, []);
+
     return (
         <div className="body-window">
             <div className="muscle-container">
@@ -96,62 +131,110 @@ export function MuscleStatus({intensityData, setIntensityData, enableEdit} : Pro
             <div className="middle-ui">
                 <ListItem 
                     title={"Abdomen"} 
-                    setData={(value) => setIntensityData({...intensityData, abdomen: value as Intensity})} 
+                    setData={(value) => {
+                        var newGroup = {...intensityData, abdomen: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.abdomen}
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Back"} 
-                    setData={(value) => setIntensityData({...intensityData, back: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, back: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.back} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Biceps"} 
-                    setData={(value) => setIntensityData({...intensityData, biceps: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, biceps: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.biceps} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Deltoid"} 
-                    setData={(value) => setIntensityData({...intensityData, deltoid: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, deltoid: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.deltoid} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Chest"} 
-                    setData={(value) => setIntensityData({...intensityData, chest: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, chest: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.chest} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Calves"} 
-                    setData={(value) => setIntensityData({...intensityData, calves: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, calves: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.calves} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Forearms"} 
-                    setData={(value) => setIntensityData({...intensityData, forearms: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, forearms: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.forearms} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Gluteus"} 
-                    setData={(value) => setIntensityData({...intensityData, gluteus: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, gluteus: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.gluteus} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Hamstrings"} 
-                    setData={(value) => setIntensityData({...intensityData, hamstrings: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, hamstrings: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.hamstrings} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Quadriceps"} 
-                    setData={(value) => setIntensityData({...intensityData, quadriceps: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, quadriceps: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.quadriceps} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Trapezius"} 
-                    setData={(value) => setIntensityData({...intensityData, trapezius: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, trapezius: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.trapezius} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Triceps"} 
-                    setData={(value) => setIntensityData({...intensityData, triceps: value as Intensity})}
+                    setData={(value) => {
+                        var newGroup = {...intensityData, triceps: value as Intensity};
+                        setIntensityData(newGroup);
+                        handleSaveIntensityData (newGroup);
+                    }}
                     defVal={intensityData.triceps} 
                     enableEdit={enableEdit}
                 />

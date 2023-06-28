@@ -52,7 +52,9 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
       }
   
       const addNewWorkout = () => {
+        //temp
           setWorkouts([...workouts, {
+            idex: 0,
             title: "new workout",
             description: "just do it",
             restInterval: 2,
@@ -111,7 +113,7 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
 
     return (
         <>
-            <MuscleStatus enableEdit={false} intensityData={workoutIntensity} setIntensityData={(data => {})}/>
+            <MuscleStatus parentId={-1} isWorkout={true} enableEdit={false} intensityData={workoutIntensity} setIntensityData={(data => {})}/>
             <div className="workout-row">
                 {
                     workouts.map((value, index) => 
@@ -130,17 +132,26 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
 
                     <DialogTitle>Modify health data</DialogTitle>
                     <DialogContent>
-                        <MuscleStatus
-                            enableEdit={true} 
-                            intensityData={selectedWorkout != null ? workouts[selectedWorkout].targetMuscles : workoutIntensity} 
-                            setIntensityData={(data => {
-                                const newWorkouts = workouts;
-                                if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], targetMuscles: data};
-                                }
-                                setWorkouts(newWorkouts);
-                            })}
-                        />
+                        {selectedWorkout != null ?
+                        (                        
+                            <MuscleStatus
+                                parentId={workouts[selectedWorkout].idex}
+                                isWorkout={true}
+                                enableEdit={true} 
+                                intensityData={workouts[selectedWorkout].targetMuscles} 
+                                setIntensityData={(data => {
+                                    const newWorkouts = workouts;
+                                    if (selectedWorkout != null) {
+                                        newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], targetMuscles: data};
+                                    }
+                                    setWorkouts(newWorkouts);
+                                })}
+                            />
+                        )
+                        :
+                        ''
+                    }
+
                         <TextField
                             autoFocus
                             margin="dense"

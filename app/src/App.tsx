@@ -123,7 +123,7 @@ export function App(): ReactElement {
           <div className="title">{viewSoreness ? "Muscle soreness" : "Workout routine"}</div>
           <Button variant="contained" onClick={() => setViewSoreness(prevState => !prevState)}> Switch views </Button>
           { viewSoreness ?
-          <MuscleStatus enableEdit={true} intensityData={health.muscleGroups} setIntensityData={(data => setHealth({ ...health, muscleGroups: data }))}/>
+          <MuscleStatus parentId={health.idhe} isWorkout={false} enableEdit={true} intensityData={health.muscleGroups} setIntensityData={(data => setHealth({ ...health, muscleGroups: data }))}/>
           :
           <WorkoutList workouts={health.workout} setWorkouts={(data) => setHealth({ ...health, workout: data })} />
           }

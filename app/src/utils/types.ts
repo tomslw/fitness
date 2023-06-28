@@ -1,7 +1,7 @@
 
 
 export interface Exercise {
-    //idex: number;
+    idex: number;
     title: String;
     description: String;
     restInterval: number;
