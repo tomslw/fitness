@@ -51,7 +51,7 @@ public class Excersise {
 	
 	@Column(name = "TargetMuscles")
 	@NotNull
-	private ArrayList<String> targetMuscles;
+	private MuscleGroups targetMuscles;
 	
 	@Column(name = "AddedWeight")
 	@Min(1)
@@ -70,7 +70,7 @@ public class Excersise {
 			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") String title,
 			@Size(min = 3, max = 100) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") String description,
 			@Min(0) @Max(10) float restInterval, @Min(1) @Max(100) int repetitions,
-			@NotNull ArrayList<String> targetMuscles, @Min(1) @Max(1000) float addedWeight) {
+			@NotNull MuscleGroups targetMuscles, @Min(1) @Max(1000) float addedWeight) {
 		this.title = title;
 		this.description = description;
 		this.restInterval = restInterval;

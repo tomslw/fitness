@@ -34,10 +34,12 @@ public class ExcersiseController {
         return excersiseService.selectAllExcersises();
     }
 
+    /*
     @GetMapping("/showExerciseByMuscle/{muscle}")
     Collection<Excersise> getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model) throws Exception {
         return excersiseService.selectExcersisesByMuscle(muscle);
     }
+    */
 
     @GetMapping("/delete/{id}")
     Collection<Excersise> getDeleteExercise(@PathVariable(name = "id") long id, Model model) throws Exception {

@@ -2,6 +2,7 @@ package lv.venta.fitness;
 
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
+import lv.venta.fitness.models.MuscleGroups;
 import lv.venta.fitness.repos.ExcersiseRepo;
 import lv.venta.fitness.repos.HealthDataRepo;
 import lv.venta.fitness.services.IExcersiseService;
@@ -26,7 +27,7 @@ public class FitnessApplication {
 			@Override
 			public void run(String... args) throws Exception {
 			
-				Excersise excersise = new Excersise("Bicep curls", "Barbell bicep curl", 2, 10, new ArrayList<>(Arrays.asList("biceps")), 20);
+				Excersise excersise = new Excersise("Bicep curls", "Barbell bicep curl", 2, 10, new MuscleGroups(), 20);
 				excersiseRepo.save(excersise);
 			}
 		};

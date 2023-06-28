@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
+import lv.venta.fitness.models.MuscleGroups;
 import lv.venta.fitness.repos.ExcersiseRepo;
 import lv.venta.fitness.services.IExcersiseService;
 
@@ -21,6 +22,7 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 		return (ArrayList<Excersise>) excersiseRepo.findAll();
 	}
 
+	/*
 	@Override
 	public ArrayList<Excersise> selectExcersisesByMuscle(String muscle) throws Exception {
 		if (muscle != null) {
@@ -37,10 +39,11 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 			throw new Exception("Invalid muscle");
 		}
 	}
+	*/
 
 	@Override
 	public void insertNewExcersise(String title, String description, float restInterval, int repetitions,
-			ArrayList<String> targetMuscles, float addedWeight) {
+			MuscleGroups targetMuscles, float addedWeight) {
 		Excersise excersise = new Excersise(title, description, restInterval, repetitions, targetMuscles, addedWeight);
 		excersiseRepo.save(excersise);
 		
@@ -56,5 +59,6 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 		}
 		
 	}
+
 
 }

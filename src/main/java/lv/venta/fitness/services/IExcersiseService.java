@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
+import lv.venta.fitness.models.MuscleGroups;
 
 public interface IExcersiseService {
 	ArrayList<Excersise> selectAllExcersises();
-	ArrayList<Excersise> selectExcersisesByMuscle(String muscle) throws Exception;
-	void insertNewExcersise(String title, String description, float restInterval, int repetitions, ArrayList<String> targetMuscles, float addedWeight);
+	//ArrayList<Excersise> selectExcersisesByMuscle(String muscle) throws Exception;
+	void insertNewExcersise(String title, String description, float restInterval, int repetitions, MuscleGroups targetMuscles, float addedWeight);
 	void deleteExcersiseById(long idex) throws Exception;
 }
