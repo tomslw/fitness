@@ -28,7 +28,7 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
 
     return (
         <div className="base-container">
-            <div className="selected-item-title">{healthData.dateTime.toLocaleString()}</div>
+            <div className="selected-item-title">{healthData.date.toLocaleString()}</div>
             <div className="stats">
                 <div className="stat-entry">{"Weight: " + healthData.weight + "kg"}</div>
                 <div className="stat-entry">{"Height: " + healthData.height + "cm"}</div>
