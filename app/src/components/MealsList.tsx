@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useCallback, useState } from "react";
 import { Meal } from "../utils/types";
 import "./MealsList.css";
 
@@ -10,11 +10,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
 interface Props {
+    healthDataId: number,
     meals: Array<Meal>,
     setMeals: (newData: Array<Meal>) => void
 }
 
-export function MealsList({meals, setMeals} : Props): ReactElement {
+export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement {
 
     const [open, setOpen] = useState(false);
     // index
@@ -35,22 +36,57 @@ export function MealsList({meals, setMeals} : Props): ReactElement {
         return sum
     }
 
-    const handleDelete = () => {
+    const handleDelete = useCallback(() => {
+        if (selectedMeal != null) {
+            fetch('meal/delete/' + meals[selectedMeal].idme);
+                // .then(response => response.json())
+                // .then(data => {
+                //     console.log(data);
+                // });
+        }
+
         setMeals(meals.filter((value, index) => index !== selectedMeal));
         handleClose()
-    }
+    }, [meals, selectedMeal, setMeals]);
 
-    const addNewMeal = () => {
-        setMeals([...meals, {    
-            title: "New meal entry!",
-            description: "unused variable",
-            calories: 300,
-            fat: 0,
-            carbohydrates: 0,
-            protein: 0,
-        }]);
-        handleClickOpen(meals.length);
-    }
+    const addNewMeal = useCallback(() => {
+        
+        fetch('meal/getFresh/' + healthDataId)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setMeals( [ ...meals, {
+                    idme: data.idme,
+                    title: data.title,
+                    description: data.description,
+                    calories: data.calories,
+                    fat: data.fat,
+                    carbohydrates: data.carbohydrates,
+                    protein: data.protein,
+                }]);
+                console.log(meals);
+            });
+        //handleClickOpen(meals.length); // cant do this now, need to change something, other wise there is no component at that array loco
+
+    }, [healthDataId, meals, setMeals]);
+
+    const handleUpdatePost = useCallback((newValue: Meal) => {
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(newValue),
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+        };
+
+        fetch('meal/update/' + newValue.idme, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // check if success i guess
+            });
+    }, []);
 
     return (
         <>
@@ -88,6 +124,7 @@ export function MealsList({meals, setMeals} : Props): ReactElement {
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
                                     newMeals[selectedMeal] = {...newMeals[selectedMeal], title: event.target.value};
+                                    handleUpdatePost(newMeals[selectedMeal]);
                                 }
                                 setMeals(newMeals);
                             }}
@@ -105,6 +142,7 @@ export function MealsList({meals, setMeals} : Props): ReactElement {
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
                                     newMeals[selectedMeal] = {...newMeals[selectedMeal], protein: +event.target.value};
+                                    handleUpdatePost(newMeals[selectedMeal]);
                                 }
                                 setMeals(newMeals);
                             }}
@@ -122,6 +160,7 @@ export function MealsList({meals, setMeals} : Props): ReactElement {
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
                                     newMeals[selectedMeal] = {...newMeals[selectedMeal], carbohydrates: +event.target.value};
+                                    handleUpdatePost(newMeals[selectedMeal]);
                                 }
                                 setMeals(newMeals);
                             }}
@@ -139,6 +178,7 @@ export function MealsList({meals, setMeals} : Props): ReactElement {
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
                                     newMeals[selectedMeal] = {...newMeals[selectedMeal], fat: +event.target.value};
+                                    handleUpdatePost(newMeals[selectedMeal]);
                                 }
                                 setMeals(newMeals);
                             }}
@@ -156,6 +196,7 @@ export function MealsList({meals, setMeals} : Props): ReactElement {
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
                                     newMeals[selectedMeal] = {...newMeals[selectedMeal], calories: +event.target.value};
+                                    handleUpdatePost(newMeals[selectedMeal]);
                                 }
                                 setMeals(newMeals);
                             }}

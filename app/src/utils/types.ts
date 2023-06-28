@@ -11,7 +11,7 @@ export interface Exercise {
 }
 
 export interface Meal {
-    //idme: number;
+    idme: number;
     title: String;
     description: String;
     calories: number;

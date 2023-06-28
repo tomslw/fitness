@@ -98,6 +98,7 @@ export function App(): ReactElement {
         // maybe turn this into its own CALLBACK?
         fetchHealthData(translateWeirdData[0].idhe);
       })
+
   // otherwise we might get into a nice little loop
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -116,7 +117,7 @@ export function App(): ReactElement {
         </div>
         <div className="health-data-side">
           <HealthSummary healthData={health} setHealthData={setHealth}/>
-          <MealsList meals={health.diet} setMeals={(newList) => setHealth({ ...health, diet: newList })} />
+          <MealsList healthDataId={health.idhe} meals={health.diet} setMeals={(newList) => setHealth({ ...health, diet: newList })} />
         </div>
         <div className="muscle-side">
           <div className="title">{viewSoreness ? "Muscle soreness" : "Workout routine"}</div>
