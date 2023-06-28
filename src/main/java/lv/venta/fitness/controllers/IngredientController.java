@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/ingredient")
 public class IngredientController
@@ -18,50 +20,25 @@ public class IngredientController
     @Autowired
     private IIngredientService ingredientService;
 
-    @GetMapping("/error")
-    public String getError(Model model){
-        model.addAttribute("packetError", "Error");
-        return "error-page";
-    }
-
     @GetMapping("/showAll")
-    public String getAllIngredients(Model model){
-        model.addAttribute("ingredients", ingredientService.selectAllIngredients());
-        return "all-ingredients-page";
+    Collection<Ingredient> getAllIngredients(Model model){
+        return ingredientService.selectAllIngredients();
     }
 
     @GetMapping("/insertNewIngredient")
-    public String getAddIngredient(Model model){
-        model.addAttribute("ingredient", new Ingredient());
-        return "add-ingredient-page";
+    Collection<Ingredient> getAddIngredient(Model model){
+        return (Collection<Ingredient>) new Ingredient();
     }
 
     @PostMapping("/insertNewIngrient")
-    public String postAddIngredient(@Valid @ModelAttribute("ingredient") Ingredient ingredient, BindingResult result) {
-        if(!result.hasErrors()) {
-            try {
-                ingredientService.insertNewIngredient(ingredient.getTitle(), ingredient.getDescription(), ingredient.getCalories(), ingredient.getFat(), ingredient.getCarbohydrates(), ingredient.getProtein());
-                return "redirect:/ingredient/showAll";
-            }
-            catch (Exception e) {
-//                e.printStackTrace();
-                return "redirect:/error";
-            }
-        } else {
-            return "add-ingredient-page";
-        }
+    void postAddIngredient(@Valid @ModelAttribute("ingredient") Ingredient ingredient, BindingResult result) throws Exception {
+        ingredientService.insertNewIngredient(ingredient.getTitle(), ingredient.getDescription(), ingredient.getCalories(), ingredient.getFat(), ingredient.getCarbohydrates(), ingredient.getProtein());
     }
 
     @GetMapping("/delete/{id}")
-    public String getDeleteIngredient(@PathVariable(name = "idin") long idin, Model model){
-        try{
+    void getDeleteIngredient(@PathVariable(name = "idin") long idin, Model model) throws Exception {
             ingredientService.deleteIngredientById(idin);
-            model.addAttribute("ingredient", ingredientService.selectAllIngredients());
-            return "all-ingredients-page";
-        } catch (Exception e) {
-            model.addAttribute("packetError", e.getMessage());
-            return "error-page";
-        }
+            ingredientService.selectAllIngredients();
     }
 
 }
