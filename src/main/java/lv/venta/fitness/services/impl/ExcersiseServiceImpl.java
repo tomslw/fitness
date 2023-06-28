@@ -33,24 +33,34 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 	}
 	
 	@Override
-	public ArrayList<Excersise> getExcersisesByHealthId(long idhe) {
-		HealthData healthData = healthRepo.findByIdhe(idhe);
-		return (ArrayList<Excersise>) healthData.getWorkout();
+	public ArrayList<Excersise> getExcersisesByHealthId(long idhe) throws Exception {
+		if(idhe < 1) {
+			throw new Exception("Incorrect id");
+		}
+		else {
+			HealthData healthData = healthRepo.findByIdhe(idhe);
+			return (ArrayList<Excersise>) healthData.getWorkout();
+		}
 	}
 
 	@Override
-	public Excersise insertNewExcersise(long idhe) {
-		MuscleGroups muscleGroup = new MuscleGroups(Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, null);
-		HealthData healthData = healthRepo.findByIdhe(idhe);
-		Excersise excersise = new Excersise("Exercise", "Description", 1, 1, muscleGroup, 1);
-		
-		healthData.addExercise(excersise);
-		
-		excersiseRepo.save(excersise);
-		muscleRepo.save(muscleGroup);
-		healthRepo.save(healthData);
+	public Excersise insertNewExcersise(long idhe) throws Exception {
+		if(idhe < 1) {
+			throw new Exception("Incorrect id");
+		}
+		else {
+			MuscleGroups muscleGroup = new MuscleGroups(Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, null);
+			HealthData healthData = healthRepo.findByIdhe(idhe);
+			Excersise excersise = new Excersise("Exercise", "Description", 1, 1, muscleGroup, 1);
+			
+			healthData.addExercise(excersise);
+			
+			excersiseRepo.save(excersise);
+			muscleRepo.save(muscleGroup);
+			healthRepo.save(healthData);
 
-		return excersise;
+			return excersise;
+		}
 	}
 
 	@Override
