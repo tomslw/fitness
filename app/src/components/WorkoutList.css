@@ -1,0 +1,27 @@
+
+
+.workout-row {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #fce303;
+    margin-bottom: 0.5rem;
+}
+
+.workout-item {
+    margin-left: 0.5rem;
+    background-color: #827500;
+    padding-bottom: 0.5rem;
+}
+
+.workout-title {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.workout-stat {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
