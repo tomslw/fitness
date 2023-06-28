@@ -10,7 +10,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -23,8 +22,8 @@
 }
 
 .title {
-  font-size: 5rem;
-  margin-bottom: 2rem;
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
 }
 
 .health-data-side {
