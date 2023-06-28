@@ -7,6 +7,7 @@ import { HealthSummary } from './components/HealthSummary';
 import { MealsList } from './components/MealsList';
 import Button from "@mui/material/Button";
 import { WorkoutList } from './components/WorkoutList';
+import { HealthDataList } from './components/HealthDataList';
 
 export function App(): ReactElement {
 
@@ -14,8 +15,7 @@ export function App(): ReactElement {
   const [loading, setLoading] = useState(false);
   const [viewSoreness, setViewSoreness] = useState(true);
 
-  // selected HealthData entry
-  const [health, setHealth] = useState<HealthData> ({
+  const [healthList, setHealthList] = useState<Array<HealthData>>(new Array<HealthData>({
     weight: 60,
     height: 180,
     morningMuscleFatigue: {
@@ -71,7 +71,12 @@ export function App(): ReactElement {
     }),
     caloriesSpent: 2000,
     dateTime: new Date(2023, 4, 8, 10, 13, 41, 12),
-  })
+  }))
+
+  // selected HealthData entry
+  const [health, setHealth] = useState<HealthData> (healthList[0]);
+
+  // TODO: add a useEffect that updates the selected HealthData entrie in the list (that doesn't yet exist as im writing this)
 
   useEffect(() => {
     setLoading(true);
@@ -94,6 +99,9 @@ export function App(): ReactElement {
   return (
     <div className="App">
       <header className="App-header">
+        <div className="health-data-list">
+          {/* <HealthDataList healthDataList={healthList} setHealthDataList={} setSelectedItem={setHealth}  /> */}
+        </div>
         <div className="health-data-side">
           <HealthSummary healthData={health} setHealthData={setHealth}/>
           <MealsList meals={health.diet} setMeals={(newList) => setHealth({ ...health, diet: newList })} />
