@@ -16,19 +16,42 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import java.rmi.server.ExportException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/healthData")
 public class HealthDataController {
+	
+	class HealthDataListItem {
+		long id;
+		LocalDate date;
+	}
 
     @Autowired
     private IHealthDataService healthDataService;
 
     @GetMapping("/showAll")
-    List<HealthData> getAllHealthData(Model model){
-        return healthDataService.selectAllHealthData();
+    List<LocalDate> getAllHealthDataDates(){
+    	ArrayList<LocalDate> newDateList = new ArrayList<LocalDate>();
+    	
+    	for (HealthData item : healthDataService.selectAllHealthData()) {
+    		newDateList.add(item.getDate());
+    	}
+        return newDateList;
+    }
+    
+    @GetMapping("/entry/{id}")
+    HealthData getHealthDataById(@PathVariable(name="id") long id){
+        try {
+			return healthDataService.selectHealthDataById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
     }
     
     @GetMapping("/getFresh")
