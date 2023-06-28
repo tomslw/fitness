@@ -77,9 +77,9 @@ public class MealServiceImpl implements IMealService{
 	}
 
 	@Override
-	public void insertNewMeal(String title, String description) throws Exception {
+	public void insertNewMeal(String title, String description, int calories, int fat, int carbohydrates, int protein) throws Exception {
 		if(title != null && description != null) {
-			Meal meal = new Meal(title, description);
+			Meal meal = new Meal(title, description, calories, fat, carbohydrates, protein);
 			mealRepo.save(meal);
 		}
 		else {
@@ -101,7 +101,7 @@ public class MealServiceImpl implements IMealService{
 	@Override
 	public Meal insertEmptyMealEntry(long idhe) {
 		HealthData healthData = healthRepo.findbyIdhe(idhe);
-		Meal meal = new Meal("title", "description");
+		Meal meal = new Meal("title", "description", 1, 1, 1 ,1);
 
 		healthData.addMeal(meal);
 		mealRepo.save(meal);

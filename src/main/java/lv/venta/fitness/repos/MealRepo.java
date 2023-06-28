@@ -6,5 +6,4 @@ import lv.venta.fitness.models.Meal;
 
 public interface MealRepo extends CrudRepository<Meal, Long>{
 
-    Meal findTopByOrderByDate();
 }

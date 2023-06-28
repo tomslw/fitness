@@ -59,46 +59,13 @@ public class Meal {
 	@JoinColumn(name="idhe")
 	private HealthData healthData;
 
-    @OneToMany(mappedBy = "meal")
-    @ToString.Exclude
-    private Collection<Meal> meals = new ArrayList<>();
 
-	public Meal(@NotNull @Size(min = 3, max = 20) String title,
-			@NotNull @Size(min = 3, max = 30) String description) {
+	public Meal(String title, String description, int calories, int fat, int carbohydrates, int protein) {
 		this.title = title;
 		this.description = description;
+		this.calories = calories;
+		this.fat = fat;
+		this.carbohydrates = carbohydrates;
+		this.protein = protein;
 	}
-
-	public int getCalories() {
-		int calorieSum = 0;
-		for (Meal meal : meals) {
-			calorieSum += meal.getCalories();
-		}
-		return calorieSum;
-	}
-	
-	public int getFat() {
-		int fatSum = 0;
-		for (Meal meal : meals) {
-			fatSum += meal.getFat();
-		}
-		return fatSum;
-	}
-	
-	public int getCarbs() {
-		int carbSum = 0;
-		for (Meal meal : meals) {
-			carbSum += meal.getCarbohydrates();
-		}
-		return carbSum;
-	}
-	
-	public int getProtein() {
-		int proteinSum = 0;
-		for (Meal meal : meals) {
-			proteinSum += meal.getProtein();
-		}
-		return proteinSum;
-	}  
-	
 }
