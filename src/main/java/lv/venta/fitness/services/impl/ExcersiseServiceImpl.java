@@ -67,6 +67,7 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 	@Override
 	public void deleteExcersiseById(long idex) throws Exception {
 		if(idex > 0) {
+			muscleRepo.deleteById(excersiseRepo.findById(idex).get().getTargetMuscles().getIdmg());
 			excersiseRepo.deleteById(idex);
 		}
 		else {

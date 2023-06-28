@@ -7,4 +7,5 @@ public interface IMuscleGroupsService {
 	MuscleGroups getByHealthDataId(long idhe) throws Exception;
 	void editByExerciseId(long idex, MuscleGroups data) throws Exception;
 	void editByHealthDataId(long idhe, MuscleGroups data) throws Exception;
+	void deleteById(long idmg) throws Exception;
 }

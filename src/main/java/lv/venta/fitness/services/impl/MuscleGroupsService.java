@@ -101,4 +101,13 @@ public class MuscleGroupsService implements IMuscleGroupsService{
 		
 	}
 
+	@Override
+	public void deleteById(long idmg) throws Exception {
+		if(idmg < 1) {
+			throw new Exception("Invalid id!");
+		}
+		
+		muscleRepo.deleteById(idmg);
+	}
+
 }
