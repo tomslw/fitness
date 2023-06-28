@@ -1,16 +1,17 @@
 
 
 export interface Exercise {
-    idex: number;
+    //idex: number;
     title: String;
     description: String;
-    rest_interval: number;
+    restInterval: number;
     repetitions: number;
-    added_weight: number
-    target_muscles: MuscleGroups
+    addedWeight: number
+    targetMuscles: MuscleGroups
 }
 
 export interface Meal {
+    //idme: number;
     title: String;
     description: String;
     calories: number;
@@ -20,19 +21,21 @@ export interface Meal {
 }
 
 export interface HealthData {
+    //idhd: number;
     weight: number;
     height: number;
-    morning_muscle_fatigue: MuscleGroups;
+    morningMuscleFatigue: MuscleGroups;
     diet: Array<Meal>;
     workout: Array<Exercise>;
-    calories_spent: number;
-    date_time: Date;
+    caloriesSpent: number;
+    dateTime: Date;
 }
 
 export enum Intensity {
     none, low, medium, high, injury
 }
 
+// no need to save the muscle groups id, i can edit the muscle group by Exercise/HealthData id
 export interface MuscleGroups {
     chest: Intensity;
     back: Intensity;

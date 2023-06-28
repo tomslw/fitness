@@ -20,14 +20,15 @@ interface ListProps {
     title: String, 
     setData: (newVal: Number) => void, 
     defVal: Intensity, 
-    intensityData: MuscleGroups
+    enableEdit: boolean,
 }
 
-function ListItem({title, setData, defVal, intensityData} : ListProps) : ReactElement {
+function ListItem({title, setData, defVal, enableEdit} : ListProps) : ReactElement {
     return (
         <div className="slider-item">
             <div className="slider-title">{title}</div>
             <Slider 
+                disabled={!enableEdit}
                 aria-label="back intensity"
                 defaultValue={defVal}
                 getAriaValueText={valuetext}
@@ -46,14 +47,15 @@ function ListItem({title, setData, defVal, intensityData} : ListProps) : ReactEl
 
 interface Props {
     intensityData: MuscleGroups,
-    setIntensityData: (intensityData: MuscleGroups) => void
+    setIntensityData: (intensityData: MuscleGroups) => void,
+    enableEdit: boolean,
 }
 
 function valuetext(value: number) {
     return Intensity[value];
 }
 
-export function MuscleStatus({intensityData, setIntensityData} : Props): ReactElement {
+export function MuscleStatus({intensityData, setIntensityData, enableEdit} : Props): ReactElement {
 
     function translateIntensity (intensity: Intensity): String {
         switch (intensity) {
@@ -95,62 +97,63 @@ export function MuscleStatus({intensityData, setIntensityData} : Props): ReactEl
                 <ListItem 
                     title={"Abdomen"} 
                     setData={(value) => setIntensityData({...intensityData, abdomen: value as Intensity})} 
-                    defVal={intensityData.abdomen} intensityData={intensityData}
+                    defVal={intensityData.abdomen}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Back"} 
                     setData={(value) => setIntensityData({...intensityData, back: value as Intensity})}
                     defVal={intensityData.back} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Biceps"} 
                     setData={(value) => setIntensityData({...intensityData, biceps: value as Intensity})}
                     defVal={intensityData.biceps} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Deltoid"} 
                     setData={(value) => setIntensityData({...intensityData, deltoid: value as Intensity})}
                     defVal={intensityData.deltoid} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Chest"} 
                     setData={(value) => setIntensityData({...intensityData, chest: value as Intensity})}
                     defVal={intensityData.chest} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Calves"} 
                     setData={(value) => setIntensityData({...intensityData, calves: value as Intensity})}
                     defVal={intensityData.calves} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Forearms"} 
                     setData={(value) => setIntensityData({...intensityData, forearms: value as Intensity})}
                     defVal={intensityData.forearms} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Gluteus"} 
                     setData={(value) => setIntensityData({...intensityData, gluteus: value as Intensity})}
                     defVal={intensityData.gluteus} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Hamstrings"} 
                     setData={(value) => setIntensityData({...intensityData, hamstrings: value as Intensity})}
                     defVal={intensityData.hamstrings} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Quadriceps"} 
                     setData={(value) => setIntensityData({...intensityData, quadriceps: value as Intensity})}
                     defVal={intensityData.quadriceps} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Trapezius"} 
                     setData={(value) => setIntensityData({...intensityData, trapezius: value as Intensity})}
                     defVal={intensityData.trapezius} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
                 <ListItem title={"Triceps"} 
                     setData={(value) => setIntensityData({...intensityData, triceps: value as Intensity})}
                     defVal={intensityData.triceps} 
-                    intensityData={intensityData}
+                    enableEdit={enableEdit}
                 />
 
                 
