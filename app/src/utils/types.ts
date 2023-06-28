@@ -21,13 +21,18 @@ export interface Meal {
 }
 
 export interface HealthData {
-    idhd: number;
+    idhe: number;
     weight: number;
     height: number;
     muscleGroups: MuscleGroups;
     diet: Array<Meal>;
     workout: Array<Exercise>;
     caloriesSpent: number;
+    date: Date;
+}
+
+export interface HealthDataShort {
+    idhe: number;
     date: Date;
 }
 

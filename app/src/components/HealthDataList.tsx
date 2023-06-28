@@ -1,47 +1,33 @@
-import { ReactElement } from "react";
-import { Exercise, HealthData, Intensity, Meal } from "../utils/types";
+import { ReactElement, useCallback } from "react";
+import { Exercise, HealthData, HealthDataShort, Intensity, Meal } from "../utils/types";
 import "./HealthDataList.css"
 
 import Button from "@mui/material/Button";
 
 
 interface Props {
-    healthDataList: Array<HealthData>,
-    setHealthDataList: (newData: Array<HealthData>) => void,
-    setSelectedItem: (newSelection: HealthData) => void,
+    healthDataList: Array<HealthDataShort>,
+    setHealthDataList: (newData: Array<HealthDataShort>) => void,
+    setSelectedItem: (id: number) => void,
 }
 
 export function HealthDataList({healthDataList, setHealthDataList, setSelectedItem} : Props): ReactElement {
 
-    const addEntry = () => {
-        // get request to backend to get a fresh entry, i need the idmg
-        // fresh HealthData entry AND a MuscleGroups entry
+    const addEntry = useCallback(() => {
+        // TODO: maybe check if theres an entry for todays date or not
 
-        // setHealthDataList([...healthDataList, {
-        //     weight: 60,
-        //     height: 180,
-        //     muscleGroups: {
-        //       chest: Intensity.none,
-        //       back: Intensity.none,
-        //       biceps: Intensity.none,
-        //       triceps: Intensity.none,
-        //       forearms: Intensity.none,
-        //       abdomen: Intensity.none,
-        //       gluteus: Intensity.none,
-        //       hamstrings: Intensity.none,
-        //       quadriceps: Intensity.none,
-        //       calves: Intensity.none,
-        //       trapezius: Intensity.none,
-        //       deltoid: Intensity.none,
-        //     },
-        //     diet: new Array<Meal>(),
-        //     workout: new Array<Exercise>(),
-        //     caloriesSpent: 0,
-        //     date: new Date(),
-        //   }]);
-        setSelectedItem(healthDataList[healthDataList.length]);
-        // sort by date tho
-    };
+        fetch('healthData/getFresh')
+            .then(response => response.json())
+            .then(data => {
+                setSelectedItem(data.idhe);
+                setHealthDataList( [ {
+                    idhe: data.idhe,
+                    date: new Date(data.date),
+                }, 
+                ...healthDataList,
+                ])
+            });
+    }, [healthDataList, setHealthDataList, setSelectedItem]);
 
     console.log(healthDataList[0]);
 
@@ -52,7 +38,7 @@ export function HealthDataList({healthDataList, setHealthDataList, setSelectedIt
                 {
                     healthDataList.map((value, index) =>
                     // wont actually save it locally in the list tho, is basically going to be a local variable
-                    <div className="health-item" onClick={() => setSelectedItem(healthDataList[index])}>
+                    <div className="health-item" onClick={() => setSelectedItem(value.idhe)}>
                         <div className="health-name">{value.date.toLocaleDateString()}</div>
                     </div>
                     )

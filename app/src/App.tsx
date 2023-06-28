@@ -1,7 +1,7 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Exercise, HealthData, Intensity, Meal, MuscleGroups } from './utils/types';
+import { Exercise, HealthData, HealthDataShort, Intensity, Meal, MuscleGroups } from './utils/types';
 import { MuscleStatus } from './components/MuscleStatus';
 import { HealthSummary } from './components/HealthSummary';
 import { MealsList } from './components/MealsList';
@@ -14,11 +14,11 @@ export function App(): ReactElement {
   const [loading, setLoading] = useState(false);
   const [viewSoreness, setViewSoreness] = useState(true);
 
-  const [healthList, setHealthList] = useState<Array<HealthData>>(new Array<HealthData>())
+  const [healthList, setHealthList] = useState<Array<HealthDataShort>>(new Array<HealthDataShort>())
 
   // selected HealthData entry
   const [health, setHealth] = useState<HealthData> ({
-    idhd: -1,
+    idhe: -1,
     weight: 0,
     height: 0,
     muscleGroups: {
@@ -41,49 +41,65 @@ export function App(): ReactElement {
     date: new Date(1999, 1, 1, 1, 1, 1, 1),
   });
 
+  const fetchHealthData = useCallback((id: number) => {
+    setLoading(true);
+    fetch('healthData/entry/' + id)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      var translateSingleHealthData: HealthData = {
+              idhe: data.idhe,
+              weight: data.weight,
+              height: data.height,
+              muscleGroups: {
+                chest: Intensity[data.muscleGroups.chest as keyof typeof Intensity],
+                back: Intensity[data.muscleGroups.back as keyof typeof Intensity],
+                biceps: Intensity[data.muscleGroups.biceps as keyof typeof Intensity],
+                triceps: Intensity[data.muscleGroups.triceps as keyof typeof Intensity],
+                forearms: Intensity[data.muscleGroups.forearms as keyof typeof Intensity],
+                abdomen: Intensity[data.muscleGroups.abdomen as keyof typeof Intensity],
+                gluteus: Intensity[data.muscleGroups.gluteus as keyof typeof Intensity],
+                hamstrings: Intensity[data.muscleGroups.hamstrings as keyof typeof Intensity],
+                quadriceps: Intensity[data.muscleGroups.quadriceps as keyof typeof Intensity],
+                calves: Intensity[data.muscleGroups.calves as keyof typeof Intensity],
+                trapezius: Intensity[data.muscleGroups.trapezius as keyof typeof Intensity],
+                deltoid: Intensity[data.muscleGroups.deltoid as keyof typeof Intensity],
+              },
+              diet: data.diet,
+              workout: data.workout,
+              caloriesSpent: data.caloriesSpent,
+              date: new Date(data.date),
+            }
+      setHealth(translateSingleHealthData);
+      setLoading(false);
+  });
+  }, []);
+
   useEffect(() => {
     setLoading(true);
-    // having the response beeing handeled here is kind of meh, 
+    // having the responses being handeled here is kind of meh, 
     // should probably have a seperate Requester.ts with all the safety checks in the world
     fetch('healthData/showAll')
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        
-        var nonWeirdData: Array<HealthData> = new Array<HealthData>();
-        data.forEach((entry: { idhd: any; weight: any; height: any; muscleGroups: { chest: string; back: string; biceps: string; triceps: string; forearms: string; abdomen: string; gluteus: string; hamstrings: string; quadriceps: string; calves: string; trapezius: string; deltoid: string; }; diet: any; workout: any; caloriesSpent: any; date: string | number | Date; }) => {
-          nonWeirdData.push(
-            {
-              idhd: entry.idhd,
-              weight: entry.weight,
-              height: entry.height,
-              muscleGroups: {
-                chest: Intensity[entry.muscleGroups.chest as keyof typeof Intensity],
-                back: Intensity[entry.muscleGroups.back as keyof typeof Intensity],
-                biceps: Intensity[entry.muscleGroups.biceps as keyof typeof Intensity],
-                triceps: Intensity[entry.muscleGroups.triceps as keyof typeof Intensity],
-                forearms: Intensity[entry.muscleGroups.forearms as keyof typeof Intensity],
-                abdomen: Intensity[entry.muscleGroups.abdomen as keyof typeof Intensity],
-                gluteus: Intensity[entry.muscleGroups.gluteus as keyof typeof Intensity],
-                hamstrings: Intensity[entry.muscleGroups.hamstrings as keyof typeof Intensity],
-                quadriceps: Intensity[entry.muscleGroups.quadriceps as keyof typeof Intensity],
-                calves: Intensity[entry.muscleGroups.calves as keyof typeof Intensity],
-                trapezius: Intensity[entry.muscleGroups.trapezius as keyof typeof Intensity],
-                deltoid: Intensity[entry.muscleGroups.deltoid as keyof typeof Intensity],
-              },
-              diet: entry.diet,
-              workout: entry.workout,
-              caloriesSpent: entry.caloriesSpent,
-              date: new Date(entry.date),
-            }
-          )
+        var translateWeirdData: Array<HealthDataShort> = new Array<HealthDataShort>();
+        data.forEach((entry: { idhe: string; date: any; }) => {
+          translateWeirdData.push({
+            idhe: +entry.idhe,
+            date: new Date(entry.date),
+          })
         });
+        // sort it by date
+        translateWeirdData = translateWeirdData.sort((n1, n2) => n2.date.getTime() - n1.date.getTime());
+        setHealthList(translateWeirdData);
 
-
-        setHealthList(nonWeirdData);
-        setHealth(nonWeirdData[0]);
-        setLoading(false);
+        // fetch latest HealthData entry by date
+        // maybe turn this into its own CALLBACK?
+        fetchHealthData(translateWeirdData[0].idhe);
       })
+  // otherwise we might get into a nice little loop
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
@@ -96,7 +112,7 @@ export function App(): ReactElement {
     <div className="App">
       <header className="App-header">
         <div className="health-data-list">
-          <HealthDataList healthDataList={healthList} setHealthDataList={() => {}} setSelectedItem={setHealth}  />
+          <HealthDataList healthDataList={healthList} setHealthDataList={setHealthList} setSelectedItem={fetchHealthData}  />
         </div>
         <div className="health-data-side">
           <HealthSummary healthData={health} setHealthData={setHealth}/>

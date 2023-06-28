@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useCallback, useState } from "react";
 import { HealthData } from "../utils/types";
 import "./HealthSummary.css";
 import Button from "@mui/material/Button";
@@ -25,6 +25,24 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
         setOpen(false);
     };
 
+    const updateHealthData = useCallback((updatedHD: HealthData) => {
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(updatedHD),
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+        };
+
+        fetch('healthData/update/' + updatedHD.idhe, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // check if success i guess
+            });
+    }, []);
+
 
     return (
         <div className="base-container">
@@ -48,8 +66,11 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
+                        value={healthData.weight}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHealthData({...healthData, weight: +event.target.value})
+                            const updatedHD = {...healthData, weight: +event.target.value};
+                            updateHealthData(updatedHD)
+                            setHealthData(updatedHD)
                         }}
                     />
                     <TextField
@@ -60,8 +81,11 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
+                        value={healthData.height}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHealthData({...healthData, height: +event.target.value})
+                            const updatedHD = {...healthData, height: +event.target.value};
+                            updateHealthData(updatedHD)
+                            setHealthData(updatedHD)
                         }}
                     />
                     <TextField
@@ -72,8 +96,11 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
+                        value={healthData.caloriesSpent}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setHealthData({...healthData, caloriesSpent: +event.target.value})
+                            const updatedHD = {...healthData, caloriesSpent: +event.target.value};
+                            updateHealthData(updatedHD)
+                            setHealthData(updatedHD)
                         }}
                     />
                 </DialogContent>
