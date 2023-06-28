@@ -1,13 +1,15 @@
 package lv.venta.fitness.services.impl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import lv.venta.fitness.enums.Intensity;
+import lv.venta.fitness.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lv.venta.fitness.models.Ingredient;
-import lv.venta.fitness.models.Meal;
 import lv.venta.fitness.repos.MealRepo;
 import lv.venta.fitness.services.IMealService;
 
@@ -94,6 +96,19 @@ public class MealServiceImpl implements IMealService{
 		else {
 			throw new Exception("Invalid id");
 		}
+	}
+
+	@Override
+	public Meal insertEmptyMealEntry() throws Exception{
+		Meal latestEntry = mealRepo.findTopByOrderByDate();
+
+		if (latestEntry.getDate().toLocalDate().equals(LocalDate.now()))
+			throw new Exception("Theres already and entry for today");
+
+
+		Meal newEntry = new Meal(latestEntry.getTitle(), latestEntry.getDescription(), latestEntry.getIngredients());
+		mealRepo.save(newEntry);
+		return newEntry;
 	}
 
 }
