@@ -140,10 +140,9 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             variant="standard"
                
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-								const numberRegex = /^[0-9]+$/;
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
-									if(numberRegex.test(event.target.value)){
+									if(Number(event.target.value)>=0&&Number(event.target.value)<=100000){
 										newMeals[selectedMeal] = {...newMeals[selectedMeal], protein: +event.target.value};
                                     	handleUpdatePost(newMeals[selectedMeal]);
 									} 
@@ -165,10 +164,9 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             defaultValue={selectedMeal != null ? meals[selectedMeal].carbohydrates : ''}
                             variant="standard"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-								const numberRegex = /^[0-9]+$/;
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
-                                   if(numberRegex.test(event.target.value)){
+                                   if(Number(event.target.value)>=0&&Number(event.target.value)<=100000){
 										newMeals[selectedMeal] = {...newMeals[selectedMeal], carbohydrates: +event.target.value};
                                     	handleUpdatePost(newMeals[selectedMeal]);
 									} 
@@ -190,10 +188,9 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             defaultValue={selectedMeal != null ? meals[selectedMeal].fat : ''}
                             variant="standard"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-								const numberRegex = /^[0-9]+$/;
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
-                                    if(numberRegex.test(event.target.value)){
+                                    if(Number(event.target.value)>=0&&Number(event.target.value)<=100000){
 										newMeals[selectedMeal] = {...newMeals[selectedMeal], fat: +event.target.value};
                                     	handleUpdatePost(newMeals[selectedMeal]);
 									} 
@@ -215,10 +212,9 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             defaultValue={selectedMeal != null ? meals[selectedMeal].calories : ''}
                             variant="standard"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-								const numberRegex = /^[0-9]+$/;
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
-                                    if(numberRegex.test(event.target.value)){
+                                    if(Number(event.target.value)>=0&&Number(event.target.value)<=100000){
 										newMeals[selectedMeal] = {...newMeals[selectedMeal], calories: +event.target.value};
                                     	handleUpdatePost(newMeals[selectedMeal]);
 									} 
