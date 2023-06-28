@@ -66,11 +66,20 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
-                        value={healthData.weight}
+                        defaultValue={healthData.weight}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             const updatedHD = {...healthData, weight: +event.target.value};
-                            updateHealthData(updatedHD)
-                            setHealthData(updatedHD)
+                            const invalidHD = {...healthData, weight: 1};
+                            const numberRegex = /^[0-9]+$/;
+                            if(numberRegex.test(event.target.value)){
+								updateHealthData(updatedHD)
+                            	setHealthData(updatedHD)
+							} 
+							else{
+								updateHealthData(invalidHD)
+                            	setHealthData(invalidHD)
+							}
+									
                         }}
                     />
                     <TextField
@@ -81,11 +90,19 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
-                        value={healthData.height}
+                        defaultValue={healthData.height}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             const updatedHD = {...healthData, height: +event.target.value};
-                            updateHealthData(updatedHD)
-                            setHealthData(updatedHD)
+                            const invalidHD = {...healthData, height: 1};
+                            const numberRegex = /^[0-9]+$/;
+                            if(numberRegex.test(event.target.value)){
+								updateHealthData(updatedHD)
+                            	setHealthData(updatedHD)
+							} 
+							else{
+								updateHealthData(invalidHD)
+                            	setHealthData(invalidHD)
+							}
                         }}
                     />
                     <TextField
@@ -96,11 +113,19 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
-                        value={healthData.caloriesSpent}
+                        defaultValue={healthData.caloriesSpent}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             const updatedHD = {...healthData, caloriesSpent: +event.target.value};
-                            updateHealthData(updatedHD)
-                            setHealthData(updatedHD)
+                            const invalidHD = {...healthData, caloriesSpent: 1};
+                            const numberRegex = /^[0-9]+$/;
+                            if(numberRegex.test(event.target.value)){
+								updateHealthData(updatedHD)
+                            	setHealthData(updatedHD)
+							} 
+							else{
+								updateHealthData(invalidHD)
+                            	setHealthData(invalidHD)
+							}
                         }}
                     />
                 </DialogContent>
