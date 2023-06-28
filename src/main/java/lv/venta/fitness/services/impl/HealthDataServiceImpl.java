@@ -1,11 +1,15 @@
 package lv.venta.fitness.services.impl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.venta.fitness.models.HealthData;
+import lv.venta.fitness.models.Ingredient;
+import lv.venta.fitness.models.MuscleGroups;
 import lv.venta.fitness.repos.HealthDataRepo;
 import lv.venta.fitness.services.IHealthDataService;
 
@@ -32,6 +36,23 @@ public class HealthDataServiceImpl implements IHealthDataService{
 		}
 			
 	}
+	
+	@Override
+	public void insertNewHealthData(float weight, float height, MuscleGroups muscleGroups, int caloriesSpent,
+			LocalDate date) throws Exception {
+		if(weight > 0 && height > 0 && muscleGroups != null && caloriesSpent > 0 && date != null) {
+			ArrayList<HealthData> allHealthData = (ArrayList<HealthData>) healthRepo.findAll();
+			
+			for(HealthData healthData : allHealthData) {
+				
+			}
+		}
+		else {
+			throw new Exception("Invalid arguments");
+		}
+		
+		
+	}
 
 	@Override
 	public void deleteHealthDataById(long idhe) throws Exception {
@@ -54,5 +75,6 @@ public class HealthDataServiceImpl implements IHealthDataService{
 		}
 		
 	}
+
 
 }
