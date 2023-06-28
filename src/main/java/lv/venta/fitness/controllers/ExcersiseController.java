@@ -46,13 +46,13 @@ public class ExcersiseController {
     }
 
     @GetMapping("/insertNewExercise")
-    Excersise getAddExercise(long idhe) {
+    long getAddExercise(long idhe) {
         try {
 			return excersiseService.insertNewExcersise(idhe);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
+			return -1;
 		}
     }
     
