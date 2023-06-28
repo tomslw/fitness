@@ -99,7 +99,7 @@ public class MealServiceImpl implements IMealService{
 	}
 
 	@Override
-	public Meal insertEmptyMealEntry(long idhe) {
+	public long insertEmptyMealEntry(long idhe) {
 		HealthData healthData = healthRepo.findById(idhe).get();
 		Meal meal = new Meal("title", "description", 1, 1, 1 ,1);
 
@@ -107,7 +107,7 @@ public class MealServiceImpl implements IMealService{
 		mealRepo.save(meal);
 		healthRepo.save(healthData);
 
-		return meal;
+		return meal.getIdme();
 	}
 
 	@Override
