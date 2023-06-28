@@ -1,5 +1,6 @@
 package lv.venta.fitness.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,7 +57,7 @@ public class HealthData {
 //	@OneToMany(mappedBy="Meal")
 	@OneToMany(mappedBy = "healthData")
 	@NotNull
-	private Collection<Meal> diet;
+	private Collection<Meal> diet = new ArrayList<>();
 	
 	@ManyToMany(mappedBy="healthDataCollection")
 	@ToString.Exclude
@@ -70,10 +71,44 @@ public class HealthData {
 	
 	@Column(name = "date")
 	@NotNull
-	private LocalDateTime date;
+	private LocalDate date;
 	
 	@ManyToOne
 	@JoinColumn(name="idus")
 	private User user;
+
+	public HealthData(@Min(0) @Max(500) float weight, @Min(0) @Max(300) float height, MuscleGroups muscleGroups,
+			@Min(0) @Max(10000) int caloriesSpent, @NotNull LocalDate date) {
+		super();
+		this.weight = weight;
+		this.height = height;
+		this.muscleGroups = muscleGroups;
+		this.caloriesSpent = caloriesSpent;
+		this.date = date;
+	}
+	
+	public void addMeal(Meal meal) {
+		if(meal != null && !diet.contains(meal)) {
+			diet.add(meal);
+		}
+	}
+	
+	public void removeMeal(Meal meal) {
+		if(diet.contains(meal)) {
+			diet.remove(meal);
+		}
+	}
+	
+	public void addExercise(Excersise exercise) {
+		if(exercise != null && !workout.contains(exercise)) {
+			workout.add(exercise);
+		}
+	}
+	
+	public void removeExercise(Excersise exercise) {
+		if(workout.contains(exercise)) {
+			workout.remove(exercise);
+		}
+	}
 	
 }
