@@ -4,8 +4,10 @@ package lv.venta.fitness.controllers;
 import jakarta.validation.Valid;
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
+import lv.venta.fitness.models.Meal;
 import lv.venta.fitness.services.IExcersiseService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import lv.venta.fitness.services.IHealthDataService;
@@ -38,20 +40,31 @@ public class ExcersiseController {
         return excersiseService.selectExcersisesByMuscle(muscle);
     }
     */
+    
+    @GetMapping("/showAll/{id}")
+    Collection<Excersise> getAllExcersiseByHealthDataId(@PathVariable(name="id") long id){
+        try {
+			return excersiseService.getExcersisesByHealthId(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ArrayList<Excersise>();
+		}
+    }
 
     @GetMapping("/delete/{id}")
     void getDeleteExercise(@PathVariable(name = "id") long id, Model model) throws Exception {
         excersiseService.deleteExcersiseById(id);
     }
 
-    @GetMapping("/insertNewExercise")
-    long getAddExercise(long idhe) {
+    @GetMapping("/insertNewExercise/{id}")
+    Excersise getAddExercise(@PathVariable(name = "id") long id) {
         try {
-			return excersiseService.insertNewExcersise(idhe);
+			return excersiseService.insertNewExcersise(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return -1;
+			return null;
 		}
     }
     

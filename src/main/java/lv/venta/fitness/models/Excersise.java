@@ -3,6 +3,7 @@ package lv.venta.fitness.models;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
@@ -63,6 +64,7 @@ public class Excersise {
 	
 	@ManyToMany
 	@ToString.Exclude
+    @JsonIgnore
 	@JoinTable(
 			name="exercise_healthData_table",
 			joinColumns = @JoinColumn(name = "idex"),

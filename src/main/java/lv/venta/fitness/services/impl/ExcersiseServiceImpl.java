@@ -44,7 +44,7 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 	}
 
 	@Override
-	public long insertNewExcersise(long idhe) throws Exception {
+	public Excersise insertNewExcersise(long idhe) throws Exception {
 		if(idhe < 1) {
 			throw new Exception("Incorrect id");
 		}
@@ -52,14 +52,15 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 			MuscleGroups muscleGroup = new MuscleGroups(Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, null);
 			HealthData healthData = healthRepo.findByIdhe(idhe);
 			Excersise excersise = new Excersise("Exercise", "Description", 1, 1, muscleGroup, 1);
-			
+			excersise.addHealthData(healthData);
 			healthData.addExercise(excersise);
+			muscleGroup.setExcersise(excersise);
 			
 			excersiseRepo.save(excersise);
 			muscleRepo.save(muscleGroup);
 			healthRepo.save(healthData);
 
-			return excersise.getIdex();
+			return excersise;
 		}
 	}
 
