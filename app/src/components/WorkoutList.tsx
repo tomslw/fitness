@@ -161,25 +161,29 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
             <Dialog 
                 open={open} 
                 onClose={handleClose}
+                fullWidth
+                maxWidth="md"
                 >
 
                     <DialogTitle>Modify health data</DialogTitle>
                     <DialogContent>
                         {selectedWorkout != null ?
-                        (                        
-                            <MuscleStatus
-                                parentId={workouts[selectedWorkout].idex}
-                                isWorkout={true}
-                                enableEdit={true} 
-                                intensityData={workouts[selectedWorkout].targetMuscles} 
-                                setIntensityData={(data => {
-                                    const newWorkouts = workouts;
-                                    if (selectedWorkout != null) {
-                                        newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], targetMuscles: data};
-                                    }
-                                    setWorkouts(newWorkouts);
-                                })}
-                            />
+                        (                
+                            <div className="muscle-dialog-container">        
+                                <MuscleStatus
+                                    parentId={workouts[selectedWorkout].idex}
+                                    isWorkout={true}
+                                    enableEdit={true} 
+                                    intensityData={workouts[selectedWorkout].targetMuscles} 
+                                    setIntensityData={(data => {
+                                        const newWorkouts = workouts;
+                                        if (selectedWorkout != null) {
+                                            newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], targetMuscles: data};
+                                        }
+                                        setWorkouts(newWorkouts);
+                                    })}
+                                />
+                            </div> 
                         )
                         :
                         ''
