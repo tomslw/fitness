@@ -5,6 +5,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,7 +44,7 @@ public class MuscleGroupsController {
     }
 	
 	@PostMapping("/updateByExercise/{id}")
-    public void updateMusclesByExercise(@PathVariable(name="id") long id, @Valid MuscleGroups data, BindingResult result) {
+    public void updateMusclesByExercise(@PathVariable(name="id") long id, @RequestBody MuscleGroups data, BindingResult result) {
     	try {
 			muscleService.editByExerciseId(id, data);
 		} catch (Exception e) {
@@ -53,7 +54,8 @@ public class MuscleGroupsController {
     }
 	
 	@PostMapping("/updateByHealthData/{id}")
-    public void updateMusclesByHealthData(@PathVariable(name="id") long id, @Valid MuscleGroups data, BindingResult result) {
+    public void updateMusclesByHealthData(@PathVariable(name="id") long id, @RequestBody MuscleGroups data, BindingResult result) {
+		System.out.println(data);
     	try {
 			muscleService.editByHealthDataId(id, data);
 		} catch (Exception e) {
