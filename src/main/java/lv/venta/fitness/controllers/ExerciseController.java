@@ -69,7 +69,7 @@ public class ExerciseController {
     }
     
     @PostMapping("/update/{id}")
-    public void updateExercise(@PathVariable(name="id") long id, @Valid Exercise data, BindingResult result) {
+    public void updateExercise(@PathVariable(name="id") long id, @RequestBody Exercise data, BindingResult result) {
     	try {
 			ExerciseService.updateExerciseById(id, data);
 		} catch (Exception e) {
