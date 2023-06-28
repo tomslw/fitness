@@ -34,6 +34,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class HealthData {
 	
