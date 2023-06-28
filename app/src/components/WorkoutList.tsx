@@ -208,15 +208,21 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
                             margin="dense"
                             id="weight"
                             label="Rest Interval"
-                            type="text"
+                            type="number"
                             fullWidth
-                            value={selectedWorkout != null ? workouts[selectedWorkout].restInterval : ''}
+                            defaultValue={selectedWorkout != null ? workouts[selectedWorkout].restInterval : ''}
                             variant="standard"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                 const newWorkouts = workouts;
                                 if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], restInterval: +event.target.value};
-                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+									if(Number(event.target.value)>=0&&Number(event.target.value)<=10){
+	                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], restInterval: +event.target.value};
+	                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+	                                }
+	                                else{
+										newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], restInterval: 1};
+	                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+									}
                                 }
                                 setWorkouts(newWorkouts);
                             }}
@@ -226,15 +232,21 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
                             margin="dense"
                             id="weight"
                             label="Repetitions"
-                            type="text"
+                            type="number"
                             fullWidth
-                            value={selectedWorkout != null ? workouts[selectedWorkout].repetitions : ''}
+                            defaultValue={selectedWorkout != null ? workouts[selectedWorkout].repetitions : ''}
                             variant="standard"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                 const newWorkouts = workouts;
                                 if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], repetitions: +event.target.value};
-                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+                                    if(Number(event.target.value)>=1&&Number(event.target.value)<=100){
+	                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], repetitions: +event.target.value};
+	                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+	                                }
+	                                else{
+										newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], repetitions: 1};
+	                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+									}
                                 }
                                 setWorkouts(newWorkouts);
                             }}
@@ -244,15 +256,21 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
                             margin="dense"
                             id="weight"
                             label="Added Weight"
-                            type="text"
+                            type="number"
                             fullWidth
-                            value={selectedWorkout != null ? workouts[selectedWorkout].addedWeight : ''}
+                            defaultValue={selectedWorkout != null ? workouts[selectedWorkout].addedWeight : ''}
                             variant="standard"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                 const newWorkouts = workouts;
                                 if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], addedWeight: +event.target.value};
-                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+                                    if(Number(event.target.value)>=1&&Number(event.target.value)<=1000){
+	                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], addedWeight: +event.target.value};
+	                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+	                                }
+	                                else{
+										newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], addedWeight: 1};
+	                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+									}
                                 }
                                 setWorkouts(newWorkouts);
                             }}
