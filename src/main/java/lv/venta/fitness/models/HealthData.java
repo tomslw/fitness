@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,6 +54,7 @@ public class HealthData {
 	private float height;
 	
 	@OneToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "idmg")
 	private MuscleGroups muscleGroups;
 	
@@ -74,6 +78,7 @@ public class HealthData {
 	private LocalDate date;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="idus")
 	private User user;
 

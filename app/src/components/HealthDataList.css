@@ -1,0 +1,29 @@
+
+
+
+.health-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #fcd349;
+}
+
+.health-item {
+    width: 100%;
+    background-color: #690000;
+    margin-Top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
+
+.health-name {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.add-entry-button {
+    margin-top: 0.5rem;
+}

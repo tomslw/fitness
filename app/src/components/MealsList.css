@@ -1,0 +1,54 @@
+
+
+
+.base-meals-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #32a852;
+    margin-bottom: 0.5rem;
+}
+
+.meals-title-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 3rem;
+}
+
+.meals-title {
+    margin-left: 2rem;
+}
+
+.meals-total {
+    font-size: 1rem;
+    margin-right: 2rem;
+}
+
+.meal-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #04358f;
+    margin-bottom: 0.5rem;
+}
+
+.meal-name {
+    margin-left: 2rem;
+    font-size: 1.5rem;
+}
+
+.meal-stats {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+    margin-right: 2rem;
+}

@@ -9,10 +9,13 @@ import lv.venta.fitness.models.Meal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lv.venta.fitness.enums.Intensity;
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
+import lv.venta.fitness.models.Meal;
 import lv.venta.fitness.models.MuscleGroups;
 import lv.venta.fitness.repos.HealthDataRepo;
+import lv.venta.fitness.repos.MuscleGroupsRepo;
 import lv.venta.fitness.services.IHealthDataService;
 
 @Service
@@ -20,6 +23,9 @@ public class HealthDataServiceImpl implements IHealthDataService{
 	
 	@Autowired
 	private HealthDataRepo healthRepo;
+	
+	@Autowired
+	private MuscleGroupsRepo muscleRepo;
 
 	@Override
 	public ArrayList<HealthData> selectAllHealthData() {
@@ -83,24 +89,36 @@ public class HealthDataServiceImpl implements IHealthDataService{
 	}
 
 	@Override
-	public HealthData getHealthServiceById(long idhe) {
-		HealthData healthData = healthRepo.findByIdhe(idhe);
-		return healthData;
+	public HealthData insertEmptyHealthDataEntry() throws Exception{
+		MuscleGroups muscleGroup = new MuscleGroups(Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, null);
+		
+		HealthData latestEntry = healthRepo.findTopByOrderByDate();
+		
+		if (latestEntry.getDate().equals(LocalDate.now()))
+			throw new Exception("Theres already and entry for today");
+		
+											// take weight and height from previous entry
+		HealthData newEntry = new HealthData(latestEntry.getWeight(), latestEntry.getHeight(), muscleGroup, 0, LocalDate.now());
+		healthRepo.save(newEntry);
+		muscleRepo.save(muscleGroup);
+		return newEntry;
 	}
 
 	@Override
-	public void addExercise(long idhe, Excersise excersise) {
-		HealthData healthData = getHealthServiceById(idhe);
-		healthData.addExercise(excersise);
-		healthRepo.save(healthData);
+	public void updateHealthDataById(long id, HealthData data) throws Exception {
+		if (id < 1)
+			throw new Exception("Invalid id!");
+		
+		HealthData target = healthRepo.findById(id).get();
+		
+		target.setCaloriesSpent(data.getCaloriesSpent());
+//		target.setDiet(data.getDiet()); this should be done in the meal service
+		// same with muscleGroups
+		// same with Exercises
+		target.setHeight(data.getHeight());
+		target.setWeight(data.getWeight());
+		
+		healthRepo.save(target);
 	}
-
-	@Override
-	public void addMeal(long idhe, Meal meal) {
-		HealthData healthData = getHealthServiceById(idhe);
-		healthData.addMeal(meal);
-		healthRepo.save(healthData);
-	}
-
 
 }

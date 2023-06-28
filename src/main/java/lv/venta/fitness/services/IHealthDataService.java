@@ -17,9 +17,7 @@ public interface IHealthDataService {
 	void insertNewHealthData(float weight, float height, MuscleGroups muscleGroups, int caloriesSpent, LocalDate date) throws Exception;
 	void deleteHealthDataById(long idhe) throws Exception;
 	void deleteHealthDataByUserId(long idus) throws Exception;
-	HealthData getHealthServiceById(long idhe);
-	void addExercise(long idhe, Excersise excersise);
-	void addMeal(long idhe, Meal meal);
-
+	HealthData insertEmptyHealthDataEntry() throws Exception;
+	void updateHealthDataById(long id, HealthData data) throws Exception;
 
 }
