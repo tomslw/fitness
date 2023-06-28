@@ -3,10 +3,12 @@ package lv.venta.fitness.controllers;
 
 import jakarta.validation.Valid;
 import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.services.IExcersiseService;
 
 import java.util.Collection;
 
+import lv.venta.fitness.services.IHealthDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,30 +24,52 @@ public class ExcersiseController {
     @Autowired
     private IExcersiseService excersiseService;
 
+    @Autowired
+    private IHealthDataService healthDataService;
+
     @GetMapping("/showAll")
     Collection<Excersise> getAllExercises(Model model) {
         return excersiseService.selectAllExcersises();
     }
 
+    /*
     @GetMapping("/showExerciseByMuscle/{muscle}")
     Collection<Excersise> getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model) throws Exception {
         return excersiseService.selectExcersisesByMuscle(muscle);
     }
+    */
 
     @GetMapping("/delete/{id}")
-    Collection<Excersise> getDeleteExercise(@PathVariable(name = "id") long id, Model model) throws Exception {
+    void getDeleteExercise(@PathVariable(name = "id") long id, Model model) throws Exception {
         excersiseService.deleteExcersiseById(id);
-        return excersiseService.selectAllExcersises();
     }
 
     @GetMapping("/insertNewExercise")
-    Excersise getAddExercise(Model model) {
-    	// does it ever get saved in the database tho? no it dont
-        return new Excersise();
+    long getAddExercise(long idhe) {
+        try {
+			return excersiseService.insertNewExcersise(idhe);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+    }
+    
+    @PostMapping("/update/{id}")
+    public void updateExcersise(@PathVariable(name="id") long id, @Valid Excersise data, BindingResult result) {
+    	try {
+			excersiseService.updateExcersiseById(id, data);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
+    /*
     @PostMapping("/insertNewExercise")
-    void postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise) {
-        excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
+    void postAddExercise(@Valid @ModelAttribute("exercise") long idhe) {
+        //excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
+        excersiseService.insertNewExcersise(idhe);
     }
+    */
 }

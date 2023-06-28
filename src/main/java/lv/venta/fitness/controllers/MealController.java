@@ -5,6 +5,7 @@ import lv.venta.fitness.controllers.HealthDataController.HealthDataListItem;
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.Meal;
+import lv.venta.fitness.services.IHealthDataService;
 import lv.venta.fitness.services.IMealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

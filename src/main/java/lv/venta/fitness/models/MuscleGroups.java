@@ -88,6 +88,10 @@ public class MuscleGroups {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "muscleGroups")
 	@JsonIgnore
 	private HealthData healthData;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "targetMuscles")
+	@JsonIgnore
+	private Excersise excersise;
 
 	public MuscleGroups(@NotNull Intensity chest, @NotNull Intensity back, @NotNull Intensity biceps,
 			@NotNull Intensity triceps, @NotNull Intensity forearms, @NotNull Intensity abdomen,
@@ -109,7 +113,6 @@ public class MuscleGroups {
 		this.deltoid = deltoid;
 		this.healthData = healthData;
 	}
-	
-	
+
 	
 }
