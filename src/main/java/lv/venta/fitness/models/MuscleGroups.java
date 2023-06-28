@@ -85,5 +85,27 @@ public class MuscleGroups {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "muscleGroups")
 	private HealthData healthData;
+
+	public MuscleGroups(@NotNull Intensity chest, @NotNull Intensity back, @NotNull Intensity biceps,
+			@NotNull Intensity triceps, @NotNull Intensity forarms, @NotNull Intensity abdomen,
+			@NotNull Intensity calves, @NotNull Intensity hamstrings, @NotNull Intensity quadriceps,
+			@NotNull Intensity glutes, @NotNull Intensity trapezius, @NotNull Intensity latissimus_dorsi,
+			HealthData healthData) {
+		super();
+		this.chest = chest;
+		this.back = back;
+		this.biceps = biceps;
+		this.triceps = triceps;
+		this.forarms = forarms;
+		this.abdomen = abdomen;
+		this.calves = calves;
+		this.hamstrings = hamstrings;
+		this.quadriceps = quadriceps;
+		this.glutes = glutes;
+		this.trapezius = trapezius;
+		this.latissimus_dorsi = latissimus_dorsi;
+		this.healthData = healthData;
+	}
+	
 	
 }

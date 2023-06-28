@@ -59,7 +59,7 @@ public class ExcersiseController {
 
     @PostMapping("/insertNewExercise")
     void postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise, long idhe) {
-        excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
+        //excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
         healthDataService.addExercise(idhe, exercise);
     }
 }

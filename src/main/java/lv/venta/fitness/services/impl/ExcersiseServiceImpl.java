@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lv.venta.fitness.enums.Intensity;
 import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.MuscleGroups;
@@ -42,11 +43,14 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 	*/
 
 	@Override
-	public void insertNewExcersise(String title, String description, float restInterval, int repetitions,
-			MuscleGroups targetMuscles, float addedWeight) {
-		Excersise excersise = new Excersise(title, description, restInterval, repetitions, targetMuscles, addedWeight);
-		excersiseRepo.save(excersise);
+	public Excersise insertNewExcersise(long idhe) {
+		MuscleGroups muscleGroup = new MuscleGroups(Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, null);
 		
+		Excersise excersise = new Excersise("Exercise", "Description", 1, 1, muscleGroup, 1);
+		excersiseRepo.save(excersise);
+
+		
+		return excersise;
 	}
 
 	@Override
@@ -57,6 +61,13 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 		else {
 			throw new Exception("Invalid muscle");
 		}
+		
+	}
+
+	@Override
+	public void editExcersise(String title, String description, float restInterval, int repetitions,
+			MuscleGroups targetMuscles, float addedWeight) {
+		// TODO Auto-generated method stub
 		
 	}
 
