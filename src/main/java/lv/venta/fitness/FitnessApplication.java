@@ -1,7 +1,9 @@
 package lv.venta.fitness;
 
 import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.repos.ExcersiseRepo;
+import lv.venta.fitness.repos.HealthDataRepo;
 import lv.venta.fitness.services.IExcersiseService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,9 +25,10 @@ public class FitnessApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				Excersise excersise = new Excersise("Wanking", "Wanking with hand hard", 4, 4, new ArrayList<>(Arrays.asList("bicpes", "triceps")), 200);
+			
+				Excersise excersise = new Excersise("Bicep curls", "Barbell bicep curl", 2, 10, new ArrayList<>(Arrays.asList("biceps")), 20);
 				excersiseRepo.save(excersise);
 			}
 		};
-	}
+	}														
 }

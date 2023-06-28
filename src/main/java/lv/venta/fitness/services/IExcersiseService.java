@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.HealthData;
 
 public interface IExcersiseService {
 	ArrayList<Excersise> selectAllExcersises();
