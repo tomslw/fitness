@@ -86,6 +86,28 @@ public class HealthData {
 		this.date = date;
 	}
 	
+	public void addMeal(Meal meal) {
+		if(meal != null && !diet.contains(meal)) {
+			diet.add(meal);
+		}
+	}
 	
+	public void removeMeal(Meal meal) {
+		if(diet.contains(meal)) {
+			diet.remove(meal);
+		}
+	}
+	
+	public void addExercise(Excersise exercise) {
+		if(exercise != null && !workout.contains(exercise)) {
+			workout.add(exercise);
+		}
+	}
+	
+	public void removeExercise(Excersise exercise) {
+		if(workout.contains(exercise)) {
+			workout.remove(exercise);
+		}
+	}
 	
 }
