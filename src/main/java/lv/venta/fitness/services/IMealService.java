@@ -15,7 +15,7 @@ public interface IMealService {
 
 	void deleteMealById(long idme) throws Exception;
 
-	long insertEmptyMealEntry(long idhe);
+	Meal insertEmptyMealEntry(long idhe);
 
 	ArrayList<Meal> getMealsByHealthId(long idhe) throws Exception;
 
