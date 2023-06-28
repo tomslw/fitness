@@ -110,4 +110,10 @@ public class MealServiceImpl implements IMealService{
 		return meal;
 	}
 
+	@Override
+	public ArrayList<Meal> getMealsByHealthId(long idhe) {
+		HealthData healthData = healthRepo.findbyIdhe(idhe);
+		return (ArrayList<Meal>) healthData.getDiet();
+	}
+
 }
