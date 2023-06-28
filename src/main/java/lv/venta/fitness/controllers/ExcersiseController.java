@@ -39,8 +39,9 @@ public class ExcersiseController {
     }
 
     @GetMapping("/insertNewExercise")
-    Collection<Excersise> getAddExercise(Model model) {
-        return (Collection<Excersise>) new Excersise();
+    Excersise getAddExercise(Model model) {
+    	// does it ever get saved in the database tho? no it dont
+        return new Excersise();
     }
 
     @PostMapping("/insertNewExercise")

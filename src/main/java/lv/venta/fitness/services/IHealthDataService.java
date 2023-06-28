@@ -10,4 +10,6 @@ public interface IHealthDataService {
 	ArrayList<HealthData> selectAllHealthDataByUserId(long idus) throws Exception;
 	void deleteHealthDataById(long idhe) throws Exception;
 	void deleteHealthDataByUserId(long idus) throws Exception;
+	HealthData insertEmptyHealthDataEntry() throws Exception;
+	void updateHealthDataById(long id, HealthData data) throws Exception;
 }

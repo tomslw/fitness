@@ -11,5 +11,7 @@ public interface HealthDataRepo extends CrudRepository<HealthData, Long>{
 	ArrayList<HealthData> findAllByUserIdus(long idus);
 
 	void deleteByUserIdus(long idus);
+	
+	HealthData findTopByOrderByDate();
 
 }

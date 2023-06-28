@@ -2,6 +2,8 @@ package lv.venta.fitness.models;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -84,6 +86,7 @@ public class MuscleGroups {
 	private Intensity deltoid;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "muscleGroups")
+	@JsonIgnore
 	private HealthData healthData;
 
 	public MuscleGroups(@NotNull Intensity chest, @NotNull Intensity back, @NotNull Intensity biceps,

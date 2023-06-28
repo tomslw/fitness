@@ -8,6 +8,8 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Table(name = "meal_table")
 @Entity
 @Getter
@@ -31,6 +33,7 @@ public class Meal {
     private String description;
     
     @ManyToOne
+    @JsonIgnore
 	@JoinColumn(name="idhe")
 	private HealthData healthData;
 
