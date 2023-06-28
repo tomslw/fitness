@@ -18,61 +18,41 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/exercise")
 public class ExcersiseController {
 
-	@Autowired
+    @Autowired
     private IExcersiseService excersiseService;
-	
+
     @GetMapping("/showAll")
-    Collection<Excersise> getAllExercises(Model model){
+    Collection<Excersise> getAllExercises(Model model) {
         return excersiseService.selectAllExcersises();
     }
 
     @GetMapping("/showExerciseByMuscle/{muscle}")
-    public String getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model){
-        try {
-            model.addAttribute("exercises", excersiseService.selectExcersisesByMuscle(muscle));
-            return "all-exercises-page";
-        } catch (Exception e) {
-            model.addAttribute("packetError", e.getMessage());
-            return "error-page";
-        }
+    Collection<Excersise> getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model) throws Exception {
+        return excersiseService.selectExcersisesByMuscle(muscle);
     }
 
     @GetMapping("/delete/{id}")
-    public String getDeleteExercise(@PathVariable(name = "id") long id, Model model){
-        try{
-            excersiseService.deleteExcersiseById(id);
-            model.addAttribute("exercises", excersiseService.selectAllExcersises());
-            return "all-exercises-page";
-        } catch (Exception e) {
-            model.addAttribute("packetError", e.getMessage());
-            return "error-page";
-        }
+    Collection<Excersise> getDeleteExercise(@PathVariable(name = "id") long id, Model model) throws Exception {
+        excersiseService.deleteExcersiseById(id);
+        return excersiseService.selectAllExcersises();
     }
 
     @GetMapping("/insertNewExercise")
-    public String getAddExercise(Model model){
-        model.addAttribute("exercise", new Excersise());
-        return "add-exercise-page";
+    Collection<Excersise> getAddExercise(Model model) {
+        return (Collection<Excersise>) new Excersise();
     }
 
     @PostMapping("/insertNewExercise")
-    public String postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise, BindingResult result) {
-        if(!result.hasErrors()) {
-            try {
-                excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
-                return "redirect:/exercise/showAll";
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                return "error-page";
-            }
-        } else {
-        	return "add-exercise-page";
-        }
+    void postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise) {
+        excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
     }
-
 }
+
