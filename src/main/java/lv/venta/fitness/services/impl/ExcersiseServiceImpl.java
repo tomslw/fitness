@@ -31,32 +31,21 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 	public ArrayList<Excersise> selectAllExcersises() {
 		return (ArrayList<Excersise>) excersiseRepo.findAll();
 	}
-
-	/*
+	
 	@Override
-	public ArrayList<Excersise> selectExcersisesByMuscle(String muscle) throws Exception {
-		if (muscle != null) {
-			ArrayList<Excersise> filteredResults = new ArrayList<>();
-			ArrayList<Excersise> allExcersises = (ArrayList<Excersise>) excersiseRepo.findAll();
-			for (Excersise excersise : allExcersises) {
-				if(excersise.getTargetMuscles().contains(muscle)) {
-					filteredResults.add(excersise);
-				}
-			}
-			return filteredResults;
-		}
-		else {
-			throw new Exception("Invalid muscle");
-		}
+	public ArrayList<Excersise> getExcersisesByHealthId(long idhe) {
+		HealthData healthData = healthRepo.findByIdhe(idhe);
+		return (ArrayList<Excersise>) healthData.getWorkout();
 	}
-	*/
 
 	@Override
 	public Excersise insertNewExcersise(long idhe) {
 		MuscleGroups muscleGroup = new MuscleGroups(Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, null);
 		HealthData healthData = healthRepo.findByIdhe(idhe);
 		Excersise excersise = new Excersise("Exercise", "Description", 1, 1, muscleGroup, 1);
+		
 		healthData.addExercise(excersise);
+		
 		excersiseRepo.save(excersise);
 		muscleRepo.save(muscleGroup);
 		healthRepo.save(healthData);
@@ -81,6 +70,7 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 }

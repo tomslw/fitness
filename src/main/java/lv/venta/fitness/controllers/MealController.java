@@ -51,7 +51,7 @@ public class MealController
     @PostMapping("/insertNewMeal")
     void postAddMeal(@Valid @ModelAttribute("meal") Meal meal, long idhe) throws Exception {
         mealService.insertNewMeal(meal.getTitle(), meal.getDescription(), meal.getIngredients());
-        healthDataService.addMeal(idhe, meal);
+       // healthDataService.addMeal(idhe, meal);
     }
 
     @GetMapping("/delete/{idme}")

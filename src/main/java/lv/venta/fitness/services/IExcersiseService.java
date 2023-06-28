@@ -9,6 +9,7 @@ import lv.venta.fitness.models.MuscleGroups;
 
 public interface IExcersiseService {
 	ArrayList<Excersise> selectAllExcersises();
+	ArrayList<Excersise> getExcersisesByHealthId(long idhe);
 	//ArrayList<Excersise> selectExcersisesByMuscle(String muscle) throws Exception;
 	Excersise insertNewExcersise(long idhe);
 	void editExcersise(String title, String description, float restInterval, int repetitions, MuscleGroups targetMuscles, float addedWeight);
