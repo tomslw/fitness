@@ -3,10 +3,12 @@ package lv.venta.fitness.controllers;
 
 import jakarta.validation.Valid;
 import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.services.IExcersiseService;
 
 import java.util.Collection;
 
+import lv.venta.fitness.services.IHealthDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,9 @@ public class ExcersiseController {
 
     @Autowired
     private IExcersiseService excersiseService;
+
+    @Autowired
+    private IHealthDataService healthDataService;
 
     @GetMapping("/showAll")
     Collection<Excersise> getAllExercises(Model model) {
@@ -53,8 +58,9 @@ public class ExcersiseController {
     }
 
     @PostMapping("/insertNewExercise")
-    void postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise) {
+    void postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise, long idhe) {
         excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
+        healthDataService.addExercise(idhe, exercise);
     }
 }
 

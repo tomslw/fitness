@@ -9,6 +9,7 @@ import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.MuscleGroups;
 import lv.venta.fitness.models.User;
+import lv.venta.fitness.models.*;
 
 public interface IHealthDataService {
 	ArrayList<HealthData> selectAllHealthData();
@@ -16,4 +17,9 @@ public interface IHealthDataService {
 	void insertNewHealthData(float weight, float height, MuscleGroups muscleGroups, int caloriesSpent, LocalDate date) throws Exception;
 	void deleteHealthDataById(long idhe) throws Exception;
 	void deleteHealthDataByUserId(long idus) throws Exception;
+	HealthData getHealthServiceById(long idhe);
+	void addExercise(long idhe, Excersise excersise);
+	void addMeal(long idhe, Meal meal);
+
+
 }

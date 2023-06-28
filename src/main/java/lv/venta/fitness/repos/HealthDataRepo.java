@@ -12,4 +12,5 @@ public interface HealthDataRepo extends CrudRepository<HealthData, Long>{
 
 	void deleteByUserIdus(long idus);
 
+	HealthData findByIdhe(long idhe);
 }
