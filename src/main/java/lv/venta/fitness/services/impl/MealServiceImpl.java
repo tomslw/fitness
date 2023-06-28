@@ -76,17 +76,17 @@ public class MealServiceImpl implements IMealService{
 		}
 	}
 
-	@Override
-	public void insertNewMeal(String title, String description, int calories, int fat, int carbohydrates, int protein) throws Exception {
-		if(title != null && description != null) {
-			Meal meal = new Meal(title, description, calories, fat, carbohydrates, protein);
-			mealRepo.save(meal);
-		}
-		else {
-			throw new Exception("Invalid arguments");
-		}
-		
-	}
+//	@Override
+//	public void insertNewMeal(String title, String description, int calories, int fat, int carbohydrates, int protein) throws Exception {
+//		if(title != null && description != null) {
+//			Meal meal = new Meal();
+//			mealRepo.save(meal);
+//		}
+//		else {
+//			throw new Exception("Invalid arguments");
+//		}
+//		
+//	}
 
 	@Override
 	public void deleteMealById(long idme) throws Exception {
@@ -101,7 +101,7 @@ public class MealServiceImpl implements IMealService{
 	@Override
 	public Meal insertEmptyMealEntry(long idhe) {
 		HealthData healthData = healthRepo.findById(idhe).get();
-		Meal meal = new Meal("title", "description", 1, 1, 1 ,1);
+		Meal meal = new Meal("title", "description", 1, 1, 1 ,1, healthData);
 
 		healthData.addMeal(meal);
 		mealRepo.save(meal);
@@ -127,7 +127,26 @@ public class MealServiceImpl implements IMealService{
 		}
 
 		Meal meal = mealRepo.findById(idme).get();
-
+		
+		if (data.getTitle().length() < 3 || data.getTitle().length() > 20)
+			throw new Exception("Invalid update data");
+		
+		if (data.getDescription().length() < 3 || data.getDescription().length() > 20)
+			throw new Exception("Invalid update data");
+		
+		if (data.getCalories() < 0 || data.getCalories() > 100000)
+			throw new Exception("Invalid update data");
+		
+		if (data.getFat() < 0 || data.getFat() > 100000)
+			throw new Exception("Invalid update data");
+		
+		if (data.getCarbohydrates() < 0 || data.getCarbohydrates() > 100000)
+			throw new Exception("Invalid update data");
+		
+		if (data.getProtein() < 0 || data.getProtein() > 100000)
+			throw new Exception("Invalid update data");
+		
+		
 		meal.setTitle(data.getTitle());
 		meal.setDescription(data.getDescription());
 		meal.setCalories(data.getCalories());

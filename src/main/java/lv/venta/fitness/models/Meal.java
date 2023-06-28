@@ -60,12 +60,13 @@ public class Meal {
 	private HealthData healthData;
 
 
-	public Meal(String title, String description, int calories, int fat, int carbohydrates, int protein) {
+	public Meal(String title, String description, int calories, int fat, int carbohydrates, int protein, HealthData healthData) {
 		this.title = title;
 		this.description = description;
 		this.calories = calories;
 		this.fat = fat;
 		this.carbohydrates = carbohydrates;
 		this.protein = protein;
+		this.healthData = healthData;
 	}
 }
