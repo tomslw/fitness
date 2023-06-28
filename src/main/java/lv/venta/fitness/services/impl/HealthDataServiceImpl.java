@@ -93,11 +93,11 @@ public class HealthDataServiceImpl implements IHealthDataService{
 		
 		HealthData latestEntry = healthRepo.findTopByOrderByDate();
 		
-		if (latestEntry.getDate().toLocalDate().equals(LocalDate.now()))
+		if (latestEntry.getDate().equals(LocalDate.now()))
 			throw new Exception("Theres already and entry for today");
 		
 											// take weight and height from previous entry
-		HealthData newEntry = new HealthData(latestEntry.getWeight(), latestEntry.getHeight(), muscleGroup, new ArrayList<Meal>(), new ArrayList<Excersise>(), 0, LocalDateTime.now(), null);
+		HealthData newEntry = new HealthData(latestEntry.getWeight(), latestEntry.getHeight(), muscleGroup, 0, LocalDate.now());
 		healthRepo.save(newEntry);
 		muscleRepo.save(muscleGroup);
 		return newEntry;
@@ -118,6 +118,14 @@ public class HealthDataServiceImpl implements IHealthDataService{
 		target.setWeight(data.getWeight());
 		
 		healthRepo.save(target);
+	}
+
+	@Override
+	public HealthData selectHealthDataById(long id) throws Exception {
+		if (id < 1)
+			throw new Exception("Invalid id!");
+		
+		return healthRepo.findById(id).get();
 	}
 
 }
