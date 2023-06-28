@@ -46,14 +46,19 @@ public class ExcersiseController {
     }
 
     @GetMapping("/insertNewExercise")
-    Excersise getAddExercise(Model model) {
-    	// does it ever get saved in the database tho? no it dont
-        return new Excersise();
+    Excersise getAddExercise(long idhe) {
+        try {
+			return excersiseService.insertNewExcersise(idhe);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
     }
 
     @PostMapping("/insertNewExercise")
-    void postAddExercise(@Valid @ModelAttribute("exercise") Excersise exercise, long idhe) {
+    void postAddExercise(@Valid @ModelAttribute("exercise") long idhe) {
         //excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
-        healthDataService.addExercise(idhe, exercise);
+        excersiseService.insertNewExcersise(idhe);
     }
 }
