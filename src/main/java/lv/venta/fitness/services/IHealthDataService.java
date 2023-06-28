@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.MuscleGroups;
 import lv.venta.fitness.models.User;
@@ -15,4 +16,8 @@ public interface IHealthDataService {
 	void insertNewHealthData(float weight, float height, MuscleGroups muscleGroups, int caloriesSpent, LocalDate date) throws Exception;
 	void deleteHealthDataById(long idhe) throws Exception;
 	void deleteHealthDataByUserId(long idus) throws Exception;
+	HealthData getHealthServiceById(long idhe);
+	void addExercise(long idhe, Excersise excersise);
+
+
 }

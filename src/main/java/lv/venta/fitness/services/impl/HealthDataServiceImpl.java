@@ -81,5 +81,18 @@ public class HealthDataServiceImpl implements IHealthDataService{
 		
 	}
 
+	@Override
+	public HealthData getHealthServiceById(long idhe) {
+		HealthData healthData = healthRepo.findByIdhe(idhe);
+		return healthData;
+	}
+
+	@Override
+	public void addExercise(long idhe, Excersise excersise) {
+		HealthData healthData = getHealthServiceById(idhe);
+		healthData.addExercise(excersise);
+		healthRepo.save(healthData);
+	}
+
 
 }
