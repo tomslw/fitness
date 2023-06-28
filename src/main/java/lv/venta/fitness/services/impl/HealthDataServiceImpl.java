@@ -121,4 +121,12 @@ public class HealthDataServiceImpl implements IHealthDataService{
 		healthRepo.save(target);
 	}
 
+	@Override
+	public HealthData selectHealthDataById(long id) throws Exception {
+		if (id < 1)
+			throw new Exception("Invalid id!");
+		
+		return healthRepo.findById(id).get();
+	}
+
 }

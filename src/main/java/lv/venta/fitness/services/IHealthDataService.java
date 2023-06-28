@@ -18,6 +18,7 @@ public interface IHealthDataService {
 	void deleteHealthDataById(long idhe) throws Exception;
 	void deleteHealthDataByUserId(long idus) throws Exception;
 	HealthData insertEmptyHealthDataEntry() throws Exception;
+	HealthData selectHealthDataById(long id) throws Exception;
 	void updateHealthDataById(long id, HealthData data) throws Exception;
 
 }

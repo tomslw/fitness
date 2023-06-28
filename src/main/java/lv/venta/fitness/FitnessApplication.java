@@ -40,6 +40,9 @@ public class FitnessApplication {
 				MuscleGroups musGroup2 = new MuscleGroups(Intensity.medium, Intensity.medium, Intensity.medium, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
 				
 				HealthData healthData1 = new HealthData(80, 180, musGroup1, 2500, LocalDate.now().plusDays(-1));
+
+				healthData1.addExercise(excersise);
+
 				HealthData healthData2 = new HealthData(80, 180, musGroup2, 2500, LocalDate.now().plusDays(-2));
 				
 				healthRepo.save(healthData1);
