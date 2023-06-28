@@ -116,4 +116,23 @@ public class MealServiceImpl implements IMealService{
 		return (ArrayList<Meal>) healthData.getDiet();
 	}
 
+
+	@Override
+	public void updateMealById(long idme, Meal data) throws Exception {
+		if(idme < 1) {
+			throw new Exception("Invalid id!");
+		}
+
+		Meal meal = mealRepo.findById(idme).get();
+
+		meal.setTitle(data.getTitle());
+		meal.setDescription(data.getDescription());
+		meal.setCalories(data.getCalories());
+		meal.setFat(data.getFat());
+		meal.setCarbohydrates(data.getCarbohydrates());
+		meal.setProtein(data.getProtein());
+
+
+		mealRepo.save(meal);
+	}
 }

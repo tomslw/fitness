@@ -18,4 +18,6 @@ public interface IMealService {
 	Meal insertEmptyMealEntry(long idhe);
 
 	ArrayList<Meal> getMealsByHealthId(long idhe);
+
+	void updateMealById(long idme, Meal data) throws Exception;
 }
