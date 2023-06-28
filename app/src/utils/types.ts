@@ -21,14 +21,14 @@ export interface Meal {
 }
 
 export interface HealthData {
-    //idhd: number;
+    idhd: number;
     weight: number;
     height: number;
-    morningMuscleFatigue: MuscleGroups;
+    muscleGroups: MuscleGroups;
     diet: Array<Meal>;
     workout: Array<Exercise>;
     caloriesSpent: number;
-    dateTime: Date;
+    date: Date;
 }
 
 export enum Intensity {
