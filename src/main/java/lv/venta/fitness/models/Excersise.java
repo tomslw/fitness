@@ -1,6 +1,7 @@
 package lv.venta.fitness.models;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -57,9 +58,13 @@ public class Excersise {
 	@Max(1000)
 	private float addedWeight;
 	
-	@ManyToOne
-	@JoinColumn(name="idhe")
-	private HealthData healthData;
+	@ManyToMany
+	@ToString.Exclude
+	@JoinTable(
+			name="exercise_healthData_table",
+			joinColumns = @JoinColumn(name = "idex"),
+			inverseJoinColumns = @JoinColumn(name="idhe"))
+	private Collection<HealthData> healthDataCollection = new ArrayList<>();
 
 	public Excersise(
 			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") String title,
@@ -73,6 +78,16 @@ public class Excersise {
 		this.targetMuscles = targetMuscles;
 		this.addedWeight = addedWeight;
 	}
+
+	public void addHealthData(HealthData healthData) {
+		if(healthData!=null && !healthDataCollection.contains(healthData)) {
+			healthDataCollection.add(healthData);
+		}
+	}
 	
-	
+	public void removeHealthData(HealthData healthData) {
+		if(healthDataCollection.contains(healthData)) {
+			healthDataCollection.remove(healthData);
+		}
+	}
 }

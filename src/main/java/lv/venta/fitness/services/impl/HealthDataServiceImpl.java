@@ -3,6 +3,7 @@ package lv.venta.fitness.services.impl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,27 @@ public class HealthDataServiceImpl implements IHealthDataService{
 			throw new Exception("Incorrect id");
 		}
 			
+	}
+	
+	@Override
+	public void insertNewHealthData(float weight, float height, MuscleGroups muscleGroups, int caloriesSpent,
+			LocalDate date) throws Exception {
+		if(weight > 0 && height > 0 && muscleGroups != null && caloriesSpent > 0 && date != null) {
+			ArrayList<HealthData> allHealthData = (ArrayList<HealthData>) healthRepo.findAll();
+			for(HealthData healthData : allHealthData) {
+				if(healthData.getDate().isEqual(date)) {
+					throw new Exception("There already is health data for this day");
+				}
+			}
+			
+			HealthData healthData = new HealthData(weight, height, muscleGroups, caloriesSpent, date);
+			healthRepo.save(healthData);
+		}
+		else {
+			throw new Exception("Invalid arguments");
+		}
+		
+		
 	}
 
 	@Override

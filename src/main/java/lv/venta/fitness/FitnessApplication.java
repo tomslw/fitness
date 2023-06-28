@@ -31,7 +31,8 @@ public class FitnessApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				Excersise excersise = new Excersise("Lifting", "Lifting with hand hard", 4, 4, new ArrayList<>(Arrays.asList("bicpes", "triceps")), 200);
+			
+				Excersise excersise = new Excersise("Bicep curls", "Barbell bicep curl", 2, 10, new ArrayList<>(Arrays.asList("biceps")), 20);
 				excersiseRepo.save(excersise);
 				
 				MuscleGroups musGroup1 = new MuscleGroups(Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
@@ -47,5 +48,5 @@ public class FitnessApplication {
 				muscleRepo.save(musGroup2);
 			}
 		};
-	}
+	}														
 }
