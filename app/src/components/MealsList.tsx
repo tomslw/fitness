@@ -73,7 +73,7 @@ export function MealsList({meals, setMeals} : Props): ReactElement {
                     )
                 }
                 <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>Modify health data</DialogTitle>
+                    <DialogTitle>Meal dialog</DialogTitle>
                     <DialogContent>
                         <TextField
                             autoFocus
@@ -167,7 +167,7 @@ export function MealsList({meals, setMeals} : Props): ReactElement {
                     </DialogActions>
                 </Dialog>
             </div>
-            <Button variant="contained" onClick={addNewMeal}>Add meal</Button>
+            <Button variant="contained" onClick={addNewMeal} className="add-meal-button">Add meal</Button>
         </>
     );
 }
