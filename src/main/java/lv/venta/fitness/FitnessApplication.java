@@ -32,12 +32,13 @@ public class FitnessApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-			
-				Excersise excersise = new Excersise("Bicep curls", "Barbell bicep curl", 2, 10, new MuscleGroups(), 20);
-				excersiseRepo.save(excersise);
 				
 				MuscleGroups musGroup1 = new MuscleGroups(Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
 				MuscleGroups musGroup2 = new MuscleGroups(Intensity.medium, Intensity.medium, Intensity.medium, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
+				MuscleGroups musGroup3 = new MuscleGroups(Intensity.high, Intensity.medium, Intensity.medium, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
+				
+				Excersise excersise = new Excersise("Bicep curls", "Barbell bicep curl", 2, 10, musGroup3, 20);
+				excersiseRepo.save(excersise);
 				
 				HealthData healthData1 = new HealthData(80, 180, musGroup1, 2500, LocalDate.now().plusDays(-1));
 

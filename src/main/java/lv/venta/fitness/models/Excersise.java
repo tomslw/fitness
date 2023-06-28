@@ -3,6 +3,8 @@ package lv.venta.fitness.models;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -49,8 +51,9 @@ public class Excersise {
 	@Max(100)
 	private int repetitions;
 	
-	@Column(name = "TargetMuscles")
-	@NotNull
+	@OneToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "idmg")
 	private MuscleGroups targetMuscles;
 	
 	@Column(name = "AddedWeight")
