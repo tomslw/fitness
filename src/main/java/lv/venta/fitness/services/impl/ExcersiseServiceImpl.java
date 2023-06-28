@@ -65,10 +65,20 @@ public class ExcersiseServiceImpl implements IExcersiseService{
 	}
 
 	@Override
-	public void editExcersise(String title, String description, float restInterval, int repetitions,
-			MuscleGroups targetMuscles, float addedWeight) {
-		// TODO Auto-generated method stub
+	public void updateExcersiseById(long idex, Excersise data) throws Exception {
+		if(idex < 1) {
+			throw new Exception("Invalid id!");
+		}
 		
+		Excersise excersise = excersiseRepo.findById(idex).get();
+		
+		excersise.setTitle(data.getTitle());
+		excersise.setDescription(data.getDescription());
+		excersise.setRepetitions(data.getRepetitions());
+		excersise.setRestInterval(data.getRestInterval());
+		excersise.setAddedWeight(data.getAddedWeight());
+		
+		excersiseRepo.save(excersise);
 	}
 
 

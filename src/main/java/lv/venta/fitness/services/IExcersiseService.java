@@ -12,6 +12,6 @@ public interface IExcersiseService {
 	ArrayList<Excersise> getExcersisesByHealthId(long idhe);
 	//ArrayList<Excersise> selectExcersisesByMuscle(String muscle) throws Exception;
 	Excersise insertNewExcersise(long idhe);
-	void editExcersise(String title, String description, float restInterval, int repetitions, MuscleGroups targetMuscles, float addedWeight);
 	void deleteExcersiseById(long idex) throws Exception;
+	void updateExcersiseById(long idex, Excersise data) throws Exception;
 }

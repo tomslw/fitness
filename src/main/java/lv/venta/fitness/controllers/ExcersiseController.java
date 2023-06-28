@@ -55,10 +55,22 @@ public class ExcersiseController {
 			return null;
 		}
     }
+    
+    @PostMapping("/update/{id}")
+    public void updateExcersise(@PathVariable(name="id") long id, @Valid Excersise data, BindingResult result) {
+    	try {
+			excersiseService.updateExcersiseById(id, data);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
+    /*
     @PostMapping("/insertNewExercise")
     void postAddExercise(@Valid @ModelAttribute("exercise") long idhe) {
         //excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
         excersiseService.insertNewExcersise(idhe);
     }
+    */
 }
