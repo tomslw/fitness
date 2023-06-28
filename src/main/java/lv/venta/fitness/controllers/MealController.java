@@ -46,7 +46,7 @@ public class MealController
 
     @PostMapping("/insertNewMeal")
     void postAddMeal(@Valid @ModelAttribute("meal") Meal meal, BindingResult result) throws Exception {
-        mealService.insertNewMeal(meal.getTitle(), meal.getDescription(), meal.getIngredients());
+        mealService.insertNewMeal(meal.getTitle(), meal.getDescription());
     }
 
     @GetMapping("/delete/{idme}")

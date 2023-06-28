@@ -11,6 +11,8 @@ public interface IMealService {
 	ArrayList<Meal> selectMealsWithCaloriesOver(int calories) throws Exception;
 	ArrayList<Meal> selectMealsWithCaloriesUnder(int calories) throws Exception;
 	ArrayList<Meal> selectMealsWithProteinOver(int protein) throws Exception;
-	void insertNewMeal(String title, String description, Collection<Ingredient> ingredients) throws Exception;
+	void insertNewMeal(String title, String description) throws Exception;
 	void deleteMealById(long idme) throws Exception;
+
+	Meal insertEmptyMealEntry(long idhe);
 }

@@ -14,4 +14,5 @@ public interface HealthDataRepo extends CrudRepository<HealthData, Long>{
 	
 	HealthData findTopByOrderByDate();
 
+	HealthData findbyIdhe(long idhe);
 }

@@ -1,12 +1,9 @@
 package lv.venta.fitness.services.impl;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 
-import lv.venta.fitness.enums.Intensity;
 import lv.venta.fitness.models.*;
+import lv.venta.fitness.repos.HealthDataRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +15,9 @@ public class MealServiceImpl implements IMealService{
 	
 	@Autowired
 	private MealRepo mealRepo;
+
+	@Autowired
+	private HealthDataRepo healthRepo;
 
 	@Override
 	public ArrayList<Meal> selectAllMeals() {
@@ -77,9 +77,9 @@ public class MealServiceImpl implements IMealService{
 	}
 
 	@Override
-	public void insertNewMeal(String title, String description, Collection<Ingredient> ingredients) throws Exception {
-		if(title != null && description != null && ingredients != null) {
-			Meal meal = new Meal(title, description, ingredients);
+	public void insertNewMeal(String title, String description) throws Exception {
+		if(title != null && description != null) {
+			Meal meal = new Meal(title, description);
 			mealRepo.save(meal);
 		}
 		else {
@@ -99,16 +99,15 @@ public class MealServiceImpl implements IMealService{
 	}
 
 	@Override
-	public Meal insertEmptyMealEntry() throws Exception{
-		Meal latestEntry = mealRepo.findTopByOrderByDate();
+	public Meal insertEmptyMealEntry(long idhe) {
+		HealthData healthData = healthRepo.findbyIdhe(idhe);
+		Meal meal = new Meal("title", "description");
 
-		if (latestEntry.getDate().toLocalDate().equals(LocalDate.now()))
-			throw new Exception("Theres already and entry for today");
+		healthData.addMeal(meal);
+		mealRepo.save(meal);
+		healthRepo.save(healthData);
 
-
-		Meal newEntry = new Meal(latestEntry.getTitle(), latestEntry.getDescription(), latestEntry.getIngredients());
-		mealRepo.save(newEntry);
-		return newEntry;
+		return meal;
 	}
 
 }
