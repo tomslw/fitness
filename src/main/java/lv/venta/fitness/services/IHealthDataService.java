@@ -3,6 +3,7 @@ package lv.venta.fitness.services;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.MuscleGroups;

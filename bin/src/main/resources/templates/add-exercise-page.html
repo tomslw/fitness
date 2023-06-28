@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<form action="#" th:action="@{/exercise/insertNewExercise}" th:object="${exercise}" method="post">
+  <table>
+    <tr>
+      <td>Exercise title:</td>
+      <td><input type="text" th:field="*{title}"/></td>
+      <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> </td>
+    </tr>
+    <tr>
+      <td>Exercise description:</td>
+      <td><input type="text" th:field="*{description}"/></td>
+      <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"> </td>
+    </tr>
+    <tr>
+      <td>Exercise RestInterval:</td>
+      <td><input type="text" th:field="*{restInterval}"/></td>
+      <td th:if="${#fields.hasErrors('restInterval')}" th:errors="*{restInterval}"> </td>
+    </tr>
+    <tr>
+      <td>Exercise Repetitions:</td>
+      <td><input type="text" th:field="*{repetitions}"/></td>
+      <td th:if="${#fields.hasErrors('repetitions')}" th:errors="*{repetitions}"> </td>
+    </tr>
+    <tr>
+      <td>Exercise TargetMuscles:</td>
+      <td><input type="text" th:field="*{targetMuscles}"/></td>
+      <td th:if="${#fields.hasErrors('targetMuscles')}" th:errors="*{targetMuscles}"> </td>
+    </tr>
+    <tr>
+      <td>Exercise AddedWeight:</td>
+      <td><input type="text" th:field="*{addedWeight}"/></td>
+      <td th:if="${#fields.hasErrors('addedWeight')}" th:errors="*{addedWeight}"> </td>
+    </tr>
+
+    <tr>
+      <td><button type="submit">Add exercise</button></td>
+    </tr>
+
+</form>
+
+</body>
+</html>

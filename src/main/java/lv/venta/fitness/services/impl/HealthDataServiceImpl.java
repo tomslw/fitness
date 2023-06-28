@@ -3,12 +3,13 @@ package lv.venta.fitness.services.impl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lv.venta.fitness.models.Excersise;
 import lv.venta.fitness.models.HealthData;
-import lv.venta.fitness.models.Ingredient;
 import lv.venta.fitness.models.MuscleGroups;
 import lv.venta.fitness.repos.HealthDataRepo;
 import lv.venta.fitness.services.IHealthDataService;
