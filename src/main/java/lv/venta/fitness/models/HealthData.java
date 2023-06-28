@@ -67,7 +67,7 @@ public class HealthData {
 	@ManyToMany(mappedBy="healthDataCollection")
 	@ToString.Exclude
 	@NotNull
-	private Collection<Excersise> workout = new ArrayList<>();
+	private Collection<Exercise> workout = new ArrayList<>();
 	
 	@Column(name = "calories_spent")
 	@Min(0)
@@ -105,13 +105,13 @@ public class HealthData {
 		}
 	}
 	
-	public void addExercise(Excersise exercise) {
+	public void addExercise(Exercise exercise) {
 		if(exercise != null && !workout.contains(exercise)) {
 			workout.add(exercise);
 		}
 	}
 	
-	public void removeExercise(Excersise exercise) {
+	public void removeExercise(Exercise exercise) {
 		if(workout.contains(exercise)) {
 			workout.remove(exercise);
 		}

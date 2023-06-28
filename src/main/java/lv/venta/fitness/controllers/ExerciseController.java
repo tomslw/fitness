@@ -2,10 +2,10 @@ package lv.venta.fitness.controllers;
 
 
 import jakarta.validation.Valid;
-import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.Exercise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.Meal;
-import lv.venta.fitness.services.IExcersiseService;
+import lv.venta.fitness.services.IExerciseService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,46 +21,46 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/exercise")
-public class ExcersiseController {
+public class ExerciseController {
 
     @Autowired
-    private IExcersiseService excersiseService;
+    private IExerciseService ExerciseService;
 
     @Autowired
     private IHealthDataService healthDataService;
 
     @GetMapping("/showAll")
-    Collection<Excersise> getAllExercises(Model model) {
-        return excersiseService.selectAllExcersises();
+    Collection<Exercise> getAllExercises(Model model) {
+        return ExerciseService.selectAllExercises();
     }
 
     /*
     @GetMapping("/showExerciseByMuscle/{muscle}")
-    Collection<Excersise> getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model) throws Exception {
-        return excersiseService.selectExcersisesByMuscle(muscle);
+    Collection<Exercise> getExerciseByMuscle(@PathVariable(name = "muscle") String muscle, Model model) throws Exception {
+        return ExerciseService.selectExercisesByMuscle(muscle);
     }
     */
     
     @GetMapping("/showAll/{id}")
-    Collection<Excersise> getAllExcersiseByHealthDataId(@PathVariable(name="id") long id){
+    Collection<Exercise> getAllExerciseByHealthDataId(@PathVariable(name="id") long id){
         try {
-			return excersiseService.getExcersisesByHealthId(id);
+			return ExerciseService.getExercisesByHealthId(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new ArrayList<Excersise>();
+			return new ArrayList<Exercise>();
 		}
     }
 
     @GetMapping("/delete/{id}")
     void getDeleteExercise(@PathVariable(name = "id") long id, Model model) throws Exception {
-        excersiseService.deleteExcersiseById(id);
+        ExerciseService.deleteExerciseById(id);
     }
 
     @GetMapping("/insertNewExercise/{id}")
-    Excersise getAddExercise(@PathVariable(name = "id") long id) {
+    Exercise getAddExercise(@PathVariable(name = "id") long id) {
         try {
-			return excersiseService.insertNewExcersise(id);
+			return ExerciseService.insertNewExercise(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,9 +69,9 @@ public class ExcersiseController {
     }
     
     @PostMapping("/update/{id}")
-    public void updateExcersise(@PathVariable(name="id") long id, @Valid Excersise data, BindingResult result) {
+    public void updateExercise(@PathVariable(name="id") long id, @Valid Exercise data, BindingResult result) {
     	try {
-			excersiseService.updateExcersiseById(id, data);
+			ExerciseService.updateExerciseById(id, data);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,8 +81,8 @@ public class ExcersiseController {
     /*
     @PostMapping("/insertNewExercise")
     void postAddExercise(@Valid @ModelAttribute("exercise") long idhe) {
-        //excersiseService.insertNewExcersise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
-        excersiseService.insertNewExcersise(idhe);
+        //ExerciseService.insertNewExercise(exercise.getTitle(), exercise.getDescription(), exercise.getRestInterval(), exercise.getRepetitions(), exercise.getTargetMuscles(), exercise.getAddedWeight());
+        ExerciseService.insertNewExercise(idhe);
     }
     */
 }

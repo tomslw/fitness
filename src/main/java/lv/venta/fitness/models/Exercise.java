@@ -24,7 +24,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Excersise {
+public class Exercise {
 	
 	@Column(name = "Idex")
 	@Id
@@ -71,7 +71,7 @@ public class Excersise {
 			inverseJoinColumns = @JoinColumn(name="idhe"))
 	private Collection<HealthData> healthDataCollection = new ArrayList<>();
 
-	public Excersise(
+	public Exercise(
 			@Size(min = 3, max = 30) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") String title,
 			@Size(min = 3, max = 100) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Only latin letters") String description,
 			@Min(0) @Max(10) float restInterval, @Min(1) @Max(100) int repetitions,

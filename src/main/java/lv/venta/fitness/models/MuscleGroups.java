@@ -91,7 +91,7 @@ public class MuscleGroups {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "targetMuscles")
 	@JsonIgnore
-	private Excersise excersise;
+	private Exercise Exercise;
 
 	public MuscleGroups(@NotNull Intensity chest, @NotNull Intensity back, @NotNull Intensity biceps,
 			@NotNull Intensity triceps, @NotNull Intensity forearms, @NotNull Intensity abdomen,

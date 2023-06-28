@@ -2,7 +2,7 @@ package lv.venta.fitness.controllers;
 
 import jakarta.validation.Valid;
 import lv.venta.fitness.controllers.HealthDataController.HealthDataListItem;
-import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.Exercise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.Meal;
 import lv.venta.fitness.services.IHealthDataService;

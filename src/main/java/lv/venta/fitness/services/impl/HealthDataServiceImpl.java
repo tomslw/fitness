@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.venta.fitness.enums.Intensity;
-import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.Exercise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.Meal;
 import lv.venta.fitness.models.MuscleGroups;
