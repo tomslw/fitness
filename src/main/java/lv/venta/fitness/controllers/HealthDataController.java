@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,19 +27,40 @@ import java.util.ArrayList;
 public class HealthDataController {
 	
 	class HealthDataListItem {
-		long id;
+		long idhe;
 		LocalDate date;
+		
+		public long getIdhe() {
+			return idhe;
+		}
+
+		public void setIdhe(long idhe) {
+			this.idhe = idhe;
+		}
+
+		public LocalDate getDate() {
+			return date;
+		}
+
+		public void setDate(LocalDate date) {
+			this.date = date;
+		}
+
+		HealthDataListItem(long idhe, LocalDate date) {
+			this.idhe = idhe;
+			this.date = date;
+		}
 	}
 
     @Autowired
     private IHealthDataService healthDataService;
 
     @GetMapping("/showAll")
-    List<LocalDate> getAllHealthDataDates(){
-    	ArrayList<LocalDate> newDateList = new ArrayList<LocalDate>();
+    Collection<HealthDataListItem> getAllHealthDataDates(){
+    	ArrayList<HealthDataListItem> newDateList = new ArrayList<HealthDataListItem>();
     	
     	for (HealthData item : healthDataService.selectAllHealthData()) {
-    		newDateList.add(item.getDate());
+    		newDateList.add(new HealthDataListItem(item.getIdhe(), item.getDate()));
     	}
         return newDateList;
     }
@@ -55,9 +77,10 @@ public class HealthDataController {
     }
     
     @GetMapping("/getFresh")
-    HealthData getFreshHealthEntry() {
+    HealthDataListItem getFreshHealthEntry() {
     	try {
-			return healthDataService.insertEmptyHealthDataEntry();
+    		HealthData freshOne = healthDataService.insertEmptyHealthDataEntry();
+			return new HealthDataListItem(freshOne.getIdhe(), freshOne.getDate());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,12 +89,15 @@ public class HealthDataController {
     }
     
     @PostMapping("/update/{id}")
-    public void updateHealthEntry(@PathVariable(name="id") long id, @Valid HealthData data, BindingResult result) {
+    public long updateHealthEntry(@PathVariable(name="id") long id, @RequestBody HealthData data, BindingResult result) {
     	try {
-			healthDataService.updateHealthDataById(id, data);
+    		System.out.println(data.toString());
+			healthDataService.updateHealthDataById(id, data.getWeight(), data.getHeight(), data.getCaloriesSpent());
+			return 1;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return -1;
 			// should probably respond with some sort of response class telling the front end what's up
 		}
     }

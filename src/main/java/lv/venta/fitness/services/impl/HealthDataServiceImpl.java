@@ -104,18 +104,18 @@ public class HealthDataServiceImpl implements IHealthDataService{
 	}
 
 	@Override
-	public void updateHealthDataById(long id, HealthData data) throws Exception {
+	public void updateHealthDataById(long id, float weight, float height, int calories) throws Exception {
 		if (id < 1)
 			throw new Exception("Invalid id!");
 		
 		HealthData target = healthRepo.findById(id).get();
 		
-		target.setCaloriesSpent(data.getCaloriesSpent());
+		target.setCaloriesSpent(calories);
 //		target.setDiet(data.getDiet()); this should be done in the meal service
 		// same with muscleGroups
 		// same with Exercises
-		target.setHeight(data.getHeight());
-		target.setWeight(data.getWeight());
+		target.setHeight(height);
+		target.setWeight(weight);
 		
 		healthRepo.save(target);
 	}

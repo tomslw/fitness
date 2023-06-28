@@ -115,5 +115,13 @@ public class HealthData {
 			workout.remove(exercise);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "HealthData [idhe=" + idhe + ", weight=" + weight + ", height=" + height + ", caloriesSpent="
+				+ caloriesSpent + ", date=" + date + "]";
+	}
+	
+	
 	
 }
