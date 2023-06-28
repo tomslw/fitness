@@ -192,13 +192,20 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
                             label="Workout name"
                             type="text"
                             fullWidth
-                            value={selectedWorkout != null ? workouts[selectedWorkout].title : ''}
+                            defaultValue={selectedWorkout != null ? workouts[selectedWorkout].title : ''}
                             variant="standard"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+								const titleRegex = /^[A-Z]{1}[a-z\\ ]+$/
                                 const newWorkouts = workouts;
                                 if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], title: event.target.value};
-                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+									if(event.target.value.length>=3 && event.target.value.length<=20 && titleRegex.test(event.target.value)){
+										newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], title: event.target.value};
+                                    	handleUpdatePost(newWorkouts[selectedWorkout]);
+									}
+                                    else{
+										newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], title: "Exercise"};
+                                    	handleUpdatePost(newWorkouts[selectedWorkout]);
+									}
                                 }
                                 setWorkouts(newWorkouts);
                             }}

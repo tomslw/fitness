@@ -118,14 +118,22 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             label="The name of the quisine"
                             type="text"
                             fullWidth
-                            value={selectedMeal != null ? meals[selectedMeal].title : ''}
+                            defaultValue={selectedMeal != null ? meals[selectedMeal].title : ''}
                             variant="standard"
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                 const newMeals = meals;
                                 if (selectedMeal != null) {
-                                    newMeals[selectedMeal] = {...newMeals[selectedMeal], title: event.target.value};
-                                    handleUpdatePost(newMeals[selectedMeal]);
+                                   if(event.target.value.length>=3 && event.target.value.length<=20){
+										newMeals[selectedMeal] = {...newMeals[selectedMeal], title: event.target.value};
+                                    	handleUpdatePost(newMeals[selectedMeal]);	   
+								   }
+								   else{
+										newMeals[selectedMeal] = {...newMeals[selectedMeal], title: "title"};
+                                    	handleUpdatePost(newMeals[selectedMeal]);	
+								   }
+                                    
                                 }
+                               
                                 setMeals(newMeals);
                             }}
                         />
