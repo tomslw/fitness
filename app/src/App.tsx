@@ -11,7 +11,6 @@ import { HealthDataList } from './components/HealthDataList';
 
 export function App(): ReactElement {
 
-  const [loading, setLoading] = useState(false);
   const [viewSoreness, setViewSoreness] = useState(true);
 
   const [healthList, setHealthList] = useState<Array<HealthDataShort>>(new Array<HealthDataShort>())
@@ -42,7 +41,6 @@ export function App(): ReactElement {
   });
 
   const fetchHealthData = useCallback((id: number) => {
-    setLoading(true);
     fetch('healthData/entry/' + id)
     .then(response => response.json())
     .then(data => {
@@ -93,12 +91,11 @@ export function App(): ReactElement {
               date: new Date(data.date),
             }
       setHealth(translateSingleHealthData);
-      setLoading(false);
   });
   }, []);
 
   useEffect(() => {
-    setLoading(true);
+    //setLoading(true);
     // having the responses being handeled here is kind of meh, 
     // should probably have a seperate Requester.ts with all the safety checks in the world
     fetch('healthData/showAll')
@@ -124,13 +121,7 @@ export function App(): ReactElement {
   // otherwise we might get into a nice little loop
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-
-
+  
   return (
     <div className="App">
       <header className="App-header">

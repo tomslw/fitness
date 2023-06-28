@@ -19,18 +19,18 @@ import triceps from "../images/muscles/triceps.png";
 interface ListProps {
     title: String, 
     setData: (newVal: Number) => void, 
-    defVal: Intensity, 
+    value: Intensity, 
     enableEdit: boolean,
 }
 
-function ListItem({title, setData, defVal, enableEdit} : ListProps) : ReactElement {
+function ListItem({title, setData, value: defVal, enableEdit} : ListProps) : ReactElement {
     return (
         <div className="slider-item">
             <div className="slider-title">{title}</div>
             <Slider 
                 disabled={!enableEdit}
                 aria-label="back intensity"
-                defaultValue={defVal}
+                value={defVal}
                 getAriaValueText={valuetext}
                 valueLabelFormat={valuetext}
                 valueLabelDisplay="auto"
@@ -136,7 +136,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.abdomen}
+                    value={intensityData.abdomen}
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Back"} 
@@ -145,7 +145,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.back} 
+                    value={intensityData.back} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Biceps"} 
@@ -154,7 +154,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.biceps} 
+                    value={intensityData.biceps} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Deltoid"} 
@@ -163,7 +163,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.deltoid} 
+                    value={intensityData.deltoid} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Chest"} 
@@ -172,7 +172,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.chest} 
+                    value={intensityData.chest} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Calves"} 
@@ -181,7 +181,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.calves} 
+                    value={intensityData.calves} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Forearms"} 
@@ -190,7 +190,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.forearms} 
+                    value={intensityData.forearms} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Gluteus"} 
@@ -199,7 +199,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.gluteus} 
+                    value={intensityData.gluteus} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Hamstrings"} 
@@ -208,7 +208,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.hamstrings} 
+                    value={intensityData.hamstrings} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Quadriceps"} 
@@ -217,7 +217,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.quadriceps} 
+                    value={intensityData.quadriceps} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Trapezius"} 
@@ -226,7 +226,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.trapezius} 
+                    value={intensityData.trapezius} 
                     enableEdit={enableEdit}
                 />
                 <ListItem title={"Triceps"} 
@@ -235,7 +235,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
                         setIntensityData(newGroup);
                         handleSaveIntensityData (newGroup);
                     }}
-                    defVal={intensityData.triceps} 
+                    value={intensityData.triceps} 
                     enableEdit={enableEdit}
                 />
 
