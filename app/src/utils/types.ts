@@ -1,19 +1,46 @@
 
 
-export interface Excercise {
+export interface Exercise {
     idex: number;
     title: String;
     description: String;
     restInterval: number;
     repetitions: number;
     addedWeight: number
-    // health data goes here, once that has been defined, for now not nessesary
+    targetMuscles: MuscleGroups
+}
+
+export interface Meal {
+    idme: number;
+    title: String;
+    description: String;
+    calories: number;
+    fat: number;
+    carbohydrates: number;
+    protein: number;
+}
+
+export interface HealthData {
+    idhe: number;
+    weight: number;
+    height: number;
+    muscleGroups: MuscleGroups;
+    diet: Array<Meal>;
+    workout: Array<Exercise>;
+    caloriesSpent: number;
+    date: Date;
+}
+
+export interface HealthDataShort {
+    idhe: number;
+    date: Date;
 }
 
 export enum Intensity {
     none, low, medium, high, injury
 }
 
+// no need to save the muscle groups id, i can edit the muscle group by Exercise/HealthData id
 export interface MuscleGroups {
     chest: Intensity;
     back: Intensity;

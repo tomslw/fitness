@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +34,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class HealthData {
 	
@@ -51,6 +55,7 @@ public class HealthData {
 	private float height;
 	
 	@OneToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "idmg")
 	private MuscleGroups muscleGroups;
 	
@@ -62,7 +67,7 @@ public class HealthData {
 	@ManyToMany(mappedBy="healthDataCollection")
 	@ToString.Exclude
 	@NotNull
-	private Collection<Excersise> workout = new ArrayList<>();
+	private Collection<Exercise> workout = new ArrayList<>();
 	
 	@Column(name = "calories_spent")
 	@Min(0)
@@ -74,6 +79,7 @@ public class HealthData {
 	private LocalDate date;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="idus")
 	private User user;
 
@@ -99,16 +105,24 @@ public class HealthData {
 		}
 	}
 	
-	public void addExercise(Excersise exercise) {
+	public void addExercise(Exercise exercise) {
 		if(exercise != null && !workout.contains(exercise)) {
 			workout.add(exercise);
 		}
 	}
 	
-	public void removeExercise(Excersise exercise) {
+	public void removeExercise(Exercise exercise) {
 		if(workout.contains(exercise)) {
 			workout.remove(exercise);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "HealthData [idhe=" + idhe + ", weight=" + weight + ", height=" + height + ", caloriesSpent="
+				+ caloriesSpent + ", date=" + date + "]";
+	}
+	
+	
 	
 }
