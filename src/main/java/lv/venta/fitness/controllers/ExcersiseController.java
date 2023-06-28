@@ -40,9 +40,8 @@ public class ExcersiseController {
     */
 
     @GetMapping("/delete/{id}")
-    Collection<Excersise> getDeleteExercise(@PathVariable(name = "id") long id, Model model) throws Exception {
+    void getDeleteExercise(@PathVariable(name = "id") long id, Model model) throws Exception {
         excersiseService.deleteExcersiseById(id);
-        return excersiseService.selectAllExcersises();
     }
 
     @GetMapping("/insertNewExercise")
