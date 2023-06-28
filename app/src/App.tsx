@@ -46,6 +46,7 @@ export function App(): ReactElement {
     fetch('healthData/entry/' + id)
     .then(response => response.json())
     .then(data => {
+      console.log("fetchHealthData");
       console.log(data);
       var translateSingleHealthData: HealthData = {
               idhe: data.idhe,
@@ -66,7 +67,28 @@ export function App(): ReactElement {
                 deltoid: Intensity[data.muscleGroups.deltoid as keyof typeof Intensity],
               },
               diet: data.diet,
-              workout: data.workout,
+              workout: data.workout.map((item: { idex: any; title: any; description: any; restInterval: any; repetitions: any; addedWeight: any; targetMuscles: { chest: string; back: string; biceps: string; triceps: string; forearms: string; abdomen: string; gluteus: string; hamstrings: string; quadriceps: string; calves: string; trapezius: string; deltoid: string; }; }) => { return {
+                idex: item.idex,
+                title: item.title,
+                description: item.description,
+                restInterval: item.restInterval,
+                repetitions: item.repetitions,
+                addedWeight: item.addedWeight,
+                targetMuscles: {
+                  chest: Intensity[item.targetMuscles.chest as keyof typeof Intensity],
+                  back: Intensity[item.targetMuscles.back as keyof typeof Intensity],
+                  biceps: Intensity[item.targetMuscles.biceps as keyof typeof Intensity],
+                  triceps: Intensity[item.targetMuscles.triceps as keyof typeof Intensity],
+                  forearms: Intensity[item.targetMuscles.forearms as keyof typeof Intensity],
+                  abdomen: Intensity[item.targetMuscles.abdomen as keyof typeof Intensity],
+                  gluteus: Intensity[item.targetMuscles.gluteus as keyof typeof Intensity],
+                  hamstrings: Intensity[item.targetMuscles.hamstrings as keyof typeof Intensity],
+                  quadriceps: Intensity[item.targetMuscles.quadriceps as keyof typeof Intensity],
+                  calves: Intensity[item.targetMuscles.calves as keyof typeof Intensity],
+                  trapezius: Intensity[item.targetMuscles.trapezius as keyof typeof Intensity],
+                  deltoid: Intensity[item.targetMuscles.deltoid as keyof typeof Intensity],
+                },
+              }}),
               caloriesSpent: data.caloriesSpent,
               date: new Date(data.date),
             }
@@ -125,7 +147,7 @@ export function App(): ReactElement {
           { viewSoreness ?
           <MuscleStatus parentId={health.idhe} isWorkout={false} enableEdit={true} intensityData={health.muscleGroups} setIntensityData={(data => setHealth({ ...health, muscleGroups: data }))}/>
           :
-          <WorkoutList workouts={health.workout} setWorkouts={(data) => setHealth({ ...health, workout: data })} />
+          <WorkoutList healthDataId={health.idhe} workouts={health.workout} setWorkouts={(data) => setHealth({ ...health, workout: data })} />
           }
         </div>
         

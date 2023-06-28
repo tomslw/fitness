@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useCallback, useEffect, useState } from "react"
 import { Exercise, Intensity, MuscleGroups } from "../utils/types"
 import { MuscleStatus } from "./MuscleStatus";
 import "./WorkoutList.css";
@@ -11,11 +11,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
 interface Props {
+    healthDataId: number,
     workouts: Array<Exercise>,
     setWorkouts: (newData: Array<Exercise>) => void
 }
 
-export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
+export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): ReactElement {
 
     const [workoutIntensity, setWorkoutIntensity] = useState<MuscleGroups>({
         chest: Intensity.none,
@@ -32,66 +33,80 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
         deltoid: Intensity.none,
       });
 
-      const [open, setOpen] = useState(false);
-      // index
-      const [selectedWorkout, setSelectedWorkout] = useState<number | null>();
-  
-      const handleClickOpen = (i: number) => {
-          setSelectedWorkout(i);
-          setOpen(true);
-      };
-      
-      const handleClose = () => {
-          setSelectedWorkout(null);
-          setOpen(false);
-      };
-  
-      const handleDelete = () => {
-          setWorkouts(workouts.filter((value, index) => index !== selectedWorkout));
-          handleClose()
-      }
-  
-      const addNewWorkout = () => {
-        //temp
-          setWorkouts([...workouts, {
-            idex: 0,
-            title: "new workout",
-            description: "just do it",
-            restInterval: 2,
-            repetitions: 0,
-            addedWeight: 0,
-            targetMuscles: {
-              chest: Intensity.none,
-              back: Intensity.none,
-              biceps: Intensity.none,
-              triceps: Intensity.none,
-              forearms: Intensity.none,
-              abdomen: Intensity.none,
-              gluteus: Intensity.none,
-              hamstrings: Intensity.none,
-              quadriceps: Intensity.none,
-              calves: Intensity.none,
-              trapezius: Intensity.none,
-              deltoid: Intensity.none,
-            }
-          }]);
-          handleClickOpen(workouts.length);
-      }
+    const [open, setOpen] = useState(false);
+    // index
+    const [selectedWorkout, setSelectedWorkout] = useState<number | null>();
 
-      useEffect(() => {
-        const totalIntensity = {
-            chest: Intensity.none,
-            back: Intensity.none,
-            biceps: Intensity.none,
-            triceps: Intensity.none,
-            forearms: Intensity.none,
-            abdomen: Intensity.none,
-            gluteus: Intensity.none,
-            hamstrings: Intensity.none,
-            quadriceps: Intensity.none,
-            calves: Intensity.none,
-            trapezius: Intensity.none,
-            deltoid: Intensity.none,
+    const handleClickOpen = (i: number) => {
+        setSelectedWorkout(i);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setSelectedWorkout(null);
+        setOpen(false);
+    };
+
+    const handleDelete = useCallback( () => {
+        if (selectedWorkout != null) {
+            fetch('exercise/delete/' + workouts[selectedWorkout].idex);
+                // .then(response => response.json())
+                // .then(data => {
+                //     console.log(data);
+                // });
+        }
+
+        setWorkouts(workouts.filter((value, index) => index !== selectedWorkout));
+        handleClose();
+    }, [selectedWorkout, setWorkouts, workouts]);
+
+    const addNewWorkout = useCallback(() => {
+        
+        fetch('exercise/insertNewExercise/' + healthDataId)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Response data:");
+                console.log(data);
+                setWorkouts( [ ...workouts, {
+                    idex: data.idex,
+                    title: data.title,
+                    description: data.description,
+                    restInterval: data.restInterval,
+                    repetitions: data.repetitions,
+                    addedWeight: data.addedWeight,
+                    targetMuscles: {
+                      chest: Intensity[data.targetMuscles.chest as keyof typeof Intensity],
+                      back: Intensity[data.targetMuscles.back as keyof typeof Intensity],
+                      biceps: Intensity[data.targetMuscles.biceps as keyof typeof Intensity],
+                      triceps: Intensity[data.targetMuscles.triceps as keyof typeof Intensity],
+                      forearms: Intensity[data.targetMuscles.forearms as keyof typeof Intensity],
+                      abdomen: Intensity[data.targetMuscles.abdomen as keyof typeof Intensity],
+                      gluteus: Intensity[data.targetMuscles.gluteus as keyof typeof Intensity],
+                      hamstrings: Intensity[data.targetMuscles.hamstrings as keyof typeof Intensity],
+                      quadriceps: Intensity[data.targetMuscles.quadriceps as keyof typeof Intensity],
+                      calves: Intensity[data.targetMuscles.calves as keyof typeof Intensity],
+                      trapezius: Intensity[data.targetMuscles.trapezius as keyof typeof Intensity],
+                      deltoid: Intensity[data.targetMuscles.deltoid as keyof typeof Intensity],
+                    },
+                }]);
+            });
+
+    }, [healthDataId, setWorkouts, workouts])
+
+        useEffect(() => {
+            const totalIntensity = {
+                chest: Intensity.none,
+                back: Intensity.none,
+                biceps: Intensity.none,
+                triceps: Intensity.none,
+                forearms: Intensity.none,
+                abdomen: Intensity.none,
+                gluteus: Intensity.none,
+                hamstrings: Intensity.none,
+                quadriceps: Intensity.none,
+                calves: Intensity.none,
+                trapezius: Intensity.none,
+                deltoid: Intensity.none,
         };
         // holly ternary statement
         workouts.forEach((item) => {
@@ -110,6 +125,24 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
         });
         setWorkoutIntensity(totalIntensity);
       }, [workouts, setWorkouts]);
+
+      const handleUpdatePost = useCallback((newValue: Exercise) => {
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(newValue),
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+        };
+
+        fetch('exercise/update/' + newValue.idex, requestOptions);
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(data);
+            //     // check if success i guess
+            // });
+    }, []);
 
     return (
         <>
@@ -165,6 +198,7 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
                                 const newWorkouts = workouts;
                                 if (selectedWorkout != null) {
                                     newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], title: event.target.value};
+                                    handleUpdatePost(newWorkouts[selectedWorkout]);
                                 }
                                 setWorkouts(newWorkouts);
                             }}
@@ -182,6 +216,7 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
                                 const newWorkouts = workouts;
                                 if (selectedWorkout != null) {
                                     newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], restInterval: +event.target.value};
+                                    handleUpdatePost(newWorkouts[selectedWorkout]);
                                 }
                                 setWorkouts(newWorkouts);
                             }}
@@ -199,6 +234,7 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
                                 const newWorkouts = workouts;
                                 if (selectedWorkout != null) {
                                     newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], repetitions: +event.target.value};
+                                    handleUpdatePost(newWorkouts[selectedWorkout]);
                                 }
                                 setWorkouts(newWorkouts);
                             }}
@@ -216,6 +252,7 @@ export function WorkoutList({workouts, setWorkouts} : Props): ReactElement {
                                 const newWorkouts = workouts;
                                 if (selectedWorkout != null) {
                                     newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], addedWeight: +event.target.value};
+                                    handleUpdatePost(newWorkouts[selectedWorkout]);
                                 }
                                 setWorkouts(newWorkouts);
                             }}
