@@ -100,7 +100,7 @@ public class MealServiceImpl implements IMealService{
 
 	@Override
 	public Meal insertEmptyMealEntry(long idhe) {
-		HealthData healthData = healthRepo.findbyIdhe(idhe);
+		HealthData healthData = healthRepo.findById(idhe).get();
 		Meal meal = new Meal("title", "description", 1, 1, 1 ,1);
 
 		healthData.addMeal(meal);
@@ -111,8 +111,11 @@ public class MealServiceImpl implements IMealService{
 	}
 
 	@Override
-	public ArrayList<Meal> getMealsByHealthId(long idhe) {
-		HealthData healthData = healthRepo.findbyIdhe(idhe);
+	public ArrayList<Meal> getMealsByHealthId(long idhe) throws Exception {
+		if (idhe < 1)
+			throw new Exception("Invalid id!");
+		
+		HealthData healthData = healthRepo.findById(idhe).get();
 		return (ArrayList<Meal>) healthData.getDiet();
 	}
 
