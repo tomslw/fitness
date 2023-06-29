@@ -58,7 +58,7 @@ public class Exercise {
 	private MuscleGroups targetMuscles;
 	
 	@Column(name = "AddedWeight")
-	@Min(1)
+	@Min(0)
 	@Max(1000)
 	private float addedWeight;
 	
