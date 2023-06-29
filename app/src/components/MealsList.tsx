@@ -114,7 +114,7 @@ export function MealsList({
           <div className="meals-total">{"Total: " + totalKcal() + "Kcal"}</div>
         </div>
         {meals.map((value, index) => (
-          <div className="meal-item" onClick={() => handleClickOpen(index)}>
+          <div className="meal-item" key={"meal"+index} onClick={() => handleClickOpen(index)}>
             <div className="meal-name">{value.title}</div>
             <div className="meal-stats">
               <div> {value.protein + "g protein"} </div>

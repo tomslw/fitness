@@ -169,7 +169,7 @@ export function WorkoutList({
       />
       <div className="workout-row">
         {workouts.map((value, index) => (
-          <div className="workout-item" onClick={() => handleClickOpen(index)}>
+          <div className="workout-item" key={"workout"+index} onClick={() => handleClickOpen(index)}>
             <div className="workout-title"> {value.title} </div>
             <div className="workout-stat"> {value.repetitions + " reps"} </div>
             <div className="workout-stat">
