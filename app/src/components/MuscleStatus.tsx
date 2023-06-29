@@ -196,33 +196,13 @@ export function MuscleStatus({
       </div>
       <div className="middle-ui">
         <ListItem
-          title={"Abdomen"}
+          title={"Trapezius"}
           setData={(value) => {
-            var newGroup = { ...intensityData, abdomen: value as Intensity };
+            var newGroup = { ...intensityData, trapezius: value as Intensity };
             setIntensityData(newGroup);
             handleSaveIntensityData(newGroup);
           }}
-          value={intensityData.abdomen}
-          enableEdit={enableEdit}
-        />
-        <ListItem
-          title={"Back"}
-          setData={(value) => {
-            var newGroup = { ...intensityData, back: value as Intensity };
-            setIntensityData(newGroup);
-            handleSaveIntensityData(newGroup);
-          }}
-          value={intensityData.back}
-          enableEdit={enableEdit}
-        />
-        <ListItem
-          title={"Biceps"}
-          setData={(value) => {
-            var newGroup = { ...intensityData, biceps: value as Intensity };
-            setIntensityData(newGroup);
-            handleSaveIntensityData(newGroup);
-          }}
-          value={intensityData.biceps}
+          value={intensityData.trapezius}
           enableEdit={enableEdit}
         />
         <ListItem
@@ -246,13 +226,23 @@ export function MuscleStatus({
           enableEdit={enableEdit}
         />
         <ListItem
-          title={"Calves"}
+          title={"Biceps"}
           setData={(value) => {
-            var newGroup = { ...intensityData, calves: value as Intensity };
+            var newGroup = { ...intensityData, biceps: value as Intensity };
             setIntensityData(newGroup);
             handleSaveIntensityData(newGroup);
           }}
-          value={intensityData.calves}
+          value={intensityData.biceps}
+          enableEdit={enableEdit}
+        />
+        <ListItem
+          title={"Triceps"}
+          setData={(value) => {
+            var newGroup = { ...intensityData, triceps: value as Intensity };
+            setIntensityData(newGroup);
+            handleSaveIntensityData(newGroup);
+          }}
+          value={intensityData.triceps}
           enableEdit={enableEdit}
         />
         <ListItem
@@ -263,6 +253,26 @@ export function MuscleStatus({
             handleSaveIntensityData(newGroup);
           }}
           value={intensityData.forearms}
+          enableEdit={enableEdit}
+        />
+        <ListItem
+          title={"Abdomen"}
+          setData={(value) => {
+            var newGroup = { ...intensityData, abdomen: value as Intensity };
+            setIntensityData(newGroup);
+            handleSaveIntensityData(newGroup);
+          }}
+          value={intensityData.abdomen}
+          enableEdit={enableEdit}
+        />
+        <ListItem
+          title={"Back"}
+          setData={(value) => {
+            var newGroup = { ...intensityData, back: value as Intensity };
+            setIntensityData(newGroup);
+            handleSaveIntensityData(newGroup);
+          }}
+          value={intensityData.back}
           enableEdit={enableEdit}
         />
         <ListItem
@@ -296,23 +306,13 @@ export function MuscleStatus({
           enableEdit={enableEdit}
         />
         <ListItem
-          title={"Trapezius"}
+          title={"Calves"}
           setData={(value) => {
-            var newGroup = { ...intensityData, trapezius: value as Intensity };
+            var newGroup = { ...intensityData, calves: value as Intensity };
             setIntensityData(newGroup);
             handleSaveIntensityData(newGroup);
           }}
-          value={intensityData.trapezius}
-          enableEdit={enableEdit}
-        />
-        <ListItem
-          title={"Triceps"}
-          setData={(value) => {
-            var newGroup = { ...intensityData, triceps: value as Intensity };
-            setIntensityData(newGroup);
-            handleSaveIntensityData(newGroup);
-          }}
-          value={intensityData.triceps}
+          value={intensityData.calves}
           enableEdit={enableEdit}
         />
       </div>
