@@ -57,8 +57,6 @@ export function HealthDataList({
     }
   }, [healthDataList, setHealthDataList, setSelectedItem]);
 
-  console.log(healthDataList[0]);
-
   return (
     <>
       <div className="health-list-container">
@@ -72,6 +70,7 @@ export function HealthDataList({
         {healthDataList.map((value, index) => (
           // wont actually save it locally in the list tho, is basically going to be a local variable
           <div
+          key={"healthData"+index}
             className="health-item"
             onClick={() => setSelectedItem(value.idhe)}
           >
