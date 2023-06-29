@@ -144,6 +144,18 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
             // });
     }, []);
 
+    const [titleError, setTitleError] = useState(false);
+    const [restError, setRestError] = useState(false);
+    const [repError, setRepError] = useState(false);
+    const [weightError, setWeightError] = useState(false);
+
+    useEffect(() => {
+        setTitleError(false);
+        setRestError(false);
+        setRepError(false);
+        setWeightError(false);
+    }, [open]);
+
     return (
         <>
             <MuscleStatus parentId={-1} isWorkout={true} enableEdit={false} intensityData={workoutIntensity} setIntensityData={(data => {})}/>
@@ -196,15 +208,22 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
                             label="Workout name"
                             type="text"
                             fullWidth
-                            value={selectedWorkout != null ? workouts[selectedWorkout].title : ''}
                             variant="standard"
+                            defaultValue={selectedWorkout != null ? workouts[selectedWorkout].title : ''}
+                            error={titleError}
+                            helperText={titleError ? "3-30 characters" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newWorkouts = workouts;
-                                if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], title: event.target.value};
-                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+                                const err = (event.target.value.length < 3 || event.target.value.length > 30);
+                                setTitleError(err);
+                                
+                                if (!err) {
+                                    const newWorkouts = workouts;
+                                    if (selectedWorkout != null) {
+                                        newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], title: event.target.value};
+                                        handleUpdatePost(newWorkouts[selectedWorkout]);
+                                    }
+                                    setWorkouts(newWorkouts);
                                 }
-                                setWorkouts(newWorkouts);
                             }}
                         />
                         <TextField
@@ -214,15 +233,22 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
                             label="Rest Interval"
                             type="text"
                             fullWidth
-                            value={selectedWorkout != null ? workouts[selectedWorkout].restInterval : ''}
                             variant="standard"
+                            defaultValue={selectedWorkout != null ? workouts[selectedWorkout].restInterval : ''}
+                            error={restError}
+                            helperText={restError ? "0-10" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newWorkouts = workouts;
-                                if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], restInterval: +event.target.value};
-                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+                                const err = (+event.target.value < 0 || +event.target.value > 10);
+                                setRestError(err);
+                                
+                                if (!err) {
+                                    const newWorkouts = workouts;
+                                    if (selectedWorkout != null) {
+                                        newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], restInterval: +event.target.value};
+                                        handleUpdatePost(newWorkouts[selectedWorkout]);
+                                    }
+                                    setWorkouts(newWorkouts);
                                 }
-                                setWorkouts(newWorkouts);
                             }}
                         />
                         <TextField
@@ -232,15 +258,22 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
                             label="Repetitions"
                             type="text"
                             fullWidth
-                            value={selectedWorkout != null ? workouts[selectedWorkout].repetitions : ''}
                             variant="standard"
+                            defaultValue={selectedWorkout != null ? workouts[selectedWorkout].repetitions : ''}
+                            error={repError}
+                            helperText={repError ? "0-100" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newWorkouts = workouts;
-                                if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], repetitions: +event.target.value};
-                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+                                const err = (+event.target.value < 0 || +event.target.value > 100);
+                                setRepError(err);
+                                
+                                if (!err) {
+                                    const newWorkouts = workouts;
+                                    if (selectedWorkout != null) {
+                                        newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], repetitions: +event.target.value};
+                                        handleUpdatePost(newWorkouts[selectedWorkout]);
+                                    }
+                                    setWorkouts(newWorkouts);
                                 }
-                                setWorkouts(newWorkouts);
                             }}
                         />
                         <TextField
@@ -250,15 +283,22 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
                             label="Added Weight"
                             type="text"
                             fullWidth
-                            value={selectedWorkout != null ? workouts[selectedWorkout].addedWeight : ''}
                             variant="standard"
+                            defaultValue={selectedWorkout != null ? workouts[selectedWorkout].addedWeight : ''}
+                            error={weightError}
+                            helperText={weightError ? "0-1000" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newWorkouts = workouts;
-                                if (selectedWorkout != null) {
-                                    newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], addedWeight: +event.target.value};
-                                    handleUpdatePost(newWorkouts[selectedWorkout]);
+                                const err = (+event.target.value < 0 || +event.target.value > 1000);
+                                setWeightError(err);
+                                
+                                if (!err) {
+                                    const newWorkouts = workouts;
+                                    if (selectedWorkout != null) {
+                                        newWorkouts[selectedWorkout] = {...newWorkouts[selectedWorkout], addedWeight: +event.target.value};
+                                        handleUpdatePost(newWorkouts[selectedWorkout]);
+                                    }
+                                    setWorkouts(newWorkouts);
                                 }
-                                setWorkouts(newWorkouts);
                             }}
                         />
 

@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { Meal } from "../utils/types";
 import "./MealsList.css";
 
@@ -88,6 +88,20 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
             });
     }, []);
 
+    const [titleError, setTitleError] = useState(false);
+    const [proteinError, setProteinError] = useState(false);
+    const [carbsError, setCarbsError] = useState(false);
+    const [fatError, setFatError] = useState(false);
+    const [caloriesError, setCaloriesError] = useState(false);
+
+    useEffect(() => {
+        setTitleError(false);
+        setProteinError(false);
+        setCarbsError(false);
+        setFatError(false);
+        setCaloriesError(false);
+    }, [open]);
+
     return (
         <>
             <div className="base-meals-container">
@@ -118,15 +132,22 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             label="The name of the quisine"
                             type="text"
                             fullWidth
-                            value={selectedMeal != null ? meals[selectedMeal].title : ''}
                             variant="standard"
+                            defaultValue={selectedMeal != null ? meals[selectedMeal].title : ''}
+                            error={titleError}
+                            helperText={titleError ? "3-20 characters" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newMeals = meals;
-                                if (selectedMeal != null) {
-                                    newMeals[selectedMeal] = {...newMeals[selectedMeal], title: event.target.value};
-                                    handleUpdatePost(newMeals[selectedMeal]);
+                                const err = (event.target.value.length < 3 || event.target.value.length > 20);
+                                setTitleError(err);
+                                
+                                if (!err) {
+                                    const newMeals = meals;
+                                    if (selectedMeal != null) {
+                                        newMeals[selectedMeal] = {...newMeals[selectedMeal], title: event.target.value};
+                                        handleUpdatePost(newMeals[selectedMeal]);
+                                    }
+                                    setMeals(newMeals);
                                 }
-                                setMeals(newMeals);
                             }}
                         />
                         <TextField
@@ -136,15 +157,22 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             label="Protein"
                             type="number"
                             fullWidth
-                            value={selectedMeal != null ? meals[selectedMeal].protein : ''}
                             variant="standard"
+                            defaultValue={selectedMeal != null ? meals[selectedMeal].protein : ''}
+                            error={proteinError}
+                            helperText={proteinError ? "0-100000" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newMeals = meals;
-                                if (selectedMeal != null) {
-                                    newMeals[selectedMeal] = {...newMeals[selectedMeal], protein: +event.target.value};
-                                    handleUpdatePost(newMeals[selectedMeal]);
+                                const err = (+event.target.value < 0 || +event.target.value > 100000);
+                                setProteinError(err);
+                                
+                                if (!err) {
+                                    const newMeals = meals;
+                                    if (selectedMeal != null) {
+                                        newMeals[selectedMeal] = {...newMeals[selectedMeal], protein: +event.target.value};
+                                        handleUpdatePost(newMeals[selectedMeal]);
+                                    }
+                                    setMeals(newMeals);
                                 }
-                                setMeals(newMeals);
                             }}
                         />
                         <TextField
@@ -154,15 +182,22 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             label="Carbohydrates"
                             type="number"
                             fullWidth
-                            value={selectedMeal != null ? meals[selectedMeal].carbohydrates : ''}
                             variant="standard"
+                            defaultValue={selectedMeal != null ? meals[selectedMeal].carbohydrates : ''}
+                            error={carbsError}
+                            helperText={carbsError ? "0-100000" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newMeals = meals;
-                                if (selectedMeal != null) {
-                                    newMeals[selectedMeal] = {...newMeals[selectedMeal], carbohydrates: +event.target.value};
-                                    handleUpdatePost(newMeals[selectedMeal]);
+                                const err = (+event.target.value < 0 || +event.target.value > 100000);
+                                setCarbsError(err);
+                                
+                                if (!err) {
+                                    const newMeals = meals;
+                                    if (selectedMeal != null) {
+                                        newMeals[selectedMeal] = {...newMeals[selectedMeal], carbohydrates: +event.target.value};
+                                        handleUpdatePost(newMeals[selectedMeal]);
+                                    }
+                                    setMeals(newMeals);
                                 }
-                                setMeals(newMeals);
                             }}
                         />
                         <TextField
@@ -172,15 +207,22 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             label="Fat"
                             type="number"
                             fullWidth
-                            value={selectedMeal != null ? meals[selectedMeal].fat : ''}
                             variant="standard"
+                            defaultValue={selectedMeal != null ? meals[selectedMeal].fat : ''}
+                            error={fatError}
+                            helperText={fatError ? "0-100000" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newMeals = meals;
-                                if (selectedMeal != null) {
-                                    newMeals[selectedMeal] = {...newMeals[selectedMeal], fat: +event.target.value};
-                                    handleUpdatePost(newMeals[selectedMeal]);
+                                const err = (+event.target.value < 0 || +event.target.value > 100000);
+                                setFatError(err);
+                                
+                                if (!err) {
+                                    const newMeals = meals;
+                                    if (selectedMeal != null) {
+                                        newMeals[selectedMeal] = {...newMeals[selectedMeal], fat: +event.target.value};
+                                        handleUpdatePost(newMeals[selectedMeal]);
+                                    }
+                                    setMeals(newMeals);
                                 }
-                                setMeals(newMeals);
                             }}
                         />
                         <TextField
@@ -190,15 +232,22 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                             label="Calories"
                             type="number"
                             fullWidth
-                            value={selectedMeal != null ? meals[selectedMeal].calories : ''}
                             variant="standard"
+                            defaultValue={selectedMeal != null ? meals[selectedMeal].calories : ''}
+                            error={caloriesError}
+                            helperText={caloriesError ? "0-100000" : ""}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                const newMeals = meals;
-                                if (selectedMeal != null) {
-                                    newMeals[selectedMeal] = {...newMeals[selectedMeal], calories: +event.target.value};
-                                    handleUpdatePost(newMeals[selectedMeal]);
+                                const err = (+event.target.value < 0 || +event.target.value > 100000);
+                                setCaloriesError(err);
+                                
+                                if (!err) {
+                                    const newMeals = meals;
+                                    if (selectedMeal != null) {
+                                        newMeals[selectedMeal] = {...newMeals[selectedMeal], calories: +event.target.value};
+                                        handleUpdatePost(newMeals[selectedMeal]);
+                                    }
+                                    setMeals(newMeals);
                                 }
-                                setMeals(newMeals);
                             }}
                         />
                     </DialogContent>

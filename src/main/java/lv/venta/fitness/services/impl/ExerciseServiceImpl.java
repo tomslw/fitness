@@ -95,7 +95,7 @@ public class ExerciseServiceImpl implements IExerciseService{
 		if(data.getRestInterval() < 0 || data.getRestInterval() > 10)
 			throw new Exception("Invalid update data!");
 		
-		if(data.getAddedWeight() < 1 || data.getAddedWeight() > 1000)
+		if(data.getAddedWeight() < 0 || data.getAddedWeight() > 1000)
 			throw new Exception("Invalid update data!");
 		
 		Exercise.setTitle(data.getTitle());
