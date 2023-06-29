@@ -110,7 +110,7 @@ export function MuscleStatus({parentId, intensityData, setIntensityData, enableE
             //     // check if success i guess
             // });
         
-    }, []);
+    }, [isWorkout, parentId]);
 
     return (
         <div className="body-window">
