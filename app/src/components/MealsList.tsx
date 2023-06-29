@@ -64,7 +64,7 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
                     carbohydrates: data.carbohydrates,
                     protein: data.protein,
                 }]);
-                console.log(meals);
+                // console.log(meals);
             });
         //handleClickOpen(meals.length); // cant do this now, need to change something, other wise there is no component at that array loco
 
@@ -83,7 +83,7 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
         fetch('meal/update/' + newValue.idme, requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 // check if success i guess
             });
     }, []);

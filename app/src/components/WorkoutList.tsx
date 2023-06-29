@@ -65,8 +65,6 @@ export function WorkoutList({healthDataId, workouts, setWorkouts} : Props): Reac
         fetch('exercise/insertNewExercise/' + healthDataId)
             .then(response => response.json())
             .then(data => {
-                console.log("Response data:");
-                console.log(data);
                 setWorkouts( [ ...workouts, {
                     idex: data.idex,
                     title: data.title,

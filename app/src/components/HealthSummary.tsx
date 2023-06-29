@@ -38,7 +38,7 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
         fetch('healthData/update/' + updatedHD.idhe, requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 // check if success i guess
             });
     }, []);

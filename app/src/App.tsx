@@ -44,8 +44,6 @@ export function App(): ReactElement {
     fetch('healthData/entry/' + id)
     .then(response => response.json())
     .then(data => {
-      console.log("fetchHealthData");
-      console.log(data);
       var translateSingleHealthData: HealthData = {
               idhe: data.idhe,
               weight: data.weight,
@@ -95,13 +93,11 @@ export function App(): ReactElement {
   }, []);
 
   useEffect(() => {
-    //setLoading(true);
     // having the responses being handeled here is kind of meh, 
     // should probably have a seperate Requester.ts with all the safety checks in the world
     fetch('healthData/showAll')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         var translateWeirdData: Array<HealthDataShort> = new Array<HealthDataShort>();
         data.forEach((entry: { idhe: string; date: any; }) => {
           translateWeirdData.push({
