@@ -1,7 +1,6 @@
-import React, { ReactElement, useCallback, useEffect, useState } from 'react';
-import logo from './logo.svg';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import './App.css';
-import { Exercise, HealthData, HealthDataShort, Intensity, Meal, MuscleGroups } from './utils/types';
+import { Exercise, HealthData, HealthDataShort, Intensity, Meal } from './utils/types';
 import { MuscleStatus } from './components/MuscleStatus';
 import { HealthSummary } from './components/HealthSummary';
 import { MealsList } from './components/MealsList';

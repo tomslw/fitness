@@ -1,5 +1,5 @@
 import { ReactElement, useCallback } from "react";
-import { Exercise, HealthData, HealthDataShort, Intensity, Meal } from "../utils/types";
+import { HealthDataShort } from "../utils/types";
 import "./HealthDataList.css"
 
 import Button from "@mui/material/Button";
