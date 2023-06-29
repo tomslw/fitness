@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { HealthData } from "../utils/types";
 import "./HealthSummary.css";
 import Button from "@mui/material/Button";
@@ -46,6 +46,12 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
     const [weightError, setWeightError] = useState(false);
     const [heightError, setHeightError] = useState(false);
     const [caloriesError, setCaloriesError] = useState(false);
+
+    useEffect(() => {
+        setWeightError(false);
+        setHeightError(false);
+        setCaloriesError(false);
+    }, [open]);
 
     return (
         <div className="base-container">

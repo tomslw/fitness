@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { Meal } from "../utils/types";
 import "./MealsList.css";
 
@@ -93,6 +93,14 @@ export function MealsList({healthDataId, meals, setMeals} : Props): ReactElement
     const [carbsError, setCarbsError] = useState(false);
     const [fatError, setFatError] = useState(false);
     const [caloriesError, setCaloriesError] = useState(false);
+
+    useEffect(() => {
+        setTitleError(false);
+        setProteinError(false);
+        setCarbsError(false);
+        setFatError(false);
+        setCaloriesError(false);
+    }, [open]);
 
     return (
         <>
