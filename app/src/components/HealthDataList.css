@@ -13,9 +13,14 @@
 .health-item {
     width: 100%;
     background-color: #690000;
+
     margin-Top: 0.5rem;
     margin-bottom: 0.5rem;
     padding: 0.5rem;
+}
+
+.health-item:hover {
+    background-color: #d60000;
 }
 
 .health-name {

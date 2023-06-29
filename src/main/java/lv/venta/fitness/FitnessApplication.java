@@ -1,14 +1,14 @@
 package lv.venta.fitness;
 
 import lv.venta.fitness.enums.Intensity;
-import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.Exercise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.Meal;
 import lv.venta.fitness.models.MuscleGroups;
-import lv.venta.fitness.repos.ExcersiseRepo;
+import lv.venta.fitness.repos.ExerciseRepo;
 import lv.venta.fitness.repos.HealthDataRepo;
 import lv.venta.fitness.repos.MuscleGroupsRepo;
-import lv.venta.fitness.services.IExcersiseService;
+import lv.venta.fitness.services.IExerciseService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +28,7 @@ public class FitnessApplication {
 	}
 
 	@Bean
-	public CommandLineRunner testModel(ExcersiseRepo excersiseRepo, HealthDataRepo healthRepo, MuscleGroupsRepo muscleRepo){
+	public CommandLineRunner testModel(ExerciseRepo ExerciseRepo, HealthDataRepo healthRepo, MuscleGroupsRepo muscleRepo){
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {

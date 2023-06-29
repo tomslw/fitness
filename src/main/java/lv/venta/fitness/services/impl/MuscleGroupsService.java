@@ -3,10 +3,10 @@ package lv.venta.fitness.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lv.venta.fitness.models.Excersise;
+import lv.venta.fitness.models.Exercise;
 import lv.venta.fitness.models.HealthData;
 import lv.venta.fitness.models.MuscleGroups;
-import lv.venta.fitness.repos.ExcersiseRepo;
+import lv.venta.fitness.repos.ExerciseRepo;
 import lv.venta.fitness.repos.HealthDataRepo;
 import lv.venta.fitness.repos.MuscleGroupsRepo;
 import lv.venta.fitness.services.IMuscleGroupsService;
@@ -15,7 +15,7 @@ import lv.venta.fitness.services.IMuscleGroupsService;
 public class MuscleGroupsService implements IMuscleGroupsService{
 
 	@Autowired
-	private ExcersiseRepo excersiseRepo;
+	private ExerciseRepo ExerciseRepo;
 	
 	@Autowired
 	private HealthDataRepo healthRepo;
@@ -29,7 +29,7 @@ public class MuscleGroupsService implements IMuscleGroupsService{
 			throw new Exception("Incorrect id");
 		}
 		else {
-			return excersiseRepo.findById(idex).get().getTargetMuscles();
+			return ExerciseRepo.findById(idex).get().getTargetMuscles();
 		}
 	}
 
@@ -49,7 +49,7 @@ public class MuscleGroupsService implements IMuscleGroupsService{
 			throw new Exception("Invalid id!");
 		}
 		
-		Excersise exercise = excersiseRepo.findById(idex).get();
+		Exercise exercise = ExerciseRepo.findById(idex).get();
 		MuscleGroups muscleGroups = exercise.getTargetMuscles();
 		
 		muscleGroups.setChest(data.getChest());
@@ -68,7 +68,7 @@ public class MuscleGroupsService implements IMuscleGroupsService{
 		
 		muscleRepo.save(muscleGroups);
 		exercise.setTargetMuscles(muscleGroups);
-		excersiseRepo.save(exercise);
+		ExerciseRepo.save(exercise);
 		
 	}
 
