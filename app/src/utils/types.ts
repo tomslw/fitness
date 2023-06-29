@@ -1,57 +1,59 @@
-
-
 export interface Exercise {
-    idex: number;
-    title: String;
-    description: String;
-    restInterval: number;
-    repetitions: number;
-    addedWeight: number
-    targetMuscles: MuscleGroups
+  idex: number;
+  title: String;
+  description: String;
+  restInterval: number;
+  repetitions: number;
+  addedWeight: number;
+  targetMuscles: MuscleGroups;
 }
 
 export interface Meal {
-    idme: number;
-    title: String;
-    description: String;
-    calories: number;
-    fat: number;
-    carbohydrates: number;
-    protein: number;
+  idme: number;
+  title: String;
+  description: String;
+  calories: number;
+  fat: number;
+  carbohydrates: number;
+  protein: number;
 }
 
 export interface HealthData {
-    idhe: number;
-    weight: number;
-    height: number;
-    muscleGroups: MuscleGroups;
-    diet: Array<Meal>;
-    workout: Array<Exercise>;
-    caloriesSpent: number;
-    date: Date;
+  idhe: number;
+  weight: number;
+  height: number;
+  muscleGroups: MuscleGroups;
+  diet: Array<Meal>;
+  workout: Array<Exercise>;
+  caloriesSpent: number;
+  date: Date;
 }
 
 export interface HealthDataShort {
-    idhe: number;
-    date: Date;
+  idhe: number;
+  date: Date;
 }
 
 export enum Intensity {
-    none, low, medium, high, injury
+  none,
+  low,
+  medium,
+  high,
+  injury,
 }
 
 // no need to save the muscle groups id, i can edit the muscle group by Exercise/HealthData id
 export interface MuscleGroups {
-    chest: Intensity;
-    back: Intensity;
-    biceps: Intensity;
-    triceps: Intensity;
-    forearms: Intensity;
-    abdomen: Intensity;
-    gluteus: Intensity;
-    hamstrings: Intensity;
-    quadriceps: Intensity;
-    calves: Intensity;
-    trapezius: Intensity;
-    deltoid: Intensity;
+  chest: Intensity;
+  back: Intensity;
+  biceps: Intensity;
+  triceps: Intensity;
+  forearms: Intensity;
+  abdomen: Intensity;
+  gluteus: Intensity;
+  hamstrings: Intensity;
+  quadriceps: Intensity;
+  calves: Intensity;
+  trapezius: Intensity;
+  deltoid: Intensity;
 }
