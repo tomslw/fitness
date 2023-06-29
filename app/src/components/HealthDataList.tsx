@@ -57,8 +57,6 @@ export function HealthDataList({
     }
   }, [healthDataList, setHealthDataList, setSelectedItem]);
 
-  console.log(healthDataList[0]);
-
   return (
     <>
       <div className="health-list-container">
