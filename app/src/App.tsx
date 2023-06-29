@@ -91,6 +91,8 @@ export function App(): ReactElement {
   });
   }, []);
 
+
+  // Runs once, on first render
   useEffect(() => {
     // having the responses being handeled here is kind of meh, 
     // should probably have a seperate Requester.ts with all the safety checks in the world
