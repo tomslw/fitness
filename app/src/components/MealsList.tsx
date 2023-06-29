@@ -56,7 +56,6 @@ export function MealsList({
     fetch("meal/getFresh/" + healthDataId)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setMeals([
           ...meals,
           {
