@@ -91,7 +91,7 @@ public class HealthDataController {
     @PostMapping("/update/{id}")
     public long updateHealthEntry(@PathVariable(name="id") long id, @RequestBody HealthData data, BindingResult result) {
     	try {
-    		System.out.println(data.toString());
+    		//System.out.println(data.toString());
 			healthDataService.updateHealthDataById(id, data.getWeight(), data.getHeight(), data.getCaloriesSpent());
 			return 1;
 		} catch (Exception e) {

@@ -66,7 +66,7 @@ public class MealController
     
     @GetMapping("/getFresh/{id}")
     Meal getFreshMealEntryById(@PathVariable(name="id") long id) {
-    	System.out.println(id);
+    	//System.out.println(id);
     	try {
     		Meal freshOne = mealService.insertEmptyMealEntry(id);
 			return freshOne;

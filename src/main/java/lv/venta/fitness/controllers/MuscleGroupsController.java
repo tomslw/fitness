@@ -55,7 +55,7 @@ public class MuscleGroupsController {
 	
 	@PostMapping("/updateByHealthData/{id}")
     public void updateMusclesByHealthData(@PathVariable(name="id") long id, @RequestBody MuscleGroups data, BindingResult result) {
-		System.out.println(data);
+		//System.out.println(data);
     	try {
 			muscleService.editByHealthDataId(id, data);
 		} catch (Exception e) {
