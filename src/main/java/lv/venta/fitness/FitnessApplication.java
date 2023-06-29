@@ -33,24 +33,27 @@ public class FitnessApplication {
 			@Override
 			public void run(String... args) throws Exception {
 				
-				MuscleGroups musGroup1 = new MuscleGroups(Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
-				MuscleGroups musGroup2 = new MuscleGroups(Intensity.medium, Intensity.medium, Intensity.medium, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
-				MuscleGroups musGroup3 = new MuscleGroups(Intensity.high, Intensity.medium, Intensity.medium, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
-				
-				Exercise Exercise = new Exercise("Bicep curls", "Barbell bicep curl", 2, 10, musGroup3, 20);
-				ExerciseRepo.save(Exercise);
-				
-				HealthData healthData1 = new HealthData(80, 180, musGroup1, 2500, LocalDate.now().plusDays(-1));
+				MuscleGroups triceps2 = new MuscleGroups(Intensity.none, Intensity.none, Intensity.low, Intensity.high, Intensity.medium, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.low, Intensity.none, null);
+				MuscleGroups shoulders2 = new MuscleGroups(Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.medium, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.low, Intensity.high, null);
+				MuscleGroups biceps2 = new MuscleGroups(Intensity.medium, Intensity.low, Intensity.high, Intensity.medium, Intensity.medium, Intensity.low, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.low, null);
+				MuscleGroups squat2 = new MuscleGroups(Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.none, Intensity.low, Intensity.low, Intensity.high, Intensity.high, Intensity.high, Intensity.low, Intensity.none, null);
+				MuscleGroups chest2 = new MuscleGroups(Intensity.high, Intensity.medium, Intensity.medium, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
+				MuscleGroups deadlift2 = new MuscleGroups(Intensity.high, Intensity.medium, Intensity.medium, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, Intensity.low, null);
 
-				healthData1.addExercise(Exercise);
+				HealthData healthData1 = new HealthData(80, 180, triceps2, 2500, LocalDate.now().plusDays(-1));
+				HealthData healthData2 = new HealthData(80, 180, shoulders2, 1500, LocalDate.now().plusDays(-2));
+				HealthData healthData3 = new HealthData(79, 180, biceps2, 1200, LocalDate.now().plusDays(-3));
+				HealthData healthData4 = new HealthData(79, 180, chest2, 1500, LocalDate.now().plusDays(-4));
+				HealthData healthData5 = new HealthData(77, 180, squat2, 2500, LocalDate.now().plusDays(-5));
+				HealthData healthData6 = new HealthData(77, 180, deadlift2, 2500, LocalDate.now().plusDays(-6));
 
-				HealthData healthData2 = new HealthData(80, 180, musGroup2, 2500, LocalDate.now().plusDays(-2));
-				
 				healthRepo.save(healthData1);
 				healthRepo.save(healthData2);
-				
-				muscleRepo.save(musGroup1);
-				muscleRepo.save(musGroup2);
+				healthRepo.save(healthData3);
+				healthRepo.save(healthData4);
+				healthRepo.save(healthData5);
+				healthRepo.save(healthData6);
+
 			}
 		};
 	}														
