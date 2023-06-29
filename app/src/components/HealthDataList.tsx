@@ -3,6 +3,16 @@ import { HealthDataShort } from "../utils/types";
 import "./HealthDataList.css";
 
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import React from "react";
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 interface Props {
   healthDataList: Array<HealthDataShort>;
@@ -15,22 +25,39 @@ export function HealthDataList({
   setHealthDataList,
   setSelectedItem,
 }: Props): ReactElement {
+  const [open, setOpen] = React.useState(false);
+
   const addEntry = useCallback(() => {
     // TODO: maybe check if theres an entry for todays date or not
 
-    fetch("healthData/getFresh")
-      .then((response) => response.json())
-      .then((data) => {
-        setSelectedItem(data.idhe);
-        setHealthDataList([
-          {
-            idhe: data.idhe,
-            date: new Date(data.date),
-          },
-          ...healthDataList,
-        ]);
-      });
+    const todayFilter = healthDataList.filter((item) => {
+      var leDate = item.date;
+      var now = new Date();
+      return (
+        leDate.getDate() === now.getDate() &&
+        leDate.getMonth() === now.getMonth() &&
+        leDate.getFullYear() === now.getFullYear()
+      );
+    });
+    if (todayFilter.length === 0) {
+      fetch("healthData/getFresh")
+        .then((response) => response.json())
+        .then((data) => {
+          setSelectedItem(data.idhe);
+          setHealthDataList([
+            {
+              idhe: data.idhe,
+              date: new Date(data.date),
+            },
+            ...healthDataList,
+          ]);
+        });
+    } else {
+      setOpen(true);
+    }
   }, [healthDataList, setHealthDataList, setSelectedItem]);
+
+  console.log(healthDataList[0]);
 
   return (
     <>
@@ -52,6 +79,19 @@ export function HealthDataList({
           </div>
         ))}
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          There's already an entry for today!
+        </Alert>
+      </Snackbar>
     </>
   );
 }
