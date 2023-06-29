@@ -58,7 +58,7 @@ export function HealthSummary({
   return (
     <div className="base-container">
       <div className="selected-item-title">
-        {healthData.date.toLocaleString()}
+        {healthData.date.toLocaleDateString()}
       </div>
       <div className="stats">
         <div className="stat-entry">
