@@ -282,7 +282,7 @@ export function WorkoutList({
                 : ""
             }
             error={repError}
-            helperText={repError ? "0-100" : ""}
+            helperText={repError ? "1-100" : ""}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const err = +event.target.value < 1 || +event.target.value > 100;
               setRepError(err);
