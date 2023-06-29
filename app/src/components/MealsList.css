@@ -41,6 +41,10 @@
     margin-bottom: 0.5rem;
 }
 
+.meal-item:hover {
+    background-color: #0059ff;
+}
+
 .meal-name {
     margin-left: 2rem;
     font-size: 1.5rem;
