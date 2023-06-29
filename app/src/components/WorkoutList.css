@@ -15,6 +15,10 @@
     padding-bottom: 0.5rem;
 }
 
+.workout-item:hover {
+    background-color: #4d4500;
+}
+
 .workout-title {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
