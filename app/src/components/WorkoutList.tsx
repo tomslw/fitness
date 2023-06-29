@@ -241,7 +241,7 @@ export function WorkoutList({
             margin="dense"
             id="weight"
             label="Rest Interval"
-            type="text"
+            type="number"
             fullWidth
             variant="standard"
             defaultValue={
@@ -273,7 +273,7 @@ export function WorkoutList({
             margin="dense"
             id="weight"
             label="Repetitions"
-            type="text"
+            type="number"
             fullWidth
             variant="standard"
             defaultValue={
@@ -284,7 +284,7 @@ export function WorkoutList({
             error={repError}
             helperText={repError ? "0-100" : ""}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const err = +event.target.value < 0 || +event.target.value > 100;
+              const err = +event.target.value < 1 || +event.target.value > 100;
               setRepError(err);
 
               if (!err) {
@@ -305,7 +305,7 @@ export function WorkoutList({
             margin="dense"
             id="weight"
             label="Added Weight"
-            type="text"
+            type="number"
             fullWidth
             variant="standard"
             defaultValue={
