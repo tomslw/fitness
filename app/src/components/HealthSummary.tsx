@@ -43,6 +43,9 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
             });
     }, []);
 
+    const [weightError, setWeightError] = useState(false);
+    const [heightError, setHeightError] = useState(false);
+    const [caloriesError, setCaloriesError] = useState(false);
 
     return (
         <div className="base-container">
@@ -66,11 +69,18 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
-                        value={healthData.weight}
+                        defaultValue={healthData.weight /* this might spawn a bug when switching between entries */ }
+                        error={weightError}
+                        helperText={weightError ? "0-500" : ""}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            const updatedHD = {...healthData, weight: +event.target.value};
-                            updateHealthData(updatedHD)
-                            setHealthData(updatedHD)
+                            const err = (+event.target.value < 0 || +event.target.value > 500);
+                            setWeightError(err);
+                            
+                            if (!err) {
+                                const updatedHD = {...healthData, weight: +event.target.value};
+                                updateHealthData(updatedHD)
+                                setHealthData(updatedHD)
+                            }
                         }}
                     />
                     <TextField
@@ -81,11 +91,18 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
-                        value={healthData.height}
+                        defaultValue={healthData.height}
+                        error={heightError}
+                        helperText={heightError ? "0-300" : ""}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            const updatedHD = {...healthData, height: +event.target.value};
-                            updateHealthData(updatedHD)
-                            setHealthData(updatedHD)
+                            const err = (+event.target.value < 0 || +event.target.value > 300);
+                            setHeightError(err);
+                            
+                            if (!err) {
+                                const updatedHD = {...healthData, height: +event.target.value};
+                                updateHealthData(updatedHD)
+                                setHealthData(updatedHD)
+                            }
                         }}
                     />
                     <TextField
@@ -96,11 +113,18 @@ export function HealthSummary({healthData, setHealthData} : Props): ReactElement
                         type="number"
                         fullWidth
                         variant="standard"
-                        value={healthData.caloriesSpent}
+                        defaultValue={healthData.caloriesSpent}
+                        error={caloriesError}
+                        helperText={caloriesError ? "0-10000" : ""}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            const updatedHD = {...healthData, caloriesSpent: +event.target.value};
-                            updateHealthData(updatedHD)
-                            setHealthData(updatedHD)
+                            const err = (+event.target.value < 0 || +event.target.value > 10000);
+                            setCaloriesError(err);
+                            
+                            if (!err) {
+                                const updatedHD = {...healthData, caloriesSpent: +event.target.value};
+                                updateHealthData(updatedHD)
+                                setHealthData(updatedHD)
+                            }
                         }}
                     />
                 </DialogContent>
