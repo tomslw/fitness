@@ -14,3 +14,5 @@ Development environment setup:
 	> Now you have started the back-end and front-end of the app
 	* Open the "/app" directory in VSCode, for convenience sake
 	* Access the React site by going to http://localhost:3000
+
+![Screenshot](/screenshot.png)
