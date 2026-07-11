@@ -84,18 +84,6 @@ All REST endpoints are served under `http://localhost:8080`.
 
 The React dev server proxies API requests to the backend via the `proxy` setting in `app/package.json`.
 
-## Database
-
-The app uses an in-memory **H2** database (`jdbc:h2:mem:testdb`). Data is reset when the backend restarts.
-
-The H2 console is enabled at [http://localhost:8080/h2-console](http://localhost:8080/h2-console):
-
-| Setting | Value |
-|---------|-------|
-| JDBC URL | `jdbc:h2:mem:testdb` |
-| Username | `sa` |
-| Password | `password` |
-
 ## Development
 
 ```bash
@@ -108,7 +96,3 @@ cd app && npm test
 # Production frontend build
 cd app && npm run build
 ```
-
-## Author
-
-Toms Štrāls — [tomslw/fitness](https://github.com/tomslw/fitness)
